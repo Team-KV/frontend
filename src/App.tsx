@@ -6,6 +6,7 @@ import ClientsPageContainer from './pages/ClientsPage/ClientsPageContainer';
 import CalendarPageContainer from './pages/CalendarPage/CalendarPageContainer';
 import EncyklopediaPageContainer from './pages/EncyklopediaPage/EncyklopediaPageContainer';
 import ExercisesPageContainer from './pages/ExercisesPage/ExercisesPageContainer';
+import LoginPageContainer from './pages/LoginPage/LoginPageContainer';
 import { Box } from '@mui/system';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Box display="flex" justifyContent="center" alignItems="center">
           <Routes>
             <Route path="/" element={<DashboardPageContainer/>} />
+            <Route path="/login" element={<LoginPageContainer/>} />
             <Route path="/clients" element={<ClientsPageContainer/>} />
             <Route path="/calendar" element={<CalendarPageContainer/>} />
             <Route path="/encyklopedia" element={<EncyklopediaPageContainer/>} />
