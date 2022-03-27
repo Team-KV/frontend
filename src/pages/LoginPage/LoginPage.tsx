@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
-import '../../locales/i18n';
+import 'i18n';
 
 import {
   Box,
@@ -32,13 +32,15 @@ function Login() {
       .then((response) => {
         token = response.data.Token;
 
+        console.log(token);
+
         const config = {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         };
 
-        axios.get('http://localhost/api/info', config).then((response) => {
+        axios.get('http://localhost/api/client', config).then((response) => {
           console.log(response);
         });
       });
@@ -56,7 +58,7 @@ function Login() {
         }}
       >
         <Typography component={'h1'} variant={'h5'}>
-          {t('LOGIN_LABEL')}
+          {t('login')}
         </Typography>
         <Box component={'form'} onSubmit={handleSubmit}>
           <TextField
@@ -64,7 +66,7 @@ function Login() {
             required
             fullWidth
             id="email"
-            label={t('LOGIN_EMAIL')}
+            label={t('email')}
             name="email"
             autoComplete="email"
             autoFocus
@@ -74,7 +76,7 @@ function Login() {
             required
             fullWidth
             name="password"
-            label={t('LOGIN_PASSWORD')}
+            label={t('password')}
             type="password"
             id="password"
             autoComplete="current-password"
@@ -85,7 +87,7 @@ function Login() {
             type={'submit'}
             sx={{ mt: 3, mb: 2 }}
           >
-            {t('LOGIN_BUTTON')}
+            {t('login_button')}
           </Button>
         </Box>
       </Box>

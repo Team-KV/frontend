@@ -1,36 +1,82 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import DrawerMenu from './components/DrawerMenu';
 
-import DashboardPageContainer from './pages/DashboardPage/DashboardPageContainer';
-import ClientsPageContainer from './pages/ClientsPage/ClientsPageContainer';
-import CalendarPageContainer from './pages/CalendarPage/CalendarPageContainer';
-import EncyklopediaPageContainer from './pages/EncyklopediaPage/EncyklopediaPageContainer';
-import ExercisesPageContainer from './pages/ExercisesPage/ExercisesPageContainer';
-import LoginPageContainer from './pages/LoginPage/LoginPageContainer';
+import DashboardPage from 'pages/DashboardPage/DashboardPage';
+import ClientsPage from 'pages/ClientsPage/ClientsPage';
+import CalendarPage from 'pages/CalendarPage/CalendarPage';
+import EncyklopediaPage from 'pages/EncyklopediaPage/EncyklopediaPage';
+import ExercisesPage from 'pages/ExercisesPage/ExercisesPage';
+import LoginPage from 'pages/LoginPage/LoginPage';
 import { Box } from '@mui/system';
+import MiniDrawer from 'components/MiniDrawer';
+import PrivateRoute from 'components/PrivateRoute';
 
 function App() {
-
   return (
     <div className="App">
       <BrowserRouter>
-        <DrawerMenu />
-        <Box display="flex" justifyContent="center" alignItems="center">
-          <Routes>
-            <Route path="/" element={<DashboardPageContainer/>} />
-            <Route path="/login" element={<LoginPageContainer/>} />
-            <Route path="/clients" element={<ClientsPageContainer/>} />
-            <Route path="/calendar" element={<CalendarPageContainer/>} />
-            <Route path="/encyklopedia" element={<EncyklopediaPageContainer/>} />
-            <Route path="/exercises" element={<ExercisesPageContainer/>} />
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
 
-            {/* <Route path="/client/:clientID" element={<ClientDetail/>} /> */}
-            <Route>404 Not found</Route>
-          </Routes>
-        </Box>
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <MiniDrawer body={<DashboardPage />} />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/clients"
+            element={
+              <PrivateRoute>
+                <MiniDrawer body={<ClientsPage />} />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/calendar"
+            element={
+              <PrivateRoute>
+                <MiniDrawer body={<CalendarPage />} />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/encyklopedia"
+            element={
+              <PrivateRoute>
+                <MiniDrawer body={<EncyklopediaPage />} />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/exercises"
+            element={
+              <PrivateRoute>
+                <MiniDrawer body={<ExercisesPage />} />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <MiniDrawer body={<DashboardPage />} />
+              </PrivateRoute>
+            }
+          />
+          
+          {/* <Route path="/client/:clientID" element={<ClientDetail/>} /> */}
+          <Route>404 Not found</Route>
+        </Routes>
       </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

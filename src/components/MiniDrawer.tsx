@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -76,24 +77,24 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-    boxSizing: 'border-box',
-    ...(open && {
-      ...openedMixin(theme),
-      '& .MuiDrawer-paper': openedMixin(theme),
-    }),
-    ...(!open && {
-      ...closedMixin(theme),
-      '& .MuiDrawer-paper': closedMixin(theme),
-    }),
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  width: drawerWidth,
+  flexShrink: 0,
+  whiteSpace: 'nowrap',
+  boxSizing: 'border-box',
+  ...(open && {
+    ...openedMixin(theme),
+    '& .MuiDrawer-paper': openedMixin(theme),
   }),
-);
+  ...(!open && {
+    ...closedMixin(theme),
+    '& .MuiDrawer-paper': closedMixin(theme),
+  }),
+}));
 
-export default function MiniDrawer() {
+export default function MiniDrawer({ body }: { body: React.ReactNode }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -109,29 +110,29 @@ export default function MiniDrawer() {
     {
       name: 'Dashboard',
       icon: <DashboardIcon />,
-      link: '/'
+      link: '/dashboard',
     },
     {
       name: 'Clients',
       icon: <PeopleAltIcon />,
-      link: '/clients'
+      link: '/clients',
     },
     {
       name: 'Calendar',
       icon: <EventNoteIcon />,
-      link: '/calendar'
+      link: '/calendar',
     },
     {
       name: 'Exercises',
       icon: <FitnessCenterIcon />,
-      link: '/exercises'
+      link: '/exercises',
     },
     {
       name: 'Encyklopedia',
       icon: <MenuBookIcon />,
-      link: '/encyklopedia'
+      link: '/encyklopedia',
     },
-  ]
+  ];
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -158,40 +159,51 @@ export default function MiniDrawer() {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {theme.direction === 'rtl' ? (
+              <ChevronRightIcon />
+            ) : (
+              <ChevronLeftIcon />
+            )}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
           {menuItems.map((item, index) => (
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} key={ index } to={{
-              pathname: item.link
-            }}>
-            <ListItemButton
+            <Link
+              style={{ textDecoration: 'none', color: 'inherit' }}
+              key={index}
+              to={{
+                pathname: item.link,
+              }}
+            >
+              <ListItemButton
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
-                >
+              >
                 <ListItemIcon
                   sx={{
                     minWidth: 0,
                     mr: open ? 3 : 'auto',
                     justifyContent: 'center',
                   }}
-                  >
-                { item.icon }
+                >
+                  {item.icon}
                 </ListItemIcon>
-                <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  primary={item.name}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
               </ListItemButton>
             </Link>
           ))}
-          
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        
+        <DrawerHeader />
+        {body}
       </Box>
     </Box>
   );
