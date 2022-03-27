@@ -9,6 +9,7 @@ import LoginPage from 'pages/LoginPage/LoginPage';
 import { Box } from '@mui/system';
 import MiniDrawer from 'components/MiniDrawer';
 import PrivateRoute from 'components/PrivateRoute';
+import ClientsDetail from 'pages/ClientsPage/components/ClientsDetail';
 
 function App() {
   return (
@@ -31,6 +32,15 @@ function App() {
             element={
               <PrivateRoute>
                 <MiniDrawer body={<ClientsPage />} />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/clients/:id"
+            element={
+              <PrivateRoute>
+                <MiniDrawer body={<ClientsDetail />} />
               </PrivateRoute>
             }
           />
@@ -70,7 +80,7 @@ function App() {
               </PrivateRoute>
             }
           />
-          
+
           {/* <Route path="/client/:clientID" element={<ClientDetail/>} /> */}
           <Route>404 Not found</Route>
         </Routes>
