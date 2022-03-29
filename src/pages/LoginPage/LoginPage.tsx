@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { Axios, AxiosResponse } from 'axios';
 import { useTranslation } from 'react-i18next';
 import 'i18n';
 
@@ -14,8 +14,6 @@ import {
 function Login() {
   const { t } = useTranslation();
 
-  let token = '';
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -25,24 +23,11 @@ function Login() {
       password: formData.get('password'),
     };
 
-    console.log(loginCredentials);
-
     axios
       .post('http://localhost/api/login', loginCredentials)
-      .then((response) => {
-        token = response.data.Token;
-
-        console.log(token);
-
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-
-        axios.get('http://localhost/api/client', config).then((response) => {
-          console.log(response);
-        });
+      .then((response: AxiosResponse) => {
+        localStorage.setItem('token', response.data.Token);
+        console.log('TOKEN IS SET: ' + localStorage.getItem('token'));
       });
   };
 
