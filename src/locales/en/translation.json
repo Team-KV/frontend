@@ -1,7 +1,24 @@
 {
   "login": "Login",
+  "login_button": "Log in",
   "email": "Email",
   "password": "Password",
-  "login_button": "Log in"
+  
+  "firstName": "First name",
+  "lastName": "Last name",
+  "phone": "Phone",
+  "dateOfBirth": "Date of birth",
+
+  "listOfClients": "List of clients",
+
+  "dashboard": "Dashboard",
+  "clients": "Clients",
+  "calendar": "Calendar",
+  "exercises": "Exercises",
+  "encyclopedia": "Encyclopedia",
+
+  "search": "Search",
+
+  "end": "End"
 }
 

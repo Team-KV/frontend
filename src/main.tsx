@@ -10,8 +10,11 @@ import { Provider } from 'react-redux';
 const theme = createTheme(
   {
     palette: {
-      primary: { main: '#1976d2' },
+      primary: { main: '#94D1AF' },
     },
+    shape: {
+      borderRadius: 8,
+    }, 
   },
   csCZ,
 );

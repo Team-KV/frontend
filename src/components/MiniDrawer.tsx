@@ -22,6 +22,10 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link } from 'react-router-dom';
+import { initReactI18next, useTranslation } from 'react-i18next';
+import { Button, Switch } from '@mui/material';
+import i18n from "i18next";
+import { changeLanguage } from 'i18next';
 
 const drawerWidth = 240;
 
@@ -97,6 +101,12 @@ const Drawer = styled(MuiDrawer, {
 export default function MiniDrawer({ body }: { body: React.ReactNode }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [ t, i18n ] = useTranslation();
+
+  const switchLang = (lang: any) => {
+    i18n.use(initReactI18next) // passes i18n down to react-i18next
+    .init({lng: lang});
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -108,29 +118,29 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
 
   const menuItems = [
     {
-      name: 'Dashboard',
+      name: t('dashboard'),
       icon: <DashboardIcon />,
       link: '/dashboard',
     },
     {
-      name: 'Clients',
+      name: t('clients'),
       icon: <PeopleAltIcon />,
       link: '/clients',
     },
     {
-      name: 'Calendar',
+      name: t('calendar'),
       icon: <EventNoteIcon />,
       link: '/calendar',
     },
     {
-      name: 'Exercises',
+      name: t('exercises'),
       icon: <FitnessCenterIcon />,
       link: '/exercises',
     },
     {
-      name: 'Encyklopedia',
+      name: t('encyclopedia'),
       icon: <MenuBookIcon />,
-      link: '/encyklopedia',
+      link: '/encyclopedia',
     },
   ];
 
@@ -154,6 +164,8 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
           <Typography variant="h6" noWrap component="div">
             Physiport
           </Typography>
+          <Button sx={{ ml: 'auto' }} variant='contained' onClick={() => switchLang('cs')}>CZ</Button>
+          <Button sx={{ ml: 1 }} variant='contained' onClick={() => switchLang('en')}>EN</Button>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

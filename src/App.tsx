@@ -10,6 +10,7 @@ import { Box } from '@mui/system';
 import MiniDrawer from 'components/MiniDrawer';
 import PrivateRoute from 'components/PrivateRoute';
 import ClientsDetail from 'pages/ClientsPage/components/ClientsDetail';
+import ClientsForm from 'pages/ClientsPage/components/ClientsForm';
 
 function App() {
   return (
@@ -46,6 +47,15 @@ function App() {
           />
 
           <Route
+            path="/clients/form"
+            element={
+              <PrivateRoute>
+                <MiniDrawer body={<ClientsForm />} />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
             path="/calendar"
             element={
               <PrivateRoute>
@@ -55,7 +65,7 @@ function App() {
           />
 
           <Route
-            path="/encyklopedia"
+            path="/encyclopedia"
             element={
               <PrivateRoute>
                 <MiniDrawer body={<EncyklopediaPage />} />

@@ -1,6 +1,23 @@
 {
   "login": "Přihlášení",
+  "login_button": "Přihlásit se",
   "email": "E-mail",
   "password": "Heslo",
-  "login_button": "Přihlásit se"
+  
+  "firstName": "Jméno",
+  "lastName": "Příjmení",
+  "phone": "Telefon",
+  "dateOfBirth": "Datum narození",
+
+  "listOfClients": "Seznam klientů",
+
+  "dashboard": "Přehled",
+  "clients": "Klienti",
+  "calendar": "Kalendář",
+  "exercises": "Cvičení",
+  "encyclopedia": "Encyklopedie",
+
+  "search": "Hledat",
+
+  "end": "Konec"
 }
