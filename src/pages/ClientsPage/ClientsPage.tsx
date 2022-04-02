@@ -1,6 +1,6 @@
 import ClientsList from 'pages/ClientsPage/components/ClientsList'
 
-const ClientsPageContainer = () => {
+const ClientsPage = () => {
   return (
     <>
       <ClientsList />
@@ -8,4 +8,4 @@ const ClientsPageContainer = () => {
   );
 }
 
-export default ClientsPageContainer;
+export default ClientsPage;

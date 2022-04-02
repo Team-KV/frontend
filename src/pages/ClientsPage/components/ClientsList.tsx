@@ -139,7 +139,7 @@ const ClientList = () => {
         <TableContainer>
           <Table aria-label="simple table">
             <TableHead>
-              <TableRow onClick={navigateToDetail}>
+              <TableRow>
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
