@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 
 import { csCZ, enUS } from '@mui/material/locale';
 
-import { Provider } from 'react-redux';
 // import store from './store';
 
 const theme = createTheme(
@@ -13,8 +12,25 @@ const theme = createTheme(
       primary: { main: '#94D1AF' },
     },
     shape: {
-      borderRadius: 8,
+      borderRadius: 25,
     }, 
+    typography: {
+      fontFamily: ['Nunito', 'Open Sans'].join(',')
+    }, 
+    components: {
+      MuiButton: {
+        defaultProps: {
+          variant: "outlined",
+          size: "small"
+        }
+      },
+      MuiTextField: {
+        defaultProps: {
+          variant: "outlined",
+          size: "small"
+        }
+      }
+    }
   },
   csCZ,
 );

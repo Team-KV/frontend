@@ -9,6 +9,30 @@
   "phone": "Telefon",
   "dateOfBirth": "Datum narození",
 
+  "weight": "Váha",
+  "height": "Výška",
+  "personalInformation": "Osobní informace",
+  "insuranceCompany": "Pojišťovna",
+  "street": "Ulice",
+  "city": "Město",
+  "postalCode": "PSČ",
+  "sport": "Sport",
+  "pastIllneses": "Prodělané nemoci",
+  "injuriesSuffered": "Prodělaná zranění",
+  "anamnesis": "Anamnéza",
+  "note": "Poznámka",
+  "sex": "Pohlaví",
+
+  "unspecified": "Neuvedeno",
+  "male": "Muž",
+
+  "female": "Žena",
+  "other": "Jiné",
+
+  "generalInfo": "Obecné informace",
+  "contactInfo": "Kontaktní informace",
+  "healthInfo": "Zdravotní dokumentace",
+
   "listOfClients": "Seznam klientů",
 
   "dashboard": "Přehled",

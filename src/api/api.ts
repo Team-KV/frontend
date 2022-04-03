@@ -3,7 +3,7 @@ import config from "config.json";
 
 export default {
   get: (url: string) => {
-    return axios.get(config.SERVER_URL + url, addConfig());  
+    return axios.get(config.SERVER_URL + url, addConfig())
   },
   post: (url: string, content: any) => {
     return axios.post(config.SERVER_URL + url, content, addConfig());
@@ -17,8 +17,8 @@ export default {
 }
 
 const getToken = () => {
-  const token = localStorage.getItem('token'); 
-  if(token)
+  const token = localStorage.getItem('token');
+  if (token)
     return token;
   console.log('MUST LOG IN FIRST');
   return '';

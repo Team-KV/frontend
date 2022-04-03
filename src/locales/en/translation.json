@@ -11,6 +11,32 @@
 
   "listOfClients": "List of clients",
 
+
+  "weight": "Weight",
+  "height": "Height",
+  "personalInformation": "Personal information",
+  "insuranceCompany": "Insurance company",
+  "street": "Street",
+  "city": "City",
+  "postalCode": "Postal code",
+  "sport": "Sport",
+  "pastIllneses": "Past illneses",
+  "injuriesSuffered": "Injuries suffered",
+  "anamnesis": "Anamnesis",
+  "note": "Note",
+  "sex": "Sex",
+
+  "unspecified": "Unspecified",
+  "male": "Male",
+
+  "female": "Female",
+  "other": "Other",
+
+  "generalInfo": "General",
+  "contactInfo": "Contact",
+  "healthInfo": "Health",
+
+
   "dashboard": "Dashboard",
   "clients": "Clients",
   "calendar": "Calendar",

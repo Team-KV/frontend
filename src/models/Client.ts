@@ -1,3 +1,4 @@
+import SEX from 'constants/sex';
 import { User } from 'models/User'
 
 export interface ClientDTO {
@@ -7,7 +8,7 @@ export interface ClientDTO {
   date_born: Date,
   sex?: number,
   height?: number,
-  width?: number,
+  weight?: number,
   personal_information?: string,
   insurance_company?: number,
   phone?: string,
@@ -33,7 +34,7 @@ export interface Client {
   dateOfBirth: Date,
   sex?: number,
   height?: number,
-  width?: number,
+  weight?: number,
   personalInfo?: string,
   insuranceCompany?: number,
   phone?: string,
@@ -59,7 +60,7 @@ export class Client {
     this.dateOfBirth = dto.date_born;
     this.sex = dto.sex;
     this.height = dto.height;
-    this.width = dto.width;
+    this.weight = dto.weight;
     this.personalInfo = dto.personal_information;
     this.insuranceCompany = dto.insurance_company;
     this.phone = dto.phone;

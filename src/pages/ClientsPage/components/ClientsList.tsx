@@ -8,10 +8,7 @@ import Paper from '@mui/material/Paper';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 
-import userService from 'api/services/userService';
-
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import clientService from 'api/services/clientService';
@@ -19,13 +16,10 @@ import {
   Box,
   Button,
   IconButton,
-  makeStyles,
-  styled,
   TablePagination,
   TextField,
   Typography,
 } from '@mui/material';
-import { ClientState } from 'redux/slices/ClientSlice';
 import { Search } from '@mui/icons-material';
 
 interface Column {
@@ -35,17 +29,16 @@ interface Column {
   align?: 'right';
 }
 
-
 const ClientList = () => {
   let navigate = useNavigate();
-  
+
   let [clients, setClients] = useState([]);
   let [allClients, setAllClients] = useState([]);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [ t ] = useTranslation();
-  
+  const [t] = useTranslation();
+
   const columns: Column[] = [
     { id: 'first_name', label: t('firstName'), minWidth: 100 },
     {
@@ -74,16 +67,18 @@ const ClientList = () => {
     },
   ];
 
-  useEffect(() => {
+  const loadClients = () => {
     clientService
       .getClients()
       .then((res) => {
         setClients(res.data);
         setAllClients(res.data);
       })
-      .catch((error) => {
-        console.log(error.code);
-      });
+      .catch((error) => navigate('/login'));
+  };
+
+  useEffect(() => {
+    loadClients();
   }, []);
 
   const navigateToDetail = (client: any) => {
@@ -101,21 +96,30 @@ const ClientList = () => {
   };
 
   const changeFilter = (e: any) => {
-    const value: string = (e.target.value).toLowerCase();
+    const value: string = e.target.value.toLowerCase();
     const newClients = allClients.filter((client: any) => {
-      return client.first_name.toLowerCase().includes(value) || client.last_name.toLowerCase().includes(value)
-    })
+      return (
+        client.first_name.toLowerCase().includes(value) ||
+        client.last_name.toLowerCase().includes(value)
+      );
+    });
     setClients(newClients);
-  }
+  };
 
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant='h5'>{ t('listOfClients') }</Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <Typography variant="h5">{t('listOfClients')}</Typography>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <TextField
             size="small"
-            label={ t('search') }
+            label={t('search')}
             onChange={changeFilter}
             InputProps={{
               endAdornment: (
@@ -129,7 +133,7 @@ const ClientList = () => {
             sx={{ ml: 3 }}
             style={{ height: 40, color: 'white' }}
             variant="contained"
-            href='clients/form'
+            href="clients/form"
           >
             <AddIcon />
           </Button>
