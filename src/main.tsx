@@ -13,37 +13,37 @@ const theme = createTheme(
     },
     shape: {
       borderRadius: 25,
-    }, 
+    },
     typography: {
-      fontFamily: ['Nunito', 'Open Sans'].join(',')
-    }, 
+      fontFamily: ['Nunito', 'Open Sans'].join(','),
+    },
     components: {
       MuiButton: {
         defaultProps: {
-          variant: "outlined",
-          size: "small"
-        }
+          variant: 'outlined',
+          size: 'small',
+        },
       },
       MuiTextField: {
         defaultProps: {
-          variant: "outlined",
-          size: "small"
-        }
-      }
-    }
+          variant: 'outlined',
+          size: 'small',
+        },
+      },
+    },
   },
-  csCZ,
+  csCZ
 );
 
 import App from './App';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      {/* <Provider store={store}> */}
-      <App />
-      {/* </Provider> */}
-    </ThemeProvider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <ThemeProvider theme={theme}>
+    {/* <Provider store={store}> */}
+    <App />
+    {/* </Provider> */}
+  </ThemeProvider>,
+  // </React.StrictMode>,
   document.getElementById('root')
 );

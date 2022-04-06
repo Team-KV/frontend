@@ -58,4 +58,9 @@ export const privateRoutes: IRoute[] = [
     path: '/clients/form',
     element: <ClientsForm />,
   },
+  {
+    name: 'clients-form',
+    path: '/clients/:id/form',
+    element: <ClientsForm />,
+  },
 ];
