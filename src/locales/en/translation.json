@@ -36,6 +36,9 @@
   "contactInfo": "Contact",
   "healthInfo": "Health",
 
+  "unknown": "Unknown",
+
+  "pin": "National ID Number",
 
   "dashboard": "Dashboard",
   "clients": "Clients",

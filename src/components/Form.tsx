@@ -1,27 +1,31 @@
-import { useState } from "react"
+import { useState } from 'react';
+import { ValidatorForm } from 'react-material-ui-form-validator';
 
 export const useForm = (initialValues: any) => {
-  const [values, setValues] = useState(initialValues)
+  const [values, setValues] = useState(initialValues);
 
   const handleInput = (e: any) => {
-    const {name, value} = e.target
+    const { name, value } = e.target;
     setValues({
       ...values,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   return {
     values,
     setValues,
-    handleInput
-  }
-}
+    handleInput,
+  };
+};
 
 export const Form = (props: any) => {
-  return(
-    <form onSubmit={props.onSubmit}>
+  return (
+    <ValidatorForm
+      onSubmit={props.onSubmit}
+      onError={(errors) => console.log(errors)}
+    >
       {props.children}
-    </form>
-  )
-}
+    </ValidatorForm>
+  );
+};

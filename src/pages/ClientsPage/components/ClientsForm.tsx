@@ -1,4 +1,4 @@
-import { Box, Grid, InputAdornment } from '@mui/material';
+import { Box, FormControlLabel, FormGroup, Grid, InputAdornment } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { Client } from 'models/Client';
 
@@ -7,7 +7,7 @@ import { Controls } from 'components/Controls';
 import { useTranslation } from 'react-i18next';
 import Section from 'components/Section';
 import { Form, useForm } from 'components/Form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import SEX from 'constants/sex';
 import { ClientDTO } from 'models/dto/ClientDTO';
@@ -15,6 +15,7 @@ import clientService from 'api/services/clientService';
 
 const ClientsForm = () => {
   let { id } = useParams();
+  let navigate = useNavigate();
 
   const [t] = useTranslation();
   const { values, setValues, handleInput } = useForm({});
@@ -26,12 +27,29 @@ const ClientsForm = () => {
   const onSubmit = (e: any) => {
     e.preventDefault();
     const dto = new ClientDTO(values);
-    clientService.addClient(dto).then((res) => {
-      console.log(res);
-    }).catch(({request}) => {
-      console.log(request);
-    });
+    if (id) {
+      clientService
+        .updateClient(+id, dto)
+        .then(() => {
+          debugger;
+          navigate('/clients/' + id);
+        })
+        .catch((res) => {
+          debugger;
+        });
+    } else {
+      clientService.addClient(dto).then((res) => {
+        navigate('/clients/' + res.data.Client.id);
+      });
+    }
   };
+  useEffect(() => {
+    if (id) {
+      clientService.getClient(+id).then((res) => {
+        setValues(new Client({ ...res.data.Client }));
+      });
+    }
+  }, []);
 
   return (
     <Form onSubmit={onSubmit}>
@@ -45,107 +63,144 @@ const ClientsForm = () => {
         {/* General info */}
         <Section first label={t('generalInfo')} />
         <Controls.Input
-          required
+          validators={['required']}
+          errorMessages={['this field is required']}
           name="firstName"
           onChange={handleInput}
           value={values.firstName || ''}
         />
         <Controls.Input
-          required
+          validators={['required']}
+          errorMessages={['this field is required']}
           name="lastName"
           onChange={handleInput}
           value={values.lastName || ''}
         />
         <Controls.Select
-          required
           name="sex"
           onChange={handleInput}
           options={SEX}
           value={values.sex || ''}
         />
-        <Controls.Input
-          required
+        <Controls.DatePicker
           name="dateOfBirth"
           onChange={handleInput}
-          value={values.dateOfBirth || ''}
+          value={values.dateOfBirth || null}
         />
         <Controls.Input
-          required
+          validators={['required']}
+          errorMessages={['this field is required']}
           name="phone"
           onChange={handleInput}
           value={values.phone || ''}
         />
 
-        {/* <Controls.DatePicker
-              name="dateOfBirth"
-              onChange={handleInput}
-              value={new Date()}
-            /> */}
-        <TextField
-          fullWidth
-          label={t('insuranceCompany')}
-          id="insuranceCompany"
+        <Controls.Input
+          name="insuranceCompany"
+          onChange={handleInput}
+          value={values.insuranceCompany || ''}
         />
-        <TextField
-          fullWidth
-          label={t('personalInformation')}
-          id="personalInformation"
+
+        {/* <Controls.Checkbox
+          name="noCzech"
+          onChange={handleInput}
+          value={values.noCzech || false}
+        /> */}
+
+        <Controls.Input
+          name="pin"
+          onChange={handleInput}
+          value={values.pin || ''}
         />
 
         {/* Contact info */}
         <Section label={t('contactInfo')} />
 
-        <TextField fullWidth label={t('email')} id="email" />
+        <Controls.Input
+          errorMessages={['not an email']}
+          validators={['isEmail']}
+          name="email"
+          onChange={handleInput}
+          value={values.email || ''}
+        />
 
-        <TextField fullWidth label={t('street')} id="street" />
-        <TextField fullWidth label={t('city')} id="city" />
+        <Controls.Input
+          name="street"
+          onChange={handleInput}
+          value={values.street || ''}
+        />
 
-        <TextField fullWidth label={t('postalCode')} id="postalCode" />
+        <Controls.Input
+          name="city"
+          onChange={handleInput}
+          value={values.city || ''}
+        />
+
+        <Controls.Input
+          name="postalCode"
+          onChange={handleInput}
+          value={values.postalCode || ''}
+        />
 
         {/* Health info */}
         <Section label={t('healthInfo')} />
-        <TextField
-          fullWidth
-          label={t('weight')}
-          id="weight"
+        <Controls.Input
+          name="weight"
+          onChange={handleInput}
+          value={values.weight || ''}
           InputProps={{
             endAdornment: <InputAdornment position="start">kg</InputAdornment>,
           }}
         />
 
-        <TextField
-          fullWidth
-          label={t('height')}
-          id="height"
+        <Controls.Input
+          name="height"
+          onChange={handleInput}
+          value={values.height || ''}
           InputProps={{
             endAdornment: <InputAdornment position="start">cm</InputAdornment>,
           }}
         />
-        <TextField multiline fullWidth rows={4} label={t('sport')} id="sport" />
-        <TextField
+
+        <Controls.Input
           multiline
-          fullWidth
-          rows={4}
-          label={t('pastIllneses')}
-          id="pastIllneses"
-        />
-        <TextField
-          multiline
-          fullWidth
-          rows={4}
-          label={t('injuriesSuffered')}
-          id="injuriesSuffered"
+          rows={2}
+          name="sport"
+          onChange={handleInput}
+          value={values.sport || ''}
         />
 
-        <TextField
+        <Controls.Input
           multiline
-          fullWidth
+          rows={2}
+          name="pastIllneses"
+          onChange={handleInput}
+          value={values.pastIllneses || ''}
+        />
+
+        <Controls.Input
+          multiline
+          rows={2}
+          name="injuriesSuffered"
+          onChange={handleInput}
+          value={values.injuriesSuffered || ''}
+        />
+
+        <Controls.Input
+          multiline
+          rows={4}
+          name="anamnesis"
+          onChange={handleInput}
+          value={values.anamnesis || ''}
+        />
+
+        <Controls.Input
+          multiline
           rows={6}
-          label={t('anamnesis')}
-          id="anamnesis"
+          name="note"
+          onChange={handleInput}
+          value={values.note || ''}
         />
-
-        <TextField multiline fullWidth rows={6} label={t('note')} id="note" />
 
         <Box display={'flex'} justifyContent="space-between">
           <Controls.Button

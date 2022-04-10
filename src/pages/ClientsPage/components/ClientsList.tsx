@@ -21,9 +21,10 @@ import {
   Typography,
 } from '@mui/material';
 import { Search } from '@mui/icons-material';
+import { Client } from 'models/Client';
 
 interface Column {
-  id: 'id' | 'first_name' | 'last_name' | 'date_born' | 'phone' | 'email';
+  id: 'id' | 'firstName' | 'lastName' | 'dateOfBirth' | 'phone' | 'email';
   label: string;
   minWidth?: number;
   align?: 'right';
@@ -40,15 +41,15 @@ const ClientList = () => {
   const [t] = useTranslation();
 
   const columns: Column[] = [
-    { id: 'first_name', label: t('firstName'), minWidth: 100 },
+    { id: 'firstName', label: t('firstName'), minWidth: 100 },
     {
-      id: 'last_name',
+      id: 'lastName',
       label: t('lastName'),
       minWidth: 100,
       align: 'right',
     },
     {
-      id: 'date_born',
+      id: 'dateOfBirth',
       label: t('dateOfBirth'),
       minWidth: 170,
       align: 'right',
@@ -71,8 +72,13 @@ const ClientList = () => {
     clientService
       .getClients()
       .then((res) => {
-        setClients(res.data);
-        setAllClients(res.data);
+        let fetchedClients: any = [];
+        res.data.forEach((dto: any) => {
+          fetchedClients.push(new Client(dto));
+        });
+
+        setClients(fetchedClients);
+        setAllClients(fetchedClients);
       })
       .catch((error) => navigate('/login'));
   };
@@ -84,6 +90,7 @@ const ClientList = () => {
   const navigateToDetail = (client: any) => {
     navigate('/clients/' + client.id);
   };
+  
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -141,7 +148,7 @@ const ClientList = () => {
       </Box>
       <Paper sx={{ mt: 3, width: '100%' }}>
         <TableContainer>
-          <Table aria-label="simple table">
+          <Table aria-label="clients">
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
@@ -168,7 +175,13 @@ const ClientList = () => {
                       key={i}
                     >
                       {columns.map((column) => {
-                        const value = client[column.id];
+                        const value =
+                          column.id == 'dateOfBirth'
+                            ? new Date(client[column.id]).toLocaleDateString(
+                                'cs-CZ'
+                              )
+                            : client[column.id];
+
                         return (
                           <TableCell key={column.id} align={column.align}>
                             {value}

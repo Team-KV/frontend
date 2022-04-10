@@ -31,9 +31,10 @@ export interface Client {
 
 export class Client {
   constructor(dto: ClientDTO) {
+    this.id = dto.id;
     this.firstName = dto.first_name;
     this.lastName = dto.last_name;
-    this.dateOfBirth = dto.date_born;
+    this.dateOfBirth = new Date(dto.date_born);
     this.sex = dto.sex;
     this.height = dto.height;
     this.weight = dto.weight;
@@ -45,8 +46,8 @@ export class Client {
     this.city = dto.city;
     this.postalCode = dto.postal_code;
     this.sport = dto.sport;
-    this.pastIllneses = dto.past_illneses;
-    this.injuriesSuffered = dto.injuries_suffer;
+    this.pastIllneses = dto.past_illnesses;
+    this.injuriesSuffered = dto.injuries_suffered;
     this.anamnesis = dto.anamnesis;
     this.note = dto.note;
     this.clientId = dto.client_id;

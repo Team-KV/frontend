@@ -12,7 +12,7 @@
   "weight": "Váha",
   "height": "Výška",
   "personalInformation": "Osobní informace",
-  "insuranceCompany": "Pojišťovna",
+  "insuranceCompany": "Číslo pojišťovny",
   "street": "Ulice",
   "city": "Město",
   "postalCode": "PSČ",
@@ -29,11 +29,20 @@
   "female": "Žena",
   "other": "Jiné",
 
+  "edit": "Upravit",
+  "delete": "Smazat",
+
   "generalInfo": "Obecné informace",
   "contactInfo": "Kontaktní informace",
   "healthInfo": "Zdravotní dokumentace",
 
+  "events": "Události",
+
   "listOfClients": "Seznam klientů",
+
+  "unknown": "Neuvedeno",
+
+  "pin": "Rodné číslo",
 
   "dashboard": "Přehled",
   "clients": "Klienti",
