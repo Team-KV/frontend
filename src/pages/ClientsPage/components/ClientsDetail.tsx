@@ -41,8 +41,8 @@ const ClientsDetail = () => {
 
   useEffect(() => {
     if (id === undefined) return;
-    clientService.getClient(+id).then((res) => {
-      setClient(new Client({ ...res.data.Client }));
+    clientService.getClient(+id).then((data) => {
+      setClient(new Client({ ...data.Client }));
       if (!client) return <NotFound />;
     });
   }, []);

@@ -3,16 +3,16 @@ import config from "config.json";
 
 export default {
   get: (url: string) => {
-    return axios.get(config.SERVER_URL + url, addConfig())
+    return axios.get(config.SERVER_URL + url, addConfig()).then((res) => res.data)
   },
   post: (url: string, content: any) => {
-    return axios.post(config.SERVER_URL + url, content, addConfig());
+    return axios.post(config.SERVER_URL + url, content, addConfig()).then((res) => res.data);
   },
   update: (url: string, content: object) => {
-    return axios.put(config.SERVER_URL + url, content, addConfig());
+    return axios.put(config.SERVER_URL + url, content, addConfig()).then((res) => res.data);
   },
   delete: (url: string) => {
-    return axios.delete(config.SERVER_URL + url, addConfig());
+    return axios.delete(config.SERVER_URL + url, addConfig()).then((res) => res.data);
   }
 }
 

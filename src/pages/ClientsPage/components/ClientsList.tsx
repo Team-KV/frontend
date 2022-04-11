@@ -71,9 +71,9 @@ const ClientList = () => {
   const loadClients = () => {
     clientService
       .getClients()
-      .then((res) => {
+      .then((data) => {
         let fetchedClients: any = [];
-        res.data.forEach((dto: any) => {
+        data.forEach((dto: any) => {
           fetchedClients.push(new Client(dto));
         });
 
@@ -90,7 +90,7 @@ const ClientList = () => {
   const navigateToDetail = (client: any) => {
     navigate('/clients/' + client.id);
   };
-  
+
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };

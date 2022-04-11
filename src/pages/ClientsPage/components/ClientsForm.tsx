@@ -1,4 +1,10 @@
-import { Box, FormControlLabel, FormGroup, Grid, InputAdornment } from '@mui/material';
+import {
+  Box,
+  FormControlLabel,
+  FormGroup,
+  Grid,
+  InputAdornment,
+} from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { Client } from 'models/Client';
 
@@ -38,15 +44,15 @@ const ClientsForm = () => {
           debugger;
         });
     } else {
-      clientService.addClient(dto).then((res) => {
-        navigate('/clients/' + res.data.Client.id);
+      clientService.addClient(dto).then((data) => {
+        navigate('/clients/' + data.Client.id);
       });
     }
   };
   useEffect(() => {
     if (id) {
-      clientService.getClient(+id).then((res) => {
-        setValues(new Client({ ...res.data.Client }));
+      clientService.getClient(+id).then((data) => {
+        setValues(new Client({ ...data.Client }));
       });
     }
   }, []);
