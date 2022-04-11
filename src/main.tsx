@@ -8,29 +8,29 @@ import { csCZ, enUS } from '@mui/material/locale';
 
 const theme = createTheme(
   {
-    palette: {
-      primary: { main: '#94D1AF' },
-    },
-    shape: {
-      borderRadius: 25,
-    },
-    typography: {
-      fontFamily: ['Nunito', 'Open Sans'].join(','),
-    },
-    components: {
-      MuiButton: {
-        defaultProps: {
-          variant: 'outlined',
-          size: 'small',
-        },
-      },
-      MuiTextField: {
-        defaultProps: {
-          variant: 'outlined',
-          size: 'small',
-        },
-      },
-    },
+    // palette: {
+    //   primary: { main: '#94D1AF' },
+    // },
+    // shape: {
+    //   borderRadius: 25,
+    // },
+    // typography: {
+    //   fontFamily: ['Nunito', 'Open Sans'].join(','),
+    // },
+    // components: {
+    //   MuiButton: {
+    //     defaultProps: {
+    //       variant: 'outlined',
+    //       size: 'small',
+    //     },
+    //   },
+    //   MuiTextField: {
+    //     defaultProps: {
+    //       variant: 'outlined',
+    //       size: 'small',
+    //     },
+    //   },
+    // },
   },
   csCZ
 );

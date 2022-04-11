@@ -10,9 +10,11 @@ import {
   CssBaseline,
   Typography,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -27,7 +29,9 @@ function Login() {
       .post('http://localhost/api/login', loginCredentials)
       .then((response: AxiosResponse) => {
         localStorage.setItem('token', response.data.Token);
-        console.log('TOKEN IS SET: ' + localStorage.getItem('token'));
+        navigate('/dashboard');
+      }).catch(() => {
+        console.log('Login failed, god knows why.')
       });
   };
 
