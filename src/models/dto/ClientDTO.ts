@@ -30,7 +30,7 @@ export interface ClientDTO {
 
 export class ClientDTO {
   constructor(client: Client) {
-    this.id = client.id ?? null;
+    this.id = client.id;
     this.first_name = client.firstName;
     this.last_name = client.lastName;
     this.date_born = new Date(client.dateOfBirth).toISOString().split('T')[0];

@@ -11,7 +11,6 @@ const Select = (props: any) => {
       name={name}
       onChange={onChange}
       select
-      size="small"
       value={value}
       fullWidth
     >
