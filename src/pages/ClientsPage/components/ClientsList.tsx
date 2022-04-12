@@ -33,8 +33,8 @@ interface Column {
 const ClientList = () => {
   let navigate = useNavigate();
 
-  let [clients, setClients] = useState([]);
-  let [allClients, setAllClients] = useState([]);
+  let [clients, setClients]: [Client[], any] = useState([]);
+  let [allClients, setAllClients]: [Client[], any] = useState([]);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -70,13 +70,7 @@ const ClientList = () => {
 
   const loadClients = () => {
     clientService
-      .getClients()
-      .then((data) => {
-        let fetchedClients: any = [];
-        data.forEach((dto: any) => {
-          fetchedClients.push(new Client(dto));
-        });
-
+      .getClients().then((fetchedClients: Client[]) => {
         setClients(fetchedClients);
         setAllClients(fetchedClients);
       })

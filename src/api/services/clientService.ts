@@ -1,13 +1,30 @@
 import API from 'api/api';
+import { de, ja } from 'date-fns/locale';
 import { Client } from 'models/Client';
 import { ClientDTO } from 'models/dto/ClientDTO';
 
 const ClientService = {
-  getClients: () => API.get('client'),
-  getClient: (id: number) => API.get('client/' + id),
-  updateClient: (id: number, client: ClientDTO) => API.update('client/' + id, client),
-  addClient: (client: ClientDTO) => API.post('client', client),
-  deleteClient: (id: number) => API.delete('client/' + id),
+  getClients: async (): Promise<Client[]> => {
+    const data = await API.get('client');
+    return data.map((dto: ClientDTO) => new Client({...dto}));
+  },
+  getClient: async (id: number): Promise<Client> => {
+    const data = await API.get('client/' + id);
+    return new Client(data.Client);
+  }, 
+  updateClient: async (id: number, client: Client): Promise<Client> => {
+    const dto = new ClientDTO(client);
+    const data = await API.update('client/' + id, dto)
+    return new Client(data.Client);
+  },
+  addClient: async (client: Client): Promise<Client> => {
+    const dto = new ClientDTO(client);
+    const data = await API.post('client', dto);
+    return new Client(data.Client);
+  },
+  deleteClient: (id: number) => {
+    return API.delete('client/' + id);
+  }
 }
 
 export default ClientService;

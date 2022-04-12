@@ -16,6 +16,7 @@ import { Box } from '@mui/system';
 const ClientsDetail = () => {
   let navigate = useNavigate();
   const [client, setClient] = useState<Client | null>(null);
+
   let { id } = useParams();
   const sex = SEX.find((item) => item.value === client?.sex)?.id!;
   const sexIcon =
@@ -33,7 +34,7 @@ const ClientsDetail = () => {
 
   const deleteClient = () => {
     if (id) {
-      clientService.deleteClient(+id).then((res) => {
+      clientService.deleteClient(+id).then(() => {
         navigate('/clients');
       });
     }
@@ -41,9 +42,8 @@ const ClientsDetail = () => {
 
   useEffect(() => {
     if (id === undefined) return;
-    clientService.getClient(+id).then((data) => {
-      setClient(new Client({ ...data.Client }));
-      if (!client) return <NotFound />;
+    clientService.getClient(+id).then((fetchedClient) => {
+      setClient(fetchedClient);
     });
   }, []);
 

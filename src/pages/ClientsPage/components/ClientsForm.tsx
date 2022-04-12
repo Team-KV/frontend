@@ -26,33 +26,29 @@ const ClientsForm = () => {
   const [t] = useTranslation();
   const { values, setValues, handleInput } = useForm({});
 
-  const gridXs = 12;
-  const gridMd = 6;
-  const gridLg = 4;
-
   const onSubmit = (e: any) => {
     e.preventDefault();
-    const dto = new ClientDTO(values);
     if (id) {
       clientService
-        .updateClient(+id, dto)
+        .updateClient(+id, values)
         .then(() => {
-          debugger;
           navigate('/clients/' + id);
         })
-        .catch((res) => {
-          debugger;
-        });
     } else {
-      clientService.addClient(dto).then((data) => {
-        navigate('/clients/' + data.Client.id);
+      clientService.addClient(values).then((fetchedClient) => {
+        navigate('/clients/' + fetchedClient.id);
       });
     }
   };
+
+  const handleCancel = () => {
+    navigate('/clients');
+  };
+
   useEffect(() => {
     if (id) {
-      clientService.getClient(+id).then((data) => {
-        setValues(new Client({ ...data.Client }));
+      clientService.getClient(+id).then((fetchedClient) => {
+        setValues({ ...fetchedClient });
       });
     }
   }, []);
@@ -89,6 +85,7 @@ const ClientsForm = () => {
           value={values.sex || ''}
         />
         <Controls.DatePicker
+          required
           name="dateOfBirth"
           onChange={handleInput}
           value={values.dateOfBirth || null}
@@ -210,10 +207,10 @@ const ClientsForm = () => {
 
         <Box display={'flex'} justifyContent="space-between">
           <Controls.Button
+            onClick={handleCancel}
             color="primary"
             size="large"
             text="cancel"
-            type="submit"
             variant="outlined"
           />
           <Controls.Button

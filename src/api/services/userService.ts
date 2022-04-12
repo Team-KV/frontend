@@ -1,9 +1,9 @@
 import API from 'api/api';
 
-const UserService = {
+const userService = {
   getUserInfo: () => {
     return API.get('info');
   }
 }
 
-export default UserService;
+export default userService;

@@ -1,18 +1,26 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import config from "config.json";
 
+const handleError = (({ response }: any) => {
+  switch(response.status) {
+    case 401: 
+      window.location = window.location.protocol + "//" + window.location.host + "/login" as any;
+      break;
+  }
+})
+
 export default {
   get: (url: string) => {
-    return axios.get(config.SERVER_URL + url, addConfig()).then((res) => res.data)
+    return axios.get(config.SERVER_URL + url, addConfig()).then((res) => res.data).catch(handleError)
   },
-  post: (url: string, content: any) => {
-    return axios.post(config.SERVER_URL + url, content, addConfig()).then((res) => res.data);
+  post: (url: string, content: object) => {
+    return axios.post(config.SERVER_URL + url, content, addConfig()).then((res) => res.data).catch(handleError);
   },
   update: (url: string, content: object) => {
-    return axios.put(config.SERVER_URL + url, content, addConfig()).then((res) => res.data);
+    return axios.put(config.SERVER_URL + url, content, addConfig()).then((res) => res.data).catch(handleError);
   },
   delete: (url: string) => {
-    return axios.delete(config.SERVER_URL + url, addConfig()).then((res) => res.data);
+    return axios.delete(config.SERVER_URL + url, addConfig()).then((res) => res.data).catch(handleError);
   }
 }
 
