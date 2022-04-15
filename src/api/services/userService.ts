@@ -1,8 +1,10 @@
 import API from 'api/api';
+import { User } from 'models/User';
 
 const userService = {
-  getUserInfo: () => {
-    return API.get('info');
+  getUserInfo: async (): Promise<User> => {
+    const data = await API.get('info');
+    return {...(new User(data.User))};
   }
 }
 

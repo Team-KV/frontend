@@ -26,6 +26,9 @@ import { initReactI18next, useTranslation } from 'react-i18next';
 import { Button, Switch } from '@mui/material';
 import i18n from "i18next";
 import { changeLanguage } from 'i18next';
+import { fetchUser } from 'redux/slices/userSlice';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from 'hooks';
 
 const drawerWidth = 240;
 
@@ -102,6 +105,14 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [ t, i18n ] = useTranslation();
+  
+  const user = useAppSelector(state => state.user.value);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => { 
+    dispatch(fetchUser())
+  }, [dispatch])
 
   const switchLang = (lang: any) => {
     i18n.use(initReactI18next) // passes i18n down to react-i18next
@@ -167,8 +178,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
           <Typography variant="h6" noWrap component="div">
             Physiport
           </Typography>
-          <Button sx={{ ml: 'auto' }} variant='contained' onClick={() => switchLang('cs')}>CZ</Button>
-          <Button sx={{ ml: 1 }} variant='contained' onClick={() => switchLang('en')}>EN</Button>
+          <Typography ml="auto" >Email: {user.email}</Typography>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

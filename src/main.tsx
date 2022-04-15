@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import { csCZ, enUS } from '@mui/material/locale';
 
-// import store from './store';
+import store from './store';
 
 const theme = createTheme(
   {
@@ -36,14 +36,15 @@ const theme = createTheme(
 );
 
 import App from './App';
+import { Provider } from 'react-redux';
 
 ReactDOM.render(
-  // <React.StrictMode>
-  <ThemeProvider theme={theme}>
-    {/* <Provider store={store}> */}
-    <App />
-    {/* </Provider> */}
-  </ThemeProvider>,
-  // </React.StrictMode>,
+  <React.StrictMode>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ThemeProvider>
+  </React.StrictMode>,
   document.getElementById('root')
 );

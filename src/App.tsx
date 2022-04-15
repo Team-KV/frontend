@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { publicRoutes, privateRoutes, IRoute } from 'routes';
 import ProtectedRoute from 'components/ProtectedRoute';
+import { useEffect } from 'react';
+import store from 'store';
+import { fetchUser } from 'redux/slices/userSlice';
 
 function App() {
   const auth = 'staff';
@@ -12,6 +15,10 @@ function App() {
       element={<ProtectedRoute element={route.element} />}
     />
   ));
+
+  useEffect(() => {
+    store.dispatch(fetchUser)
+  }, [])
 
   return (
     <div className="App">
