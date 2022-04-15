@@ -1,8 +1,10 @@
 import NotFound from 'components/NotFound';
+import CalendarPage from 'pages/CalendarPage/CalendarPage';
 import ClientsPage from 'pages/ClientsPage/ClientsPage';
 import ClientsDetail from 'pages/ClientsPage/components/ClientsDetail';
 import ClientsForm from 'pages/ClientsPage/components/ClientsForm';
 import DashboardPage from 'pages/DashboardPage/DashboardPage';
+import ExercisesPage from 'pages/ExercisesPage/ExercisesPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 
 export interface IRoute {
@@ -28,39 +30,58 @@ export const publicRoutes: IRoute[] = [
 
 //\\ =================== PRIVATE ROUTES =================== //\\ 
 
-export const privateRoutes: IRoute[] = [
+export const privateRoutes: {staff: IRoute[], client: IRoute[]} = {
+  staff: [
+    {
+      name: 'home',
+      path: '/',
+      element: <ClientsPage />,
+    },
+    {
+      name: 'clients',
+      path: '/clients',
+      element: <ClientsPage />,
+    },
+    {
+      name: 'clients-detail',
+      path: '/clients/:id',
+      element: <ClientsDetail />,
+    },
+    {
+      name: 'clients-form',
+      path: '/clients/form',
+      element: <ClientsForm />,
+    },
+    {
+      name: 'clients-form',
+      path: '/clients/:id/form',
+      element: <ClientsForm />,
+    },
+  
+    // CALENDAR
+    {
+      name: 'calendar',
+      path: '/calendar',
+      element: <CalendarPage />,
+    },
 
-  // GENERAL
-  {
-    name: 'home',
-    path: '/',
-    element: <DashboardPage />,
-  },
-  {
-    name: 'dashboard',
-    path: '/dashboard',
-    element: <DashboardPage />,
-  },
-
-  // CLIENTS
-  {
-    name: 'clients',
-    path: '/clients',
-    element: <ClientsPage />,
-  },
-  {
-    name: 'clients-detail',
-    path: '/clients/:id',
-    element: <ClientsDetail />,
-  },
-  {
-    name: 'clients-form',
-    path: '/clients/form',
-    element: <ClientsForm />,
-  },
-  {
-    name: 'clients-form',
-    path: '/clients/:id/form',
-    element: <ClientsForm />,
-  },
-];
+    // EXERCISES
+    {
+      name: 'exercises',
+      path: '/exercises',
+      element: <ExercisesPage />,
+    }
+  ],
+  client: [
+    {
+      name: 'home',
+      path: '/',
+      element: <DashboardPage />,
+    },
+    {
+      name: 'dashboard',
+      path: '/dashboard',
+      element: <DashboardPage />,
+    },
+  ]
+}

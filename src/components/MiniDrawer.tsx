@@ -116,12 +116,15 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
     setOpen(false);
   };
 
-  const menuItems = [
+  const menuItemsClient = [
     {
       name: t('dashboard'),
       icon: <DashboardIcon />,
       link: '/dashboard',
     },
+  ]
+
+  const menuItemsStaff = [
     {
       name: t('clients'),
       icon: <PeopleAltIcon />,
@@ -137,11 +140,11 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
       icon: <FitnessCenterIcon />,
       link: '/exercises',
     },
-    {
-      name: t('encyclopedia'),
-      icon: <MenuBookIcon />,
-      link: '/encyclopedia',
-    },
+    // {
+    //   name: t('encyclopedia'),
+    //   icon: <MenuBookIcon />,
+    //   link: '/encyclopedia',
+    // },
   ];
 
   return (
@@ -180,7 +183,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {menuItems.map((item, index) => (
+          {menuItemsStaff.map((item, index) => (
             <Link
               style={{ textDecoration: 'none', color: 'inherit' }}
               key={index}

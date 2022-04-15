@@ -100,8 +100,8 @@ const ClientList = () => {
     const value: string = e.target.value.toLowerCase();
     const newClients = allClients.filter((client: any) => {
       return (
-        client.first_name.toLowerCase().includes(value) ||
-        client.last_name.toLowerCase().includes(value)
+        client.firstName.toLowerCase().includes(value) ||
+        client.lastName.toLowerCase().includes(value)
       );
     });
     setClients(newClients);
