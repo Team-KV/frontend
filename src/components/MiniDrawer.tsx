@@ -23,8 +23,8 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link } from 'react-router-dom';
 import { initReactI18next, useTranslation } from 'react-i18next';
-import { Button, Switch } from '@mui/material';
-import i18n from "i18next";
+import { Button, Snackbar, Switch } from '@mui/material';
+import i18n from 'i18next';
 import { changeLanguage } from 'i18next';
 import { fetchUser } from 'redux/slices/userSlice';
 import { useEffect } from 'react';
@@ -104,20 +104,21 @@ const Drawer = styled(MuiDrawer, {
 export default function MiniDrawer({ body }: { body: React.ReactNode }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [ t, i18n ] = useTranslation();
-  
-  const user = useAppSelector(state => state.user.value);
+  const [t, i18n] = useTranslation();
+
+  const user = useAppSelector((state) => state.user.value);
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => { 
-    dispatch(fetchUser())
-  }, [dispatch])
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
 
   const switchLang = (lang: any) => {
-    i18n.use(initReactI18next) // passes i18n down to react-i18next
-    .init({lng: lang});
-  }
+    i18n
+      .use(initReactI18next) // passes i18n down to react-i18next
+      .init({ lng: lang });
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -133,7 +134,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
       icon: <DashboardIcon />,
       link: '/dashboard',
     },
-  ]
+  ];
 
   const menuItemsStaff = [
     {
@@ -178,7 +179,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
           <Typography variant="h6" noWrap component="div">
             Physiport
           </Typography>
-          <Typography ml="auto" >Email: {user.email}</Typography>
+          <Typography ml="auto">Email: {user.email}</Typography>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -228,6 +229,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
+
         {body}
       </Box>
     </Box>

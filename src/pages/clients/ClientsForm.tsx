@@ -9,6 +9,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import SEX from 'constants/sex';
 import clientService from 'api/services/clientService';
+import { useAppDispatch } from 'hooks';
+import { showSuccess, showError } from 'redux/slices/snackbarSlice';
 
 const ClientsForm = () => {
   let { id } = useParams();
@@ -17,16 +19,32 @@ const ClientsForm = () => {
   const [t] = useTranslation();
   const { values, setValues, handleInput } = useForm({});
 
+  const dispatch = useAppDispatch();
+
   const onSubmit = (e: any) => {
     e.preventDefault();
     if (id) {
-      clientService.updateClient(+id, values).then(() => {
-        navigate('/clients/' + id);
-      });
+      clientService
+        .updateClient(+id, values)
+        .then(() => {
+          dispatch(showSuccess('Client was successfully added'));
+          navigate('/clients/' + id);
+        })
+        .catch((err) => {
+          const message = err.response.data.message;
+          dispatch(showError(message));
+        });
     } else {
-      clientService.addClient(values).then((fetchedClient) => {
-        navigate('/clients/' + fetchedClient.id);
-      });
+      clientService
+        .addClient(values)
+        .then((fetchedClient) => {
+          dispatch(showSuccess('Client was successfully added'));
+          navigate('/clients/' + fetchedClient.id);
+        })
+        .catch((err) => {
+          const message = err.response.data.message;
+          dispatch(showError(message));
+        });
     }
   };
 
@@ -92,8 +110,8 @@ const ClientsForm = () => {
           onChange={handleInput}
           value={values.insuranceCompany || ''}
         />
-
-        {/* <Controls.Checkbox
+        {/* 
+        <Controls.Checkbox
           name="noCzech"
           onChange={handleInput}
           value={values.noCzech || false}

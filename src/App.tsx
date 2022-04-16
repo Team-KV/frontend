@@ -4,6 +4,7 @@ import ProtectedRoute from 'components/ProtectedRoute';
 import { useEffect } from 'react';
 import store from 'store';
 import { fetchUser } from 'redux/slices/userSlice';
+import Snackbar from 'components/Snackbar';
 
 function App() {
   const auth = 'staff';
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <div className="App">
+      <Snackbar />
       <BrowserRouter>
         <Routes>
           {publicRoutes.map((route: IRoute) => (

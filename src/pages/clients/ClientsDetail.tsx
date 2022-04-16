@@ -11,11 +11,14 @@ import { t } from 'i18next';
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
 import { Box } from '@mui/system';
+import { useAppDispatch } from 'hooks';
+import { showError, showSuccess } from 'redux/slices/snackbarSlice';
 
 const ClientsDetail = () => {
   let navigate = useNavigate();
   const [client, setClient] = useState<Client | null>(null);
 
+  const dispatch = useAppDispatch();
   let { id } = useParams();
   const sex = SEX.find((item) => item.value === client?.sex)?.id!;
   const sexIcon =
@@ -34,6 +37,7 @@ const ClientsDetail = () => {
   const deleteClient = () => {
     if (id) {
       clientService.deleteClient(+id).then(() => {
+        dispatch(showSuccess('Client was successfully deleted'))
         navigate('/clients');
       });
     }
@@ -43,6 +47,10 @@ const ClientsDetail = () => {
     if (id === undefined) return;
     clientService.getClient(+id).then((fetchedClient) => {
       setClient(fetchedClient);
+    }).catch((err) => {
+      const message = err.response.data.message;
+      dispatch(showError(message))
+      navigate('/clients');
     });
   }, []);
 
