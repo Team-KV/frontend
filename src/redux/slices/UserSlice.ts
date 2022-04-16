@@ -4,18 +4,15 @@ import { User } from "models/User";
 
 export interface UserState {
   value: User
-  status: any
+  status: string
 }
 
 const initialState: UserState = {
   value: {},
-  status: null
+  status: '',
 }
 
-export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
-  const response = await userService.getUserInfo();
-  return response;
-});
+export const fetchUser = createAsyncThunk('user/fetchUser', async () => await userService.getUserInfo());
 
 export const userSlice = createSlice({
   name: "user",

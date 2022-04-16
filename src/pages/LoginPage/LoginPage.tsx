@@ -12,9 +12,12 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+
 function Login() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,9 +32,10 @@ function Login() {
       .post('http://localhost/api/login', loginCredentials)
       .then((response: AxiosResponse) => {
         localStorage.setItem('token', response.data.Token);
-        navigate('/dashboard');
-      }).catch(() => {
-        console.log('Login failed, god knows why.')
+        navigate('/');
+      })
+      .catch(() => {
+        console.log('Login failed, god knows why.');
       });
   };
 
