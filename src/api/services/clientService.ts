@@ -1,5 +1,4 @@
 import API from 'api/api';
-import { de, ja } from 'date-fns/locale';
 import { Client } from 'models/Client';
 import { ClientDTO } from 'models/dto/ClientDTO';
 

@@ -20,7 +20,7 @@ const ContactInfo = ({ client }: { client: Client }) => {
       <TextItem name={'email'} value={client?.email} />
       <TextItem
         name={'dateOfBirth'}
-        value={client?.dateOfBirth.toLocaleDateString('cs-CZ')}
+        value={client?.dateOfBirth ? new Date(client.dateOfBirth).toLocaleDateString('cs-CZ') : ''}
       />
       <TextItem name={'street'} value={client?.street} />
       <TextItem name={'postalCode'} value={client?.postalCode} />

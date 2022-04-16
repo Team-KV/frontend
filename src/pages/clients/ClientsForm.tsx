@@ -1,12 +1,4 @@
-import {
-  Box,
-  FormControlLabel,
-  FormGroup,
-  Grid,
-  InputAdornment,
-} from '@mui/material';
-import TextField from '@mui/material/TextField';
-import { Client } from 'models/Client';
+import { Box, InputAdornment } from '@mui/material';
 
 import { Controls } from 'components/Controls';
 
@@ -16,7 +8,6 @@ import { Form, useForm } from 'components/Form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import SEX from 'constants/sex';
-import { ClientDTO } from 'models/dto/ClientDTO';
 import clientService from 'api/services/clientService';
 
 const ClientsForm = () => {
@@ -29,11 +20,9 @@ const ClientsForm = () => {
   const onSubmit = (e: any) => {
     e.preventDefault();
     if (id) {
-      clientService
-        .updateClient(+id, values)
-        .then(() => {
-          navigate('/clients/' + id);
-        })
+      clientService.updateClient(+id, values).then(() => {
+        navigate('/clients/' + id);
+      });
     } else {
       clientService.addClient(values).then((fetchedClient) => {
         navigate('/clients/' + fetchedClient.id);

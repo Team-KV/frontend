@@ -1,56 +1,43 @@
 {
-  "login": "Login",
-  "login_button": "Log in",
-  "email": "Email",
-  "password": "Password",
-  
-  "firstName": "First name",
-  "lastName": "Last name",
-  "phone": "Phone",
-  "dateOfBirth": "Date of birth",
-
-  "listOfClients": "List of clients",
-
-
-  "weight": "Weight",
-  "height": "Height",
-  "personalInformation": "Personal information",
-  "insuranceCompany": "Insurance company",
-  "street": "Street",
-  "city": "City",
-  "postalCode": "Postal code",
-  "sport": "Sport",
-  "pastIllneses": "Past illneses",
-  "injuriesSuffered": "Injuries suffered",
   "anamnesis": "Anamnesis",
-  "note": "Note",
-  "sex": "Sex",
-
-  "unspecified": "Unspecified",
-  "male": "Male",
-
-  "female": "Female",
-  "other": "Other",
-
-  "generalInfo": "General",
-  "contactInfo": "Contact",
-  "healthInfo": "Health",
-
-  "unknown": "Unknown",
-
-  "pin": "National ID Number",
-
-  "dashboard": "Dashboard",
-  "clients": "Clients",
   "calendar": "Calendar",
-  "exercises": "Exercises",
-  "encyclopedia": "Encyclopedia",
-
-  "save": "Save",
   "cancel": "Cancel",
-
+  "city": "City",
+  "clients": "Clients",
+  "contactInfo": "Contact",
+  "dashboard": "Dashboard",
+  "dateOfBirth": "Date of birth",
+  "email": "Email",
+  "encyclopedia": "Encyclopedia",
+  "end": "End",
+  "exercises": "Exercises",
+  "female": "Female",
+  "firstName": "First name",
+  "generalInfo": "General",
+  "healthInfo": "Health",
+  "height": "Height",
+  "injuriesSuffered": "Injuries suffered",
+  "insuranceCompany": "Insurance company",
+  "lastName": "Last name",
+  "listOfClients": "List of clients",
+  "login_button": "Log in",
+  "login": "Login",
+  "male": "Male",
+  "note": "Note",
+  "other": "Other",
+  "password": "Password",
+  "pastIllneses": "Past illneses",
+  "personalInformation": "Personal information",
+  "phone": "Phone",
+  "pin": "National ID Number",
+  "postalCode": "Postal code",
+  "save": "Save",
   "search": "Search",
-
-  "end": "End"
+  "sex": "Sex",
+  "sport": "Sport",
+  "street": "Street",
+  "unknown": "Unknown",
+  "unspecified": "Unspecified",
+  "weight": "Weight"
 }
 

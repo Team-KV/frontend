@@ -30,7 +30,7 @@ interface Column {
   align?: 'right';
 }
 
-const ClientList = () => {
+const Clients = () => {
   let navigate = useNavigate();
 
   let [clients, setClients]: [Client[], any] = useState([]);
@@ -70,7 +70,8 @@ const ClientList = () => {
 
   const loadClients = () => {
     clientService
-      .getClients().then((fetchedClients: Client[]) => {
+      .getClients()
+      .then((fetchedClients: Client[]) => {
         setClients(fetchedClients);
         setAllClients(fetchedClients);
       })
@@ -100,12 +101,20 @@ const ClientList = () => {
     const value: string = e.target.value.toLowerCase();
     const newClients = allClients.filter((client: any) => {
       return (
-        client.firstName.toLowerCase().includes(value) ||
-        client.lastName.toLowerCase().includes(value)
+        client.first_name.toLowerCase().includes(value) ||
+        client.last_name.toLowerCase().includes(value)
       );
     });
     setClients(newClients);
   };
+
+  const styles = (theme: any) => ({
+    tableRow: {
+     hover: {
+        cursor: 'pointer'
+       }
+    }
+});
 
   return (
     <>
@@ -202,4 +211,4 @@ const ClientList = () => {
   );
 };
 
-export default ClientList;
+export default Clients;

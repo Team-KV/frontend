@@ -2,15 +2,14 @@ import clientService from 'api/services/clientService';
 import React, { useEffect, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { Client } from 'models/Client';
-import ContactInfo from './ContactInfo';
+import ContactInfo from './components/ContactInfo';
 import NotFound from 'components/NotFound';
 import { Button, Card, Grid, Typography } from '@mui/material';
-import HealthInfo from './HealthInfo';
+import HealthInfo from './components/HealthInfo';
 import SEX from 'constants/sex';
 import { t } from 'i18next';
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
-import Events from './Events';
 import { Box } from '@mui/system';
 
 const ClientsDetail = () => {
@@ -85,7 +84,6 @@ const ClientsDetail = () => {
           <ContactInfo client={client!} />
         </Grid>
         <Grid item xs={12} md={7} lg={8}>
-          <Events />
         </Grid>
         <Grid item xs={12}>
           <HealthInfo client={client!} />
