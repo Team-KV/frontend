@@ -1,11 +1,11 @@
 import { applyMiddleware, configureStore, createStore } from "@reduxjs/toolkit";
-import clientsReducer from "redux/slices/clientsSlice";
+// import clientsReducer from "redux/slices/clientsSlice";
 import userReducer from "redux/slices/userSlice";
 
 const store = configureStore({
   reducer: {
     user: userReducer,
-    clients: clientsReducer
+    // clients: clientsReducer
   }
 });
 
