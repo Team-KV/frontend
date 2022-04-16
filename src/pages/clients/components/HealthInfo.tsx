@@ -1,11 +1,13 @@
 import { Card, Divider, Grid } from '@mui/material';
 import { Client } from 'models/Client';
 import TextItem from 'components/TextItem';
-import SEX from 'constants/sex';
 import CardTitle from 'components/CardTitle';
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
+import { zhCN } from 'date-fns/locale';
 
 const HealthInfo = ({ client }: { client: Client }) => {
+  const [t] = useTranslation();
+
   return (
     <Card
       sx={{
@@ -14,12 +16,12 @@ const HealthInfo = ({ client }: { client: Client }) => {
       }}
       elevation={7}
     >
-      <CardTitle text={t('healthInfo')} />
+      <CardTitle text={t('clients:healthInfo')} />
       <Grid container>
         <Grid container item xs={9}>
           <Grid item xs={12} sm={6} lg={3}>
             <TextItem
-              name={'height'}
+              label={t('clients:height')}
               value={
                 client?.height?.toString()
                   ? client?.height?.toString() + ' cm'
@@ -29,7 +31,7 @@ const HealthInfo = ({ client }: { client: Client }) => {
           </Grid>
           <Grid item xs={12} sm={6} lg={3}>
             <TextItem
-              name={'weight'}
+              label={t('clients:weight')}
               value={
                 client?.weight?.toString()
                   ? client?.weight?.toString() + ' kg'
@@ -38,20 +40,20 @@ const HealthInfo = ({ client }: { client: Client }) => {
             />
           </Grid>
           <Grid item xs={12} sm={6} lg={3}>
-            <TextItem name={'pin'} value={client?.pin} />
+            <TextItem label={t('clients:pin')} value={client?.pin} />
           </Grid>
           <Grid item xs={12} sm={6} lg={3}>
             <TextItem
-              name={'insuranceCompany'}
+              label={t('clients:insuranceCompany')}
               value={client?.insuranceCompany?.toString()}
             />
           </Grid>
           <Grid item xs={12} lg={6}>
-            <TextItem name={'pastIllneses'} value={client?.pastIllneses} />
+            <TextItem label={t('clients:pastIllneses')} value={client?.pastIllneses} />
           </Grid>
           <Grid item xs={12} lg={6}>
             <TextItem
-              name={'injuriesSuffered'}
+              label={t('clients:injuriesSuffered')}
               value={client?.injuriesSuffered}
             />
           </Grid>
@@ -60,9 +62,9 @@ const HealthInfo = ({ client }: { client: Client }) => {
           Přílohy
         </Grid>
       </Grid>
-      <TextItem name={'sport'} value={client?.sport} />
-      <TextItem name={'anamnesis'} value={client?.anamnesis} />
-      <TextItem name={'note'} value={client?.note} />
+      <TextItem label={t('clients:sport')} value={client?.sport} />
+      <TextItem label={t('clients:anamnesis')} value={client?.anamnesis} />
+      <TextItem label={t('clients:note')} value={client?.note} />
     </Card>
   );
 };

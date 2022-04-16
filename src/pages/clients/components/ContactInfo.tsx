@@ -14,17 +14,17 @@ const ContactInfo = ({ client }: { client: Client }) => {
       }}
       elevation={7}
     >
-      <CardTitle text={t('contactInfo')} />
+      <CardTitle text={t('clients:contactInfo')} />
 
-      <TextItem name={'phone'} value={client?.phone} />
-      <TextItem name={'email'} value={client?.email} />
+      <TextItem label={t('clients:phone')} value={client?.phone} />
+      <TextItem label={t('clients:email')} value={client?.email} />
       <TextItem
-        name={'dateOfBirth'}
+        label={t('clients:dateOfBirth')}
         value={client?.dateOfBirth ? new Date(client.dateOfBirth).toLocaleDateString('cs-CZ') : ''}
       />
-      <TextItem name={'street'} value={client?.street} />
-      <TextItem name={'postalCode'} value={client?.postalCode} />
-      <TextItem name={'city'} value={client?.city} />
+      <TextItem label={t('clients:street')} value={client?.street} />
+      <TextItem label={t('clients:postalCode')} value={client?.postalCode} />
+      <TextItem label={t('clients:city')} value={client?.city} />
     </Card>
   );
 };

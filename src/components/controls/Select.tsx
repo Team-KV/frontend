@@ -2,12 +2,12 @@ import { MenuItem, TextField } from '@mui/material';
 import { t } from 'i18next';
 
 const Select = (props: any) => {
-  const { name, value, onChange, options, ...rest } = props;
+  const { name, value, label, onChange, options, ...rest } = props;
 
   return (
     <TextField
       {...rest}
-      label={t(props.label ?? name)}
+      label={label}
       name={name}
       onChange={onChange}
       select
@@ -16,7 +16,7 @@ const Select = (props: any) => {
     >
       {options.map((option: any) => (
         <MenuItem key={option.id} value={option.value}>
-          {t(option.id)}
+          {t(option.label ?? option.id)}
         </MenuItem>
       ))}
     </TextField>

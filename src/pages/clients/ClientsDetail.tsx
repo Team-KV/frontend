@@ -13,11 +13,14 @@ import FemaleIcon from '@mui/icons-material/Female';
 import { Box } from '@mui/system';
 import { useAppDispatch } from 'hooks';
 import { showError, showSuccess } from 'redux/slices/snackbarSlice';
+import { useTranslation } from 'react-i18next';
 
 const ClientsDetail = () => {
   let navigate = useNavigate();
   const [client, setClient] = useState<Client | null>(null);
 
+  const [t] = useTranslation();
+  
   const dispatch = useAppDispatch();
   let { id } = useParams();
   const sex = SEX.find((item) => item.value === client?.sex)?.id!;
@@ -37,7 +40,7 @@ const ClientsDetail = () => {
   const deleteClient = () => {
     if (id) {
       clientService.deleteClient(+id).then(() => {
-        dispatch(showSuccess('Client was successfully deleted'))
+        dispatch(showSuccess(t('clients:isDeleted')))
         navigate('/clients');
       });
     }
@@ -72,7 +75,7 @@ const ClientsDetail = () => {
         >
           {sexIcon}
           <Typography variant="h4" fontWeight={500} letterSpacing={2}>
-            {client?.firstName} {client?.lastName}
+            {client?.firstName} {client?.lastName} {client?.noCzech ? `(${(t('clients:noCheck'))})` : ''}
           </Typography>
         </Box>
         <Box>

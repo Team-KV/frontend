@@ -4,7 +4,7 @@ import { Button as MuiButton } from '@mui/material';
 import { t } from 'i18next';
 
 const Button = (props: any) => {
-  const { text, size, color, variant, onClick, ...rest } = props;
+  const { label, size, color, variant, onClick, ...rest } = props;
 
   return (
     <MuiButton
@@ -14,7 +14,7 @@ const Button = (props: any) => {
       variant={variant}
       {...rest}
     >
-      {t(text)}
+      {label}
     </MuiButton>
   );
 };

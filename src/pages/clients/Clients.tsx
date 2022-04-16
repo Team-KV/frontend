@@ -22,6 +22,8 @@ import {
 } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { Client } from 'models/Client';
+import { useAppDispatch } from 'hooks';
+import { showError } from 'redux/slices/snackbarSlice';
 
 interface Column {
   id: 'id' | 'firstName' | 'lastName' | 'dateOfBirth' | 'phone' | 'email';
@@ -36,6 +38,8 @@ const Clients = () => {
   let [clients, setClients]: [Client[], any] = useState([]);
   let [allClients, setAllClients]: [Client[], any] = useState([]);
 
+  const dispatch = useAppDispatch();
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [t] = useTranslation();
@@ -44,25 +48,25 @@ const Clients = () => {
     { id: 'firstName', label: t('firstName'), minWidth: 100 },
     {
       id: 'lastName',
-      label: t('lastName'),
+      label: t('clients:lastName'),
       minWidth: 100,
       align: 'right',
     },
     {
       id: 'dateOfBirth',
-      label: t('dateOfBirth'),
+      label: t('clients:dateOfBirth'),
       minWidth: 170,
       align: 'right',
     },
     {
       id: 'phone',
-      label: t('phone'),
+      label: t('clients:phone'),
       minWidth: 170,
       align: 'right',
     },
     {
       id: 'email',
-      label: t('email'),
+      label: t('clients:email'),
       minWidth: 170,
       align: 'right',
     },
@@ -75,7 +79,11 @@ const Clients = () => {
         setClients(fetchedClients);
         setAllClients(fetchedClients);
       })
-      .catch((error) => navigate('/login'));
+      .catch((err) => {
+        const message = err.response.data.message;
+        dispatch(showError(message));
+        navigate('/login');
+      });
   };
 
   useEffect(() => {
@@ -110,11 +118,11 @@ const Clients = () => {
 
   const styles = (theme: any) => ({
     tableRow: {
-     hover: {
-        cursor: 'pointer'
-       }
-    }
-});
+      hover: {
+        cursor: 'pointer',
+      },
+    },
+  });
 
   return (
     <>

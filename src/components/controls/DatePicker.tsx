@@ -3,11 +3,10 @@ import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker as MuiDatePicker } from '@mui/x-date-pickers/DatePicker';
-import { t } from 'i18next';
 
 
 const DatePicker = (props: any) => {
-  const { name, value, onChange } = props;
+  const { name, value, label, onChange } = props;
 
   const convertToDefEventPara = (name: any, value: any) => ({
     target: {
@@ -19,7 +18,7 @@ const DatePicker = (props: any) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <MuiDatePicker
-        label={t(name)}
+        label={label}
         value={value}
         inputFormat="dd.MM.yyyy"
         mask={"__.__.____"}

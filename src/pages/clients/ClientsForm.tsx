@@ -26,8 +26,9 @@ const ClientsForm = () => {
     if (id) {
       clientService
         .updateClient(+id, values)
-        .then(() => {
-          dispatch(showSuccess('Client was successfully added'));
+        .then((values) => {
+          debugger;
+          dispatch(showSuccess(t('clients:isUpdated')));
           navigate('/clients/' + id);
         })
         .catch((err) => {
@@ -38,7 +39,7 @@ const ClientsForm = () => {
       clientService
         .addClient(values)
         .then((fetchedClient) => {
-          dispatch(showSuccess('Client was successfully added'));
+          dispatch(showSuccess(t('clients:isAdded')));
           navigate('/clients/' + fetchedClient.id);
         })
         .catch((err) => {
@@ -48,6 +49,11 @@ const ClientsForm = () => {
     }
   };
 
+  const handleCheck = (event: any) => {
+    const checked = event.target.checked;
+    setValues({ ...values, noCzech: checked });
+  };
+
   const handleCancel = () => {
     navigate('/clients');
   };
@@ -55,7 +61,9 @@ const ClientsForm = () => {
   useEffect(() => {
     if (id) {
       clientService.getClient(+id).then((fetchedClient) => {
-        setValues({ ...fetchedClient });
+        setValues({
+          ...fetchedClient,
+        });
       });
     }
   }, []);
@@ -70,11 +78,12 @@ const ClientsForm = () => {
         gap={2}
       >
         {/* General info */}
-        <Section first label={t('generalInfo')} />
+        <Section first label={t('clients:generalInfo')} />
         <Controls.Input
           validators={['required']}
           errorMessages={['this field is required']}
           name="firstName"
+          label={t('clients:firstName')}
           onChange={handleInput}
           value={values.firstName || ''}
         />
@@ -82,11 +91,13 @@ const ClientsForm = () => {
           validators={['required']}
           errorMessages={['this field is required']}
           name="lastName"
+          label={t('clients:lastName')}
           onChange={handleInput}
           value={values.lastName || ''}
         />
         <Controls.Select
           name="sex"
+          label={t('clients:sex')}
           onChange={handleInput}
           options={SEX}
           value={values.sex || ''}
@@ -94,68 +105,83 @@ const ClientsForm = () => {
         <Controls.DatePicker
           required
           name="dateOfBirth"
+          label={t('clients:dateOfBirth')}
           onChange={handleInput}
-          value={values.dateOfBirth || null}
+          value={values.dateOfBirth ?? ''}
         />
         <Controls.Input
           validators={['required']}
           errorMessages={['this field is required']}
           name="phone"
+          label={t('clients:phone')}
           onChange={handleInput}
           value={values.phone || ''}
         />
 
         <Controls.Input
           name="insuranceCompany"
+          label={t('clients:insuranceCompany')}
           onChange={handleInput}
           value={values.insuranceCompany || ''}
         />
-        {/* 
+
         <Controls.Checkbox
           name="noCzech"
-          onChange={handleInput}
-          value={values.noCzech || false}
-        /> */}
-
-        <Controls.Input
-          name="pin"
-          onChange={handleInput}
-          value={values.pin || ''}
+          checked={values.noCzech ?? false}
+          label={t('clients:noCzech')}
+          onChange={handleCheck}
+          value={values.noCzech}
         />
 
+        {!values.noCzech ? (
+          <Controls.Input
+            name="pin"
+            label={t('clients:pin')}
+            onChange={handleInput}
+            value={values.pin || ''}
+          />
+        ) : (
+          ''
+        )}
+
         {/* Contact info */}
-        <Section label={t('contactInfo')} />
+        <Section label={t('clients:contactInfo')} />
 
         <Controls.Input
           errorMessages={['not an email']}
           validators={['isEmail']}
           name="email"
+          label={t('clients:email')}
           onChange={handleInput}
           value={values.email || ''}
         />
 
         <Controls.Input
           name="street"
+          label={t('clients:street')}
           onChange={handleInput}
           value={values.street || ''}
         />
 
         <Controls.Input
           name="city"
+          label={t('clients:city')}
           onChange={handleInput}
           value={values.city || ''}
         />
 
         <Controls.Input
           name="postalCode"
+          label={t('clients:postalCode')}
           onChange={handleInput}
           value={values.postalCode || ''}
         />
 
         {/* Health info */}
-        <Section label={t('healthInfo')} />
+        <Section label={t('clients:healthInfo')} />
         <Controls.Input
           name="weight"
+          label={t('clients:weight')}
           onChange={handleInput}
           value={values.weight || ''}
           InputProps={{
@@ -165,6 +191,7 @@ const ClientsForm = () => {
 
         <Controls.Input
           name="height"
+          label={t('clients:height')}
           onChange={handleInput}
           value={values.height || ''}
           InputProps={{
@@ -176,6 +203,7 @@ const ClientsForm = () => {
           multiline
           rows={2}
           name="sport"
+          label={t('clients:sport')}
           onChange={handleInput}
           value={values.sport || ''}
         />
@@ -184,6 +212,7 @@ const ClientsForm = () => {
           multiline
           rows={2}
           name="pastIllneses"
+          label={t('clients:pastIllneses')}
           onChange={handleInput}
           value={values.pastIllneses || ''}
         />
@@ -192,6 +221,7 @@ const ClientsForm = () => {
           multiline
           rows={2}
           name="injuriesSuffered"
+          label={t('clients:injuriesSuffered')}
           onChange={handleInput}
           value={values.injuriesSuffered || ''}
         />
@@ -200,6 +230,7 @@ const ClientsForm = () => {
           multiline
           rows={4}
           name="anamnesis"
+          label={t('clients:anamnesis')}
           onChange={handleInput}
           value={values.anamnesis || ''}
         />
@@ -208,6 +239,7 @@ const ClientsForm = () => {
           multiline
           rows={6}
           name="note"
+          label={t('clients:note')}
           onChange={handleInput}
           value={values.note || ''}
         />
@@ -217,14 +249,14 @@ const ClientsForm = () => {
             onClick={handleCancel}
             color="primary"
             size="large"
-            text="cancel"
+            label={t('cancel')}
             variant="outlined"
           />
           <Controls.Button
             color="primary"
             size="large"
             sx={{ width: 200 }}
-            text="save"
+            label={t('save')}
             type="submit"
             variant="contained"
           />
