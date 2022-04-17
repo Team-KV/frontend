@@ -6,6 +6,8 @@ import { csCZ, enUS } from '@mui/material/locale';
 
 import store from './store';
 
+import 'i18n';
+
 const theme = createTheme(
   {
     // palette: {
@@ -37,6 +39,7 @@ const theme = createTheme(
 
 import App from './App';
 import { Provider } from 'react-redux';
+import i18n from 'i18n';
 
 ReactDOM.render(
   <React.StrictMode>

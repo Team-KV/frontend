@@ -10,12 +10,15 @@
   "end": "Konec",
   "events": "Události",
   "exercises": "Cvičení",
-  "login_button": "Přihlásit se",
+  "loginButton": "Přihlásit se",
   "login": "Přihlášení",
   
   "password": "Heslo",
   "save": "Uložit",
   "search": "Hledat",
-  "unknown": "Neuvedeno"
+  "unknown": "Neuvedeno",
   
+  "formRequired": "Toto pole je povinné",
+
+  "isLoggedIn": "Successfully logged in"
 }

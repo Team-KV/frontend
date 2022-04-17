@@ -26,10 +26,9 @@ const ClientsForm = () => {
     if (id) {
       clientService
         .updateClient(+id, values)
-        .then((values) => {
-          debugger;
+        .then((updatedClient) => {
           dispatch(showSuccess(t('clients:isUpdated')));
-          navigate('/clients/' + id);
+          navigate('/clients/' + updatedClient.id);
         })
         .catch((err) => {
           const message = err.response.data.message;
@@ -38,12 +37,13 @@ const ClientsForm = () => {
     } else {
       clientService
         .addClient(values)
-        .then((fetchedClient) => {
+        .then((addedClient) => {
           dispatch(showSuccess(t('clients:isAdded')));
-          navigate('/clients/' + fetchedClient.id);
+          navigate('/clients/' + addedClient.id);
         })
         .catch((err) => {
-          const message = err.response.data.message;
+          debugger;
+          const message = err.response?.data?.message ?? err.message;
           dispatch(showError(message));
         });
     }
@@ -81,19 +81,35 @@ const ClientsForm = () => {
         <Section first label={t('clients:generalInfo')} />
         <Controls.Input
           validators={['required']}
-          errorMessages={['this field is required']}
+          errorMessages={[t('formRequired')]}
           name="firstName"
-          label={t('clients:firstName')}
+          label={t('clients:firstName') + '*'}
           onChange={handleInput}
           value={values.firstName || ''}
         />
         <Controls.Input
           validators={['required']}
-          errorMessages={['this field is required']}
+          errorMessages={[t('formRequired')]}
           name="lastName"
-          label={t('clients:lastName')}
+          label={t('clients:lastName') + '*'}
           onChange={handleInput}
           value={values.lastName || ''}
+        />
+        <Controls.Input
+          validators={['required']}
+          errorMessages={[t('formRequired')]}
+          name="phone"
+          label={t('clients:phone') + '*'}
+          onChange={handleInput}
+          value={values.phone || ''}
+        />
+        <Controls.DatePicker
+          validators={['required']}
+          errorMessages={[t('formRequired')]}
+          name="dateOfBirth"
+          label={t('clients:dateOfBirth') + '*'}
+          onChange={handleInput}
+          value={values.dateOfBirth ?? null}
         />
         <Controls.Select
           name="sex"
@@ -101,21 +117,6 @@ const ClientsForm = () => {
           onChange={handleInput}
           options={SEX}
           value={values.sex || ''}
-        />
-        <Controls.DatePicker
-          required
-          name="dateOfBirth"
-          label={t('clients:dateOfBirth')}
-          onChange={handleInput}
-          value={values.dateOfBirth ?? ''}
-        />
-        <Controls.Input
-          validators={['required']}
-          errorMessages={['this field is required']}
-          name="phone"
-          label={t('clients:phone')}
-          onChange={handleInput}
-          value={values.phone || ''}
         />
 
         <Controls.Input

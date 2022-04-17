@@ -1,6 +1,4 @@
 import axios, { Axios, AxiosResponse } from 'axios';
-import { useTranslation } from 'react-i18next';
-import 'i18n';
 
 import {
   Box,
@@ -11,13 +9,14 @@ import {
   Typography,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
-import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { useAppDispatch } from 'hooks';
+import { showError, showSuccess } from 'redux/slices/snackbarSlice';
 
 function Login() {
-  const { t } = useTranslation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const [t] = useTranslation();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -32,10 +31,12 @@ function Login() {
       .post('http://localhost/api/login', loginCredentials)
       .then((response: AxiosResponse) => {
         localStorage.setItem('token', response.data.Token);
+        dispatch(showSuccess(t('isLoggedIn')));
         navigate('/');
       })
-      .catch(() => {
-        console.log('Login failed, god knows why.');
+      .catch((err) => {
+        const message = err.response.data.message;
+        dispatch(showError(message));
       });
   };
 
@@ -80,7 +81,7 @@ function Login() {
             type={'submit'}
             sx={{ mt: 3, mb: 2 }}
           >
-            {t('login_button')}
+            {t('loginButton')}
           </Button>
         </Box>
       </Box>

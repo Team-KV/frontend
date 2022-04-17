@@ -5,6 +5,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker as MuiDateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { t } from 'i18next';
 import cs from 'date-fns/locale/cs';
+import { TextValidator } from 'react-material-ui-form-validator';
 
 
 const DateTimePicker = (props: any) => {
@@ -23,7 +24,7 @@ const DateTimePicker = (props: any) => {
         label={t(name)}
         value={value}
         onChange={(date) => onChange(convertToDefEventPara(name, date))}
-        renderInput={(params: any) => <TextField {...params} />}
+        renderInput={(params: any) => <TextValidator {...params} />}
       />
     </LocalizationProvider>
   );

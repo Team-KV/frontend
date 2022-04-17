@@ -45,7 +45,7 @@ const Clients = () => {
   const [t] = useTranslation();
 
   const columns: Column[] = [
-    { id: 'firstName', label: t('firstName'), minWidth: 100 },
+    { id: 'firstName', label: t('clients:firstName'), minWidth: 100 },
     {
       id: 'lastName',
       label: t('clients:lastName'),
@@ -133,7 +133,7 @@ const Clients = () => {
           alignItems: 'center',
         }}
       >
-        <Typography variant="h5">{t('listOfClients')}</Typography>
+        <Typography variant="h5">{t('clients:listOfClients')}</Typography>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <TextField
             size="small"

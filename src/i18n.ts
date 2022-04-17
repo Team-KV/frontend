@@ -4,17 +4,18 @@ import { initReactI18next } from 'react-i18next'
 import commonCS from 'locales/cs/common.json'
 import clientsCS from 'locales/cs/clients.json'
 
-import translationEN from 'locales/en/translation.json'
+// import commonEN from 'locales/en/common.json'
+// import clientsEN from 'locales/en/clients.json'
 
 const resources = {
   cs: {
     common: commonCS,
     clients: clientsCS
   },
-  en: {
-    common: commonCS,
-    clients: clientsCS
-  },
+  // en: {
+  //   common: commonCS,
+  //   clients: clientsCS
+  // },
 }
 
 i18n.use(initReactI18next).init({
