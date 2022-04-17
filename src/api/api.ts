@@ -5,7 +5,7 @@ export default {
   get: (url: string) => {
     return axios.get(config.SERVER_URL + url, addConfig());
   },
-  post: (url: string, content: object) => {
+  post: (url: string, content?: object) => {
     return axios.post(config.SERVER_URL + url, content, addConfig());
   },
   update: (url: string, content: object) => {
@@ -13,7 +13,10 @@ export default {
   },
   delete: (url: string) => {
     return axios.delete(config.SERVER_URL + url, addConfig());
-  }
+  },
+  postFile: (url: string, content?: object) => {
+    return axios.post(config.SERVER_URL + url, content, addConfigForFiles());
+  },
 }
 
 const getToken = () => {
@@ -28,6 +31,15 @@ const addConfig = () => {
   return {
     headers: {
       'Authorization': 'Bearer ' + getToken()
+    }
+  }
+}
+
+const addConfigForFiles = () => {
+  return {
+    headers: {
+      'Authorization': 'Bearer ' + getToken(),
+      'Content-Type': 'multipart/form-data'
     }
   }
 }

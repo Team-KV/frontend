@@ -27,7 +27,15 @@
   "unspecified": "Neuvedeno",
   "note": "Poznámka",
   "noCzech": "Cizinec",
-  
+  "createUserFromClient": "Vytvořit klientovi účet",
+  "account": "Účet",
+  "uploadFile": "Nahrát soubor",
+
+  "dropHere": "Zde upusťte",
+  "dragOrDropFiles": "Nahrajte či přetáhněte soubory",
+
+  "isFilesUploaded": "Soubory byly úspěšně nahrány",
+  "isUserCreated": "Účet byl klientovi úspěšně vytvořen",
   "isAdded": "Klient byl úspěšně vytvořen",
   "isUpdated": "Klient byl úspěšně aktualizován",
   "isDeleted": "Klient byl úspěšně odstraněn"

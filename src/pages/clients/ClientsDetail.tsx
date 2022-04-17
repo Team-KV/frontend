@@ -14,13 +14,15 @@ import { Box } from '@mui/system';
 import { useAppDispatch } from 'hooks';
 import { showError, showSuccess } from 'redux/slices/snackbarSlice';
 import { useTranslation } from 'react-i18next';
+import Events from './components/Events';
+import Attachments from './components/Attachments';
 
 const ClientsDetail = () => {
   let navigate = useNavigate();
   const [client, setClient] = useState<Client | null>(null);
 
   const [t] = useTranslation();
-  
+
   const dispatch = useAppDispatch();
   let { id } = useParams();
   const sex = SEX.find((item) => item.value === client?.sex)?.id!;
@@ -40,21 +42,36 @@ const ClientsDetail = () => {
   const deleteClient = () => {
     if (id) {
       clientService.deleteClient(+id).then(() => {
-        dispatch(showSuccess(t('clients:isDeleted')))
+        dispatch(showSuccess(t('clients:isDeleted')));
         navigate('/clients');
       });
     }
   };
 
+  const createUserFromClient = () => {
+    if (id) {
+      clientService.createUserFromClient(+id).then((fetchedClient) => {
+        dispatch(showSuccess(t('clients:isUserCreated')));
+        setClient(fetchedClient);
+      }).catch((err) => {
+        const message = err.response.data.message;
+        dispatch(showError(message));
+      })
+    }
+  };
+
   useEffect(() => {
     if (id === undefined) return;
-    clientService.getClient(+id).then((fetchedClient) => {
-      setClient(fetchedClient);
-    }).catch((err) => {
-      const message = err.response.data.message;
-      dispatch(showError(message))
-      navigate('/clients');
-    });
+    clientService
+      .getClient(+id)
+      .then((fetchedClient) => {
+        setClient(fetchedClient);
+      })
+      .catch((err) => {
+        const message = err.response.data.message;
+        dispatch(showError(message));
+        navigate('/clients');
+      });
   }, []);
 
   return (
@@ -75,7 +92,8 @@ const ClientsDetail = () => {
         >
           {sexIcon}
           <Typography variant="h4" fontWeight={500} letterSpacing={2}>
-            {client?.firstName} {client?.lastName} {client?.noCzech ? `(${(t('clients:noCheck'))})` : ''}
+            {client?.firstName} {client?.lastName}{' '}
+            {client?.noCzech ? `(${t('clients:noCheck')})` : ''}
           </Typography>
         </Box>
         <Box>
@@ -95,20 +113,31 @@ const ClientsDetail = () => {
           <ContactInfo client={client!} />
         </Grid>
         <Grid item xs={12} md={7} lg={8}>
+          <Events client={client!} />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} md={7} lg={8}>
           <HealthInfo client={client!} />
+        </Grid>
+        <Grid item xs={12} md={5} lg={4}>
+          <Attachments client={client!} />
         </Grid>
       </Grid>
       <Box mt={4} px={4} display="flex" justifyContent="space-between">
-        <Button
-          sx={{ fontWeight: 'bold' }}
-          color="info"
-          variant="contained"
-          size={'large'}
-        >
-          Empty slot
-        </Button>
+        {client?.user ? (
+          <Typography variant='h6'>
+            {t('clients:account') + ': ' + client.user?.email}
+          </Typography>
+        ) : (
+          <Button
+            sx={{ fontWeight: 'bold' }}
+            color="info"
+            variant="contained"
+            size={'large'}
+            onClick={createUserFromClient}
+          >
+            {t('clients:createUserFromClient')}
+          </Button>
+        )}
         <Button
           sx={{ fontWeight: 'bold' }}
           color="error"

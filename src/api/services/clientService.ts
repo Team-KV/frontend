@@ -22,8 +22,17 @@ const ClientService = {
     const { data } = await API.post('client', dto);
     return new Client(data.Client)
   },
-  deleteClient: (id: number) => {
+  deleteClient: async (id: number) => {
     return API.delete('client/' + id);
+  },
+  createUserFromClient: async (id: number) => {
+    const { data } = await API.post(`client/${id}/user`);
+    return new Client(data.Client);
+  },
+  uploadAttachments: async (id: number, file: any) => {
+    let formData = new FormData();
+    formData.append("file", file)
+    const { data } = await API.postFile(`client/${id}/attachment`, formData);
   }
 }
 
