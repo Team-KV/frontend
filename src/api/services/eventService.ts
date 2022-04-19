@@ -1,11 +1,34 @@
 import API from 'api/api';
+import { debug } from 'console';
 import { EventDTO } from 'models/dto/EventDTO';
+import { Event } from 'models/Event';
 
 const eventService = {
-  getEvents: () => API.get('event'),
+  getEvents: async (): Promise<Event[]> => {
+    const { data } = await API.get('event');
+    return data.map((dto: EventDTO) => new Event({ ...dto }));
+  },
   getEvent: (id: number) => API.get('event/' + id),
-  updateEvent: (id: number, event: EventDTO) => API.update('event/' + id, event),
-  addEvent: (event: EventDTO) => API.post('event', event),
+  updateEvent: async (id:number, event: Event): Promise<Event> => {
+    const dto = new EventDTO(event);
+    delete dto.id;
+    const { data } = await API.update('event/' + id, dto);
+    return new Event({
+      ...data.Event,
+      start: data?.Event?.start?.date,
+      end: data?.Event?.end?.date,
+    });
+  },
+
+  addEvent: async (event: Event): Promise<Event> => {
+    const dto = new EventDTO(event);
+    const { data } = await API.post('event', dto);
+    return new Event({
+      ...data.Event,
+      start: data?.Event?.start?.date,
+      end: data?.Event?.end?.date,
+    });
+  },
   deleteEvent: (id: number) => API.delete('event/' + id),
 }
 

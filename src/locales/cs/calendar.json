@@ -1,0 +1,13 @@
+{
+  "eventType": "Typ události",
+  "event": "Událost",
+  "title": "Název",
+  "name": "Název",
+  "start": "Začátek",
+  "end": "Konec",
+  "client": "Klient",
+  "note": "Poznámka",
+  "isEventDeleted": "Událost byla smazána",
+  "isEventCreated": "Událost byla úspěšně vytvořena",
+  "isEventSaved": "Událost byla úspěšně uložena"
+}

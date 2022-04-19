@@ -6,7 +6,7 @@ import { EventType } from 'models/EventType';
 
 const eventTypeService = {
   getEventTypes: (): Promise<EventType[]> => {
-    return API.get('event-type').then((data) => {
+    return API.get('event-type').then(({data}) => {
       return data.map((dto: EventTypeDTO) => new EventType(dto))
     })
   }

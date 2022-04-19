@@ -1,15 +1,10 @@
-import * as React from 'react';
-import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker as MuiDateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { t } from 'i18next';
-import cs from 'date-fns/locale/cs';
 import { TextValidator } from 'react-material-ui-form-validator';
 
-
 const DateTimePicker = (props: any) => {
-  const { name, value, onChange } = props;
+  const { name, value, label, onChange, ...rest } = props;
 
   const convertToDefEventPara = (name: any, value: any) => ({
     target: {
@@ -19,12 +14,16 @@ const DateTimePicker = (props: any) => {
   });
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns} locale={cs}>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
       <MuiDateTimePicker
-        label={t(name)}
+        label={label}
         value={value}
+        inputFormat="dd.MM.yyyy hh:mm"
+        mask={'__.__.____ __:__'}
         onChange={(date) => onChange(convertToDefEventPara(name, date))}
-        renderInput={(params: any) => <TextValidator {...params} />}
+        renderInput={(params: any) => (
+          <TextValidator fullWidth {...params} {...rest} value={value} />
+        )}
       />
     </LocalizationProvider>
   );

@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EventIcon from '@mui/icons-material/Event';
 
-const Events = (client: Client) => {
+const Events = ({client}: {client: Client}) => {
   const [t] = useTranslation();
   const [events, setEvents] = useState([
     {
@@ -70,7 +70,7 @@ const Events = (client: Client) => {
       <List>
         {events.map((event) => {
           return (
-            <ListItem>
+            <ListItem key={event.id}>
               <ListItemAvatar onClick={navigateToEvent} className={'hover'}>
                 <Avatar variant="rounded">
                   <Typography fontSize={16} fontWeight={700}>{event.start.getDate() + '.' + event.start.getMonth() + '.'}</Typography>

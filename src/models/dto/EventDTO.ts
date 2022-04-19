@@ -6,7 +6,7 @@ import { RecordDTO } from "./RecordDTO";
 import { Record } from "models/Record";
 
 export interface EventDTO {
-  id: number,
+  id?: number,
   name: string,
   start: string,
   end: string,
@@ -22,17 +22,13 @@ export interface EventDTO {
 
 export class EventDTO {
   constructor(event: Event) {
-    this.id = event.id;
+    this.id = event.id
     this.name = event.name;
-    this.start = event.start.toISOString();
-    this.end = event.end.toISOString();
+    this.start = new Date(event.start).toISOString().split('T')[0] + ' ' + new Date(event.start).toTimeString().split(' ')[0];
+    this.end = new Date(event.end).toISOString().split('T')[0] + ' ' + new Date(event.end).toTimeString().split(' ')[0];
     this.event_type_id = event.eventTypeId;
     this.client_id = event.clientId;
     this.staff_id = event.staffId;
     this.note = event.note;
-    this.event_type = new EventTypeDTO({ ...event.eventType });
-    this.client = new ClientDTO({ ...event.client });
-    this.staff = new StaffDTO({ ...event.staff });
-    this.records = event.records.map((record: Record) => new RecordDTO({ ...record }));
   }
 }

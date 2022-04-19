@@ -1,5 +1,3 @@
-import * as React from 'react';
-import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker as MuiDatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -23,7 +21,9 @@ const DatePicker = (props: any) => {
         inputFormat="dd.MM.yyyy"
         mask={'__.__.____'}
         onChange={(date) => onChange(convertToDefEventPara(name, date))}
-        renderInput={(params: any) => <TextValidator fullWidth {...params} {...rest} value={value}/>}
+        renderInput={(params: any) => (
+          <TextValidator fullWidth {...params} {...rest} value={value} />
+        )}
       />
     </LocalizationProvider>
   );
