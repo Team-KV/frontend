@@ -89,7 +89,7 @@ const RecordForm = () => {
         flexDirection={'column'}
         gap={2}
       >
-        <Section first label={t('calendar:recordNew')} />
+        <Section first label={recordId ? t('calendar:recordEdit') : t('calendar:recordNew')} />
         <Slider
           value={values.progress}
           aria-label={t('progress')}
