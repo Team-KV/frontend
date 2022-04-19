@@ -17,7 +17,7 @@ export interface IRoute {
   element: JSX.Element;
 }
 
-//\\ =================== PUBLIC ROUTES =================== //\\ 
+//\\ =================== PUBLIC ROUTES =================== //\\
 
 export const publicRoutes: IRoute[] = [
   {
@@ -32,9 +32,9 @@ export const publicRoutes: IRoute[] = [
   },
 ];
 
-//\\ =================== PRIVATE ROUTES =================== //\\ 
+//\\ =================== PRIVATE ROUTES =================== //\\
 
-export const privateRoutes: {staff: IRoute[], client: IRoute[]} = {
+export const privateRoutes: { staff: IRoute[]; client: IRoute[] } = {
   staff: [
     {
       name: 'home',
@@ -61,7 +61,7 @@ export const privateRoutes: {staff: IRoute[], client: IRoute[]} = {
       path: '/clients/:id/form',
       element: <ClientsForm />,
     },
-  
+
     // CALENDAR
     {
       name: 'calendar',
@@ -70,7 +70,12 @@ export const privateRoutes: {staff: IRoute[], client: IRoute[]} = {
     },
     {
       name: 'calendar',
-      path: '/events/:id/record',
+      path: '/events/:eventId/record',
+      element: <RecordForm />,
+    },
+    {
+      name: 'calendar',
+      path: '/records/:recordId/form',
       element: <RecordForm />,
     },
     {
@@ -89,15 +94,12 @@ export const privateRoutes: {staff: IRoute[], client: IRoute[]} = {
       element: <TaskDetail />,
     },
 
-
-
-
     // EXERCISES
     {
       name: 'exercises',
       path: '/exercises',
       element: <ExercisesPage />,
-    }
+    },
   ],
   client: [
     {
@@ -110,5 +112,5 @@ export const privateRoutes: {staff: IRoute[], client: IRoute[]} = {
       path: '/dashboard',
       element: <DashboardPage />,
     },
-  ]
-}
+  ],
+};

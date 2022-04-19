@@ -14,6 +14,14 @@
   "taskNew": "Nový úkol",
   "taskDetail": "Detail úkolu",
 
+  "progress": "Vývoj zdravotního stavu",
+  "progressNote": "Komentář k vývoji",
+  "exerciseNote": "Komentář ke cvičení",
+  "text": "Poznámka",
+
+  "isRecordCreated": "Záznam byl úspěšně vytvořen",
+  "isRecordDeleted": "Záznam byl smazán",
+
   "isEventDeleted": "Událost byla smazána",
   "isEventCreated": "Událost byla úspěšně vytvořena",
   "isEventSaved": "Událost byla úspěšně uložena"

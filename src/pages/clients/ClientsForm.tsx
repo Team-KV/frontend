@@ -42,7 +42,6 @@ const ClientsForm = () => {
           navigate('/clients/' + addedClient.id);
         })
         .catch((err) => {
-          debugger;
           const message = err.response?.data?.message;
           dispatch(showError(message));
         });

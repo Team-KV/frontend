@@ -90,7 +90,7 @@ const EventDetail = ({ event }: { event: ProcessedEvent }) => {
             {t('calendar:recordNew')}
           </Button>
         )}
-         {eventDetail?.record ? (
+         {eventDetail?.task ? (
           <Button
             onClick={() =>  {
               navigate('/tasks/' + eventDetail.task!.id)}
