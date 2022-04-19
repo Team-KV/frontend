@@ -3,7 +3,7 @@ import { EventTypeDTO } from "./EventTypeDTO";
 import { ClientDTO } from "./ClientDTO";
 import { StaffDTO } from "./StaffDTO";
 import { RecordDTO } from "./RecordDTO";
-import { Record } from "models/Record";
+import { TaskDTO } from "./TaskDTO";
 
 export interface EventDTO {
   id?: number,
@@ -17,7 +17,8 @@ export interface EventDTO {
   event_type: EventTypeDTO,
   client: ClientDTO,
   staff: StaffDTO,
-  records: RecordDTO[],
+  record: RecordDTO | null,
+  task: TaskDTO | null,
 }
 
 export class EventDTO {
@@ -30,5 +31,7 @@ export class EventDTO {
     this.client_id = event.clientId;
     this.staff_id = event.staffId;
     this.note = event.note;
+    this.record = event.record ? new RecordDTO({ ...event.record }) : null;
+    this.task = event.task ? new TaskDTO({ ...event.task }): null;
   }
 }

@@ -80,7 +80,7 @@ const EventForm = ({ scheduler }: { scheduler: SchedulerHelpers }) => {
               res(mapToProcessedEvent(event));
             })
             .catch((err) => {
-              const message = err.response?.data?.message ?? err.message;
+              const message = err.response?.data?.message;
               dispatch(showError(message));
             })
             .finally(() => {
@@ -94,7 +94,7 @@ const EventForm = ({ scheduler }: { scheduler: SchedulerHelpers }) => {
               res(mapToProcessedEvent(event));
             })
             .catch((err) => {
-              const message = err.response?.data?.message ?? err.message;
+              const message = err.response?.data?.message;
               dispatch(showError(message));
             })
             .finally(() => {

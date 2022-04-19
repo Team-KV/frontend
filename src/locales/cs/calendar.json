@@ -7,6 +7,13 @@
   "end": "Konec",
   "client": "Klient",
   "note": "Poznámka",
+
+  "recordNew": "Nový záznam",
+  "recordDetail": "Detail záznamu",
+
+  "taskNew": "Nový úkol",
+  "taskDetail": "Detail úkolu",
+
   "isEventDeleted": "Událost byla smazána",
   "isEventCreated": "Událost byla úspěšně vytvořena",
   "isEventSaved": "Událost byla úspěšně uložena"

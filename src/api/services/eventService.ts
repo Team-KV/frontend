@@ -8,7 +8,10 @@ const eventService = {
     const { data } = await API.get('event');
     return data.map((dto: EventDTO) => new Event({ ...dto }));
   },
-  getEvent: (id: number) => API.get('event/' + id),
+  getEvent: async (id: number): Promise<Event> => {
+    const { data } = await API.get('event/' + id)
+    return new Event({ ...data.Event });
+  },
   updateEvent: async (id:number, event: Event): Promise<Event> => {
     const dto = new EventDTO(event);
     delete dto.id;

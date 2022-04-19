@@ -43,7 +43,7 @@ const ClientsForm = () => {
         })
         .catch((err) => {
           debugger;
-          const message = err.response?.data?.message ?? err.message;
+          const message = err.response?.data?.message;
           dispatch(showError(message));
         });
     }

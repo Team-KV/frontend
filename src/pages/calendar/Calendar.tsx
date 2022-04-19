@@ -28,7 +28,8 @@ const CalendarPage = () => {
           res(events);
         })
         .catch((err) => {
-          const message = err.response?.data?.message ?? err.message;
+          const message = err.response?.data?.message;
+          if(!message) throw err;
           dispatch(showError(message));
         });
     });
@@ -46,7 +47,7 @@ const CalendarPage = () => {
           res(mapToProcessedEvent(fetchedEvent));
         })
         .catch((err) => {
-          const message = err.response?.data?.message ?? err.message;
+          const message = err.response?.data?.message;
           dispatch(showError(message));
           res(originalEvent);
         });
@@ -62,7 +63,7 @@ const CalendarPage = () => {
           res(id)
         })
         .catch((err) => {
-          const message = err.response?.data?.message ?? err.message;
+          const message = err.response?.data?.message;
           dispatch(showError(message));
         });
     });
@@ -71,6 +72,7 @@ const CalendarPage = () => {
   return (
     <div>
       <Scheduler
+        
         customEditor={(scheduler) => <EventForm scheduler={scheduler} />}
         locale={cs}
         view="week"

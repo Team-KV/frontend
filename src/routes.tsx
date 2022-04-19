@@ -1,5 +1,9 @@
 import NotFound from 'components/NotFound';
 import Calendar from 'pages/calendar/Calendar';
+import RecordDetail from 'pages/calendar/components/RecordDetail';
+import RecordForm from 'pages/calendar/components/RecordForm';
+import TaskDetail from 'pages/calendar/components/TaskDetail';
+import TaskForm from 'pages/calendar/components/TaskForm';
 import Clients from 'pages/clients/Clients';
 import ClientsDetail from 'pages/clients/ClientsDetail';
 import ClientsForm from 'pages/clients/ClientsForm';
@@ -64,6 +68,29 @@ export const privateRoutes: {staff: IRoute[], client: IRoute[]} = {
       path: '/calendar',
       element: <Calendar />,
     },
+    {
+      name: 'calendar',
+      path: '/events/:id/record',
+      element: <RecordForm />,
+    },
+    {
+      name: 'calendar',
+      path: '/records/:id',
+      element: <RecordDetail />,
+    },
+    {
+      name: 'calendar',
+      path: '/events/:id/task',
+      element: <TaskForm />,
+    },
+    {
+      path: '/tasks/:id',
+      name: 'calendar',
+      element: <TaskDetail />,
+    },
+
+
+
 
     // EXERCISES
     {
