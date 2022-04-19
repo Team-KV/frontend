@@ -1,6 +1,6 @@
 import NotFound from 'components/NotFound';
-import CalendarPage from 'pages/CalendarPage/CalendarPage';
-import ClientsPage from 'pages/clients/Clients';
+import Calendar from 'pages/calendar/Calendar';
+import Clients from 'pages/clients/Clients';
 import ClientsDetail from 'pages/clients/ClientsDetail';
 import ClientsForm from 'pages/clients/ClientsForm';
 import DashboardPage from 'pages/DashboardPage/DashboardPage';
@@ -35,12 +35,12 @@ export const privateRoutes: {staff: IRoute[], client: IRoute[]} = {
     {
       name: 'home',
       path: '/',
-      element: <ClientsPage />,
+      element: <Clients />,
     },
     {
       name: 'clients',
       path: '/clients',
-      element: <ClientsPage />,
+      element: <Clients />,
     },
     {
       name: 'clients-detail',
@@ -62,7 +62,7 @@ export const privateRoutes: {staff: IRoute[], client: IRoute[]} = {
     {
       name: 'calendar',
       path: '/calendar',
-      element: <CalendarPage />,
+      element: <Calendar />,
     },
 
     // EXERCISES

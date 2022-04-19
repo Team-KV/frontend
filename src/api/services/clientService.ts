@@ -1,6 +1,8 @@
 import API from 'api/api';
 import { AxiosResponse } from 'axios';
+import { Attachment } from 'models/Attachment';
 import { Client } from 'models/Client';
+import { AttachmentDTO } from 'models/dto/AttachmentDTO';
 import { ClientDTO } from 'models/dto/ClientDTO';
 
 const ClientService = {
@@ -31,9 +33,17 @@ const ClientService = {
   },
   uploadAttachments: async (id: number, file: any) => {
     let formData = new FormData();
-    formData.append("file", file)
+    formData.append("files[]", file)
     const { data } = await API.postFile(`client/${id}/attachment`, formData);
-  }
+    return data.Attachments.map((dto: AttachmentDTO) => new Attachment(dto));
+  },
+  getAttachment: async (id: number) => {
+    const { data } = await API.get('attachment/' + id);
+    return data;
+  },
+  deleteAttachment: async (id: number) => {
+    return API.delete('attachment/' + id);
+  },
 }
 
 export default ClientService;

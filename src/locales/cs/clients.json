@@ -34,6 +34,8 @@
   "dropHere": "Zde upusťte",
   "dragOrDropFiles": "Nahrajte či přetáhněte soubory",
 
+  "isFileDeleted": "Soubor byl úspěšně smazán",
+  "isFileUploaded": "Soubor byl úspěšně nahrán",
   "isFilesUploaded": "Soubory byly úspěšně nahrány",
   "isUserCreated": "Účet byl klientovi úspěšně vytvořen",
   "isAdded": "Klient byl úspěšně vytvořen",

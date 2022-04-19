@@ -15,7 +15,7 @@ export default {
     return axios.delete(config.SERVER_URL + url, addConfig());
   },
   postFile: (url: string, content?: object) => {
-    return axios.post(config.SERVER_URL + url, content, addConfigForFiles());
+    return axios.post(config.SERVER_URL + url, content, addConfigForPostFiles());
   },
 }
 
@@ -35,7 +35,7 @@ const addConfig = () => {
   }
 }
 
-const addConfigForFiles = () => {
+const addConfigForPostFiles = () => {
   return {
     headers: {
       'Authorization': 'Bearer ' + getToken(),
