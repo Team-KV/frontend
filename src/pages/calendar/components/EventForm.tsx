@@ -13,7 +13,6 @@ import { Controls } from 'components/Controls';
 import { Form, useForm } from 'components/Form';
 import { Box } from '@mui/system';
 import { useTranslation } from 'react-i18next';
-import Autocomplete from 'components/controls/Autocomplete';
 import eventService from 'api/services/eventService';
 import { useAppDispatch } from 'hooks';
 import { showError, showSuccess } from 'redux/slices/snackbarSlice';
@@ -123,7 +122,7 @@ const EventForm = ({ scheduler }: { scheduler: SchedulerHelpers }) => {
         {t('calendar:event')}
       </Typography>
       <Box px={5} display="flex" flexDirection="column" gap={3}>
-        <Autocomplete
+        <Controls.Autocomplete
           validators={['required']}
           errorMessages={[t('formRequired')]}
           name="eventTypeId"
@@ -156,7 +155,7 @@ const EventForm = ({ scheduler }: { scheduler: SchedulerHelpers }) => {
           onChange={handleInput}
           value={values.end}
         />
-        <Autocomplete
+        <Controls.Autocomplete
           validators={['required']}
           errorMessages={[t('formRequired')]}
           name="clientId"

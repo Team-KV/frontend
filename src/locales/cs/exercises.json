@@ -1,0 +1,22 @@
+{
+  "name": "Název",
+  "description": "Popis",
+  "url": "Odkaz URL",
+
+  "category": "Kategorie",
+  "generalInfo": "Obecné informace",
+
+  "noVideoAvailable": "Video není k dispozici",
+
+  "uploadFile": "Nahrát soubor",
+  "isFilesUploaded": "Soubory byly úspěšně nahrány",
+  "isFileUploaded": "Soubor byl úspěšně nahrán",
+
+  "addCategory": "Přidat kategorii",
+
+  "isExerciseCreated": "Cvik byl úspěšně vytvořen",
+  "isExerciseUpdated": "Cvik byl úspěšně aktualizován",
+  "isExerciseDeleted": "Cvik byl úspěšně odstraněn",
+  "exerciseNew": "Nový cvik",
+  "exerciseEdit": "Úprava cviku"
+}

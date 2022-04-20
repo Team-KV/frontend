@@ -18,6 +18,5 @@ export class ExerciseDTO {
     this.description = exercise.description;
     this.url = exercise.url;
     this.category_id = exercise.categoryId;
-    this.files = exercise.files.map((file: ExerciseFile) => new ExerciseFileDTO({ ...file }))
   }
 }

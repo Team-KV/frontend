@@ -1,30 +1,33 @@
 import {
-  Avatar,
-  Box,
-  Button,
   Card,
-  IconButton,
+  Modal,
+  Box,
   List,
   ListItem,
+  IconButton,
   ListItemAvatar,
+  Avatar,
   ListItemText,
-  Modal,
+  Button,
+  Divider,
 } from '@mui/material';
-import ClientService from 'api/services/clientService';
+import exerciseFileService from 'api/services/exerciseFileService';
+import exerciseService from 'api/services/exerciseService';
 import CardTitle from 'components/CardTitle';
+import { id } from 'date-fns/locale';
 import { useAppDispatch } from 'hooks';
-import { Client } from 'models/Client';
+import FolderIcon from '@mui/icons-material/Folder';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Exercise } from 'models/Exercise';
+import { ExerciseFile } from 'models/ExerciseFile';
 import React, { useEffect, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 import { useTranslation } from 'react-i18next';
-import { showError, showSuccess } from 'redux/slices/snackbarSlice';
-import FolderIcon from '@mui/icons-material/Folder';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Attachment } from 'models/Attachment';
+import { showSuccess, showError } from 'redux/slices/snackbarSlice';
 
 import FileDownload from 'js-file-download';
 
-const fileTypes = ['jpeg', 'png', 'pdf', 'doc', 'jpg', 'docx'];
+const fileTypes = ['jpg', 'png', 'mp4', 'avi', 'jpeg', 'mov'];
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -38,48 +41,48 @@ const style = {
   p: 4,
 };
 
-const Attachments = ({ client }: { client: Client }) => {
+const ExerciseFiles = ({ exercise }: { exercise: Exercise }) => {
   const [t] = useTranslation();
   const dispatch = useAppDispatch();
 
   const [file, setFile] = useState(null);
   const [openModal, setOpenModal] = useState(false);
 
-  const [attachments, setAttachments] = useState<Attachment[] | []>([]);
+  const [files, setFiles] = useState<ExerciseFile[] | []>([]);
 
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
 
   const handleChange = (newFile: any) => {
-    ClientService.uploadAttachments(client.id, newFile)
-      .then((fetchedAttachments) => {
+    setFile(newFile);
+    exerciseService
+      .uploadFile(exercise.id, newFile)
+      .then((fetchedFiles) => {
         const message =
-          fetchedAttachments.length > 1
-            ? 'clients:isFilesUploaded'
-            : 'clients:isFileUploaded';
+          fetchedFiles.length > 1
+            ? 'exercises:isFilesUploaded'
+            : 'exercises:isFileUploaded';
         dispatch(showSuccess(t(message)));
-        setAttachments([...attachments, ...fetchedAttachments]);
-        setFile(newFile);
+        setFiles([...files, ...fetchedFiles]);
         handleClose();
       })
       .catch((err) => {
+        debugger;
         const message = err.response.data.message;
         dispatch(showError(message));
       });
   };
 
   useEffect(() => {
-    if (client?.attachments) setAttachments([...client.attachments]);
-  }, [client]);
+    if (exercise?.files) setFiles([...exercise.files]);
+  }, [exercise?.files]);
 
-  const deleteAttachment = (id: number) => {
-    ClientService.deleteAttachment(id)
+  const deleteExerciseFile = (id: number) => {
+    exerciseFileService
+      .deleteExerciseFile(id)
       .then(() => {
         dispatch(showSuccess(t('clients:isFileDeleted')));
-        if (attachments)
-          setAttachments(
-            attachments.filter((attachment) => attachment.id !== id)
-          );
+        if (files) setFiles(files.filter((oneFile) => oneFile.id !== id));
       })
       .catch((err) => {
         const message = err.response.data.message;
@@ -87,8 +90,8 @@ const Attachments = ({ client }: { client: Client }) => {
       });
   };
 
-  const openAttachment = (id: number, fileName: string) => {
-    ClientService.getAttachment(id).then((data) => {
+  const openFile = (id: number, fileName: string) => {
+    exerciseFileService.getExerciseFile(id).then((data) => {
       FileDownload(data, fileName);
     });
   };
@@ -113,23 +116,23 @@ const Attachments = ({ client }: { client: Client }) => {
           />
         </Box>
       </Modal>
-      <CardTitle text={t('attachments')} />
+      <CardTitle text={t('files')} />
       <Box
         display={'flex'}
         flexDirection={'column'}
         justifyContent={'space-between'}
       >
-        <List sx={{ overflow: 'auto', height: '100%', maxHeight: 380 }}>
-          {attachments?.map((attachment) => {
+        <List sx={{ overflow: 'auto', height: '100%', maxHeight: 260 }}>
+          {files?.map((oneFile) => {
             return (
               <ListItem
-                key={attachment.id}
+                key={oneFile.id}
                 secondaryAction={
                   <IconButton
                     edge="end"
                     aria-label="delete"
                     onClick={() => {
-                      deleteAttachment(attachment.id);
+                      deleteExerciseFile(oneFile.id);
                     }}
                   >
                     <DeleteIcon />
@@ -138,7 +141,7 @@ const Attachments = ({ client }: { client: Client }) => {
               >
                 <ListItemAvatar
                   onClick={() => {
-                    openAttachment(attachment.id, attachment.fileName);
+                    openFile(oneFile.id, oneFile.fileName);
                   }}
                   className="hover"
                 >
@@ -148,28 +151,32 @@ const Attachments = ({ client }: { client: Client }) => {
                 </ListItemAvatar>
                 <ListItemText
                   onClick={() => {
-                    openAttachment(attachment.id, attachment.fileName);
+                    openFile(oneFile.id, oneFile.fileName);
                   }}
-                  primary={attachment.fileName}
-                  secondary={attachment.type.toUpperCase()}
+                  primary={oneFile.fileName}
+                  secondary={oneFile.type.toUpperCase()}
                   className="hover"
                 />
               </ListItem>
             );
           })}
         </List>
-
+        <Divider />
         <Button
           variant="contained"
           onClick={handleOpen}
-          fullWidth
           color="success"
+          sx={{
+            margin: 'auto',
+            marginTop: 1,
+            width: 240,
+          }}
         >
-          {t('clients:uploadFile')}
+          {t('exercises:uploadFile')}
         </Button>
       </Box>
     </Card>
   );
 };
 
-export default Attachments;
+export default ExerciseFiles;

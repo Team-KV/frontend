@@ -46,6 +46,14 @@ const RecordForm = () => {
         });
     }
   };
+  
+  const handleSliderChange = (event: Event, newValue: number | number[]) => {
+    setValues({ ...values, progress: newValue });
+  };
+
+  const handleCancel = () => {
+    navigate('/calendar');
+  };
 
   useEffect(() => {
     if (recordId) {
@@ -60,25 +68,6 @@ const RecordForm = () => {
         });
     }
   }, []);
-
-  const changeColor = (): string => {
-    const value = values.progress;
-    if (value < 0) {
-      return 'error';
-    } else if (value === 0) {
-      return 'success';
-    } else {
-      return 'primary';
-    }
-  };
-
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    setValues({ ...values, progress: newValue });
-  };
-
-  const handleCancel = () => {
-    navigate('/calendar');
-  };
 
   return (
     <Form onSubmit={handleSubmit}>

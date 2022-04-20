@@ -8,7 +8,9 @@ import Clients from 'pages/clients/Clients';
 import ClientsDetail from 'pages/clients/ClientsDetail';
 import ClientsForm from 'pages/clients/ClientsForm';
 import DashboardPage from 'pages/DashboardPage/DashboardPage';
-import ExercisesPage from 'pages/ExercisesPage/ExercisesPage';
+import ExercisesPage from 'pages/exercises/Exercises';
+import ExercisesDetail from 'pages/exercises/ExercisesDetail';
+import ExercisesForm from 'pages/exercises/ExercisesForm';
 import LoginPage from 'pages/LoginPage/LoginPage';
 
 export interface IRoute {
@@ -99,6 +101,21 @@ export const privateRoutes: { staff: IRoute[]; client: IRoute[] } = {
       name: 'exercises',
       path: '/exercises',
       element: <ExercisesPage />,
+    },
+    {
+      name: 'exercises',
+      path: '/exercises/:id',
+      element: <ExercisesDetail />,
+    },
+    {
+      name: 'exercises',
+      path: '/exercises/:id/form',
+      element: <ExercisesForm />,
+    },
+    {
+      name: 'exercises',
+      path: '/exercises/form',
+      element: <ExercisesForm />,
     },
   ],
   client: [

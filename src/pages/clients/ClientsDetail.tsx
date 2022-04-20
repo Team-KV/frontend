@@ -35,10 +35,6 @@ const ClientsDetail = () => {
       ''
     );
 
-  const navigateToForm = (client: any) => {
-    navigate('/clients/' + client.id + '/form');
-  };
-
   const deleteClient = () => {
     if (id) {
       clientService.deleteClient(+id).then(() => {
@@ -93,13 +89,13 @@ const ClientsDetail = () => {
           {sexIcon}
           <Typography variant="h4" fontWeight={500} letterSpacing={2}>
             {client?.firstName} {client?.lastName}{' '}
-            {client?.noCzech ? `(${t('clients:noCheck')})` : ''}
+            {client?.noCzech ? `(${t('clients:noCzech')})` : ''}
           </Typography>
         </Box>
         <Box>
           <Button
             sx={{ fontWeight: 'bold' }}
-            onClick={() => navigateToForm(client)}
+            onClick={() => navigate('/clients/' + client?.id + '/form')}
             variant="contained"
             size={'large'}
             color="warning"

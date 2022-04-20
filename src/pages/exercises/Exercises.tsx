@@ -13,61 +13,30 @@ import { Exercise } from 'models/Exercise';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import React, { useEffect, useState } from 'react';
-import ExerciseCard from './ExerciseCard';
+import ExerciseCard from './components/ExerciseCard';
+import exerciseService from 'api/services/exerciseService';
+import { useAppDispatch } from 'hooks';
+import { showError } from 'redux/slices/snackbarSlice';
 
-const initExercises: Exercise[] = [
-  {
-    id: 1,
-    name: 'Cvik 1',
-    description: 'Toto je cvik 1',
-    url: 'https://www.cvik.com',
-    categoryId: 1,
-    files: [],
-  },
-  {
-    id: 2,
-    name: 'Cvik 2',
-    description: 'Toto je cvik 2',
-    url: 'https://www.cvik.com',
-    categoryId: 2,
-    files: [],
-  },
-  {
-    id: 3,
-    name: 'Cvik 3',
-    description: 'Toto je cvik 3',
-    url: 'https://www.cvik.com',
-    categoryId: 3,
-    files: [],
-  },
-  {
-    id: 4,
-    name: 'Cvik 4',
-    description: 'Toto je cvik 4',
-    url: 'https://www.cvik.com',
-    categoryId: 4,
-    files: [],
-  },
-  {
-    id: 5,
-    name: 'Cvik 5',
-    description: 'Toto je cvik 5',
-    url: 'https://www.cvik.com',
-    categoryId: 5,
-    files: [],
-  },
-];
-
-const ExercisesList = () => {
+const Exercises = () => {
   const [page, setPage] = React.useState(2);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const dispatch = useAppDispatch();
 
   let [exercises, setExercises]: [Exercise[], any] = useState([]);
   let [allExercises, setAllExercises]: [Exercise[], any] = useState([]);
 
   useEffect(() => {
-    setExercises(initExercises);
-    setAllExercises(initExercises);
+    exerciseService
+      .getExercises()
+      .then((fetchedExercises) => {
+        setExercises(fetchedExercises);
+        setAllExercises(fetchedExercises);
+      })
+      .catch((err) => {
+        const message = err.response.data.message;
+        dispatch(showError(message));
+      });
   }, []);
 
   const handleChangePage = (
@@ -122,29 +91,29 @@ const ExercisesList = () => {
             sx={{ ml: 3 }}
             style={{ height: 40, color: 'white' }}
             variant="contained"
-            href="clients/form"
+            href="exercises/form"
           >
             <AddIcon />
           </Button>
         </Box>
       </Box>
-      <Grid container justifyContent="start" m='auto' spacing={2}>
+      <Grid container justifyContent="start" m="auto" spacing={2}>
         {exercises.map((exercise) => (
-          <Grid key={exercise.id} item>
-            <ExerciseCard  exercise={exercise} />
+          <Grid key={exercise.id} item sm={6} md={4} lg={2}>
+            <ExerciseCard exercise={exercise} />
           </Grid>
         ))}
       </Grid>
-      <TablePagination
+      {/* <TablePagination
         component="div"
         count={100}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      /> */}
     </>
   );
 };
 
-export default ExercisesList;
+export default Exercises;

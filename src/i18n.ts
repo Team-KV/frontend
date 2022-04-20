@@ -4,6 +4,7 @@ import { initReactI18next } from 'react-i18next'
 import commonCS from 'locales/cs/common.json'
 import clientsCS from 'locales/cs/clients.json'
 import calendarCS from 'locales/cs/calendar.json'
+import exercisesCS from 'locales/cs/exercises.json'
 
 
 // import commonEN from 'locales/en/common.json'
@@ -13,7 +14,8 @@ const resources = {
   cs: {
     common: commonCS,
     clients: clientsCS,
-    calendar: calendarCS 
+    calendar: calendarCS,
+    exercises: exercisesCS
   },
   // en: {
   //   common: commonCS,

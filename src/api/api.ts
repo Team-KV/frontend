@@ -17,6 +17,9 @@ export default {
   postFile: (url: string, content?: object) => {
     return axios.post(config.SERVER_URL + url, content, addConfigForPostFiles());
   },
+  getFile: (url: string) => {
+    return axios.get(config.SERVER_URL + url, addConfigForGetFile());
+  },
 }
 
 const getToken = () => {
@@ -30,6 +33,7 @@ const getToken = () => {
 const addConfig = () => {
   return {
     headers: {
+      'X-localization': 'cs',
       'Authorization': 'Bearer ' + getToken()
     }
   }
@@ -38,8 +42,19 @@ const addConfig = () => {
 const addConfigForPostFiles = () => {
   return {
     headers: {
+      'X-localization': 'cs',
       'Authorization': 'Bearer ' + getToken(),
       'Content-Type': 'multipart/form-data'
+    }
+  }
+}
+
+const addConfigForGetFile = () => {
+  return {
+    headers: {
+      'X-localization': 'cs',
+      'Authorization': 'Bearer ' + getToken(),
+      'responseType': 'blob',
     }
   }
 }

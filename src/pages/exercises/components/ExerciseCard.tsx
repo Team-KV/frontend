@@ -7,25 +7,24 @@ import {
 } from '@mui/material';
 import { Exercise } from 'models/Exercise';
 import React from 'react';
+import noImageSrc from 'assets/img/no-image.png'
 import { useNavigate, useParams } from 'react-router-dom';
 
 const ExerciseCard = ({ exercise }: { exercise: Exercise }) => {
   let navigate = useNavigate();
-  let { id } = useParams();
-
 
   const handleClick = () => {
-    navigate('1')
+    navigate('/exercises/' + exercise.id);
   }
   
   return (
     <>
-      <Card sx={{ maxWidth: 200 }} onClick={handleClick}>
+      <Card sx={{ width: '100%' }} onClick={handleClick}>
         <CardActionArea>
           <CardMedia
             component="img"
             height="140"
-            image="https://random.imagecdn.app/500/150"
+            image={noImageSrc}
             alt="green iguana"
           />
           <CardContent>
