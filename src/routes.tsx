@@ -87,7 +87,12 @@ export const privateRoutes: { staff: IRoute[]; client: IRoute[] } = {
     },
     {
       name: 'calendar',
-      path: '/events/:id/task',
+      path: '/events/:eventId/task',
+      element: <TaskForm />,
+    },
+    {
+      path: '/tasks/:id/form',
+      name: 'calendar',
       element: <TaskForm />,
     },
     {

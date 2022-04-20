@@ -27,7 +27,7 @@ const ExerciseForm = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: any) => {
     e.stopPropagation();
     if (id) {
       exerciseService

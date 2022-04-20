@@ -7,6 +7,8 @@
   "end": "Konec",
   "client": "Klient",
   "note": "Poznámka",
+  "description": "Popis",
+  "isActive": "Aktivovat",
 
   "recordNew": "Nový záznam",
   "recordDetail": "Detail záznamu",
@@ -22,6 +24,9 @@
 
   "isRecordCreated": "Záznam byl úspěšně vytvořen",
   "isRecordDeleted": "Záznam byl smazán",
+
+  "isTaskCreated": "Úkol byl úspěšně vytvořen",
+  "isTaskDeleted": "Úkol byl smazán",
 
   "isEventDeleted": "Událost byla smazána",
   "isEventCreated": "Událost byla úspěšně vytvořena",

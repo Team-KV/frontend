@@ -53,10 +53,6 @@ const ClientsForm = () => {
     setValues({ ...values, noCzech: checked });
   };
 
-  const handleCancel = () => {
-    navigate('/clients');
-  };
-
   useEffect(() => {
     if (id) {
       clientService.getClient(+id).then((fetchedClient) => {
@@ -246,7 +242,7 @@ const ClientsForm = () => {
 
         <Box display={'flex'} justifyContent="space-between">
           <Controls.Button
-            onClick={handleCancel}
+            onClick={() => navigate('/clients')}
             color="primary"
             size="large"
             label={t('cancel')}
