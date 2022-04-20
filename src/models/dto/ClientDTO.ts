@@ -1,6 +1,7 @@
 import { Client } from "models/Client";
 import { User } from "models/User";
 import { AttachmentDTO } from "./AttachmentDTO";
+import { EventDTO } from "./EventDTO";
 
 export interface ClientDTO {
   id: number,
@@ -27,6 +28,7 @@ export interface ClientDTO {
   parent: ClientDTO | null,
   children: ClientDTO[] | null,
   no_czech: boolean,
+  events: EventDTO[] | null,
   attachments: AttachmentDTO[] | null,
 }
 
@@ -53,6 +55,7 @@ export class ClientDTO {
     this.note = client.note ?? null;
     this.no_czech = client.noCzech ?? false;
     this.client_id = client.clientId ?? null;
+    this.events = client.events ? client.events?.map(dto => new EventDTO({...dto})) : null;
     this.attachments = client.attachments ? client.attachments?.map(attachment => new AttachmentDTO(attachment)) : null;
   }
 }

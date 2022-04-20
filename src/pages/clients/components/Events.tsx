@@ -1,48 +1,23 @@
 import {
   Avatar,
   Card,
-  IconButton,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Typography,
 } from '@mui/material';
 import CardTitle from 'components/CardTitle';
 import { Client } from 'models/Client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import DeleteIcon from '@mui/icons-material/Delete';
 import EventIcon from '@mui/icons-material/Event';
+import { useNavigate } from 'react-router-dom';
+import { Event } from 'models/Event';
 
-const Events = ({client}: {client: Client}) => {
+const Events = ({ client }: { client: Client }) => {
+  const navigate = useNavigate();
   const [t] = useTranslation();
-  const [events, setEvents] = useState([
-    {
-      id: 1,
-      name: 'Jarmilka vstupní meeting',
-      start: new Date(),
-      end: new Date(),
-      note: 'Poznámka k meetingu',
-      eventType: 'Schůzka',
-    },
-    {
-      id: 2,
-      name: 'Jarmilka další meeting',
-      start: new Date(),
-      end: new Date(),
-      note: 'Poznámka',
-      eventType: 'Schůzka',
-    },
-    {
-      id: 3,
-      name: 'Jarmilka poslední meeting',
-      start: new Date(),
-      end: new Date(),
-      note: 'Poznámka k ukončení spolupráce',
-      eventType: 'Schůzka',
-    },
-  ]);
+  const [events, setEvents] = useState<Event[]>([]);
 
   function generate(element: React.ReactElement) {
     return [0, 1, 2].map((value) =>
@@ -52,11 +27,19 @@ const Events = ({client}: {client: Client}) => {
     );
   }
 
-  const [secondary, setSecondary] = React.useState(false);
+  const startCompare = (a: Event, b: Event): number => {
+    const dateA = new Date(a.start);
+    const dateB = new Date(b.start);
+    return dateA > dateB ? -1 : 1;
+  };
 
   const navigateToEvent = (e: any) => {
-    //
+    navigate('/calendar');
   };
+
+  useEffect(() => {
+    if (client?.events) setEvents([...client.events]);
+  }, [client?.events]);
 
   return (
     <Card
@@ -68,17 +51,21 @@ const Events = ({client}: {client: Client}) => {
     >
       <CardTitle text={t('events')} />
       <List>
-        {events.map((event) => {
+        {events.sort(startCompare).map((event) => {
           return (
             <ListItem key={event.id}>
               <ListItemAvatar onClick={navigateToEvent} className={'hover'}>
                 <Avatar variant="rounded">
-                  <Typography fontSize={16} fontWeight={700}>{event.start.getDate() + '.' + event.start.getMonth() + '.'}</Typography>
+                  <EventIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
                 primary={`${event.name}`}
-                secondary={`${event.start.getHours()}:${event.start.getMinutes()} - ${event.end.getHours() + 1}:${event.end.getMinutes()}`}
+                secondary={`${new Date(
+                  event.start
+                ).toLocaleDateString()} - ${new Date(
+                  event.end
+                ).toLocaleDateString()}`}
                 onClick={navigateToEvent}
                 className={'hover'}
               />

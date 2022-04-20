@@ -2,6 +2,7 @@ import SEX from 'constants/sex';
 import { User } from 'models/User'
 import { Attachment } from './Attachment';
 import { ClientDTO } from './dto/ClientDTO';
+import { Event } from 'models/Event';
 
 export interface Client {
   id: number,
@@ -28,6 +29,7 @@ export interface Client {
   parent: Client | null,
   children: Client[] | null,
   noCzech: boolean | null,
+  events: Event[] | null,
   attachments: Attachment[] | null,
 }
 
@@ -57,6 +59,7 @@ export class Client {
     this.parent = dto.parent ? new Client(dto.parent) : null;
     this.children = dto.children ? dto.children.map(child => new Client(child)) : null;
     this.noCzech = dto.no_czech ?? null;
+    this.events = dto.events ? dto.events.map(event => new Event(event)) : null;
     this.attachments = dto.attachments ? dto.attachments.map(attachment => new Attachment(attachment)) : null;
   }
 }
