@@ -38,7 +38,7 @@ const EventForm = ({ scheduler }: { scheduler: SchedulerHelpers }) => {
   const { values, setValues, handleInput } = useForm({
     id: event?.id || null,
     name: event?.title || '',
-    eventTypeId: event?.eventTypeId,
+    eventTypeId: event?.eventTypeId || 1,
     start: event?.start || scheduler.state.start.value,
     end: event?.end || scheduler.state.end.value,
     clientId: event?.clientId || '',
@@ -63,6 +63,7 @@ const EventForm = ({ scheduler }: { scheduler: SchedulerHelpers }) => {
         label: `${eventType.name}`,
         id: eventType.id,
       }));
+      console.log(options)
       setEventTypes(options);
     });
   }, []);

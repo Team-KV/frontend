@@ -22,7 +22,7 @@ const ExerciseDetail = () => {
   const deleteExercise = () => {
     if (id) {
       exerciseService.deleteExercise(+id).then(() => {
-        dispatch(showSuccess(t('exercises:isDeleted')));
+        dispatch(showSuccess(t('exercises:isExerciseDeleted')));
         navigate('/exercises');
       });
     }

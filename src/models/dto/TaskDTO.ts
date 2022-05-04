@@ -1,5 +1,7 @@
+import { Exercise } from "models/Exercise";
 import { Task } from "models/Task";
 import { ExerciseDTO } from "./ExerciseDTO";
+import { ExerciseTaskDTO } from "./ExerciseTaskDTO";
 
 export interface TaskDTO {
   id: number,

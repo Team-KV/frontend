@@ -69,7 +69,7 @@ const CategoryEditor = ({
       });
   };
 
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: Event) => {
     e.stopPropagation();
     if (values.id) {
       categoryService

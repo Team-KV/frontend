@@ -28,6 +28,12 @@
   "isTaskCreated": "Úkol byl úspěšně vytvořen",
   "isTaskDeleted": "Úkol byl smazán",
 
+  "order": "Pořadí",
+  "feedback": "Zpětná vazba",
+  "difficulty": "Náročnost",
+  "repetitions": "Počet opakování",
+  "duration": "Doba jednoho opakování",
+
   "isEventDeleted": "Událost byla smazána",
   "isEventCreated": "Událost byla úspěšně vytvořena",
   "isEventSaved": "Událost byla úspěšně uložena"

@@ -90,10 +90,6 @@ const Clients = () => {
     loadClients();
   }, []);
 
-  const navigateToDetail = (client: any) => {
-    navigate('/clients/' + client.id);
-  };
-
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -179,7 +175,7 @@ const Clients = () => {
                 .map((client, i) => {
                   return (
                     <TableRow
-                      onClick={() => navigateToDetail(client)}
+                      onClick={() =>  navigate('/clients/' + client.id)}
                       hover
                       role="checkbox"
                       tabIndex={-1}

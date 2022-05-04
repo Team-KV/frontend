@@ -1,5 +1,6 @@
 import { TaskDTO } from "./dto/TaskDTO";
 import { Exercise } from "./Exercise";
+import { ExerciseTask } from "./ExerciseTask";
 
 export interface Task {
   id: number,
@@ -17,6 +18,6 @@ export class Task {
     this.isActive = dto.is_active;
     this.clientId = dto.client_id;
     this.eventId = dto.event_id;
-    this.exercises = dto.exercises?.map((exercise) => new Exercise({ ...exercise }));
+    this.exercises = dto.exercises?.map((dto) => new Exercise({ ...dto }));
   }
 }

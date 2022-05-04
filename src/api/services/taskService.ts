@@ -1,5 +1,8 @@
+import { Category } from '@mui/icons-material';
 import API from 'api/api';
+import { ExerciseTaskDTO } from 'models/dto/ExerciseTaskDTO';
 import { TaskDTO } from 'models/dto/TaskDTO';
+import { ExerciseTask } from 'models/ExerciseTask';
 import { Task } from 'models/Task';
 
 const taskService = {
@@ -23,6 +26,13 @@ const taskService = {
   },
   deleteTask: (id: number) => API.delete('task/' + id),
 
+  addExerciseToTask: async (id: number, exerciseTask: ExerciseTask) => {
+    const dto = {
+      exerciseTasks: [new ExerciseTaskDTO(exerciseTask)]
+    }
+    const { data } = await API.post('task/' + id + '/add-exercises', dto)
+    return data.map((dto: ExerciseTaskDTO) => new ExerciseTask(dto));
+  }
 
 }
 

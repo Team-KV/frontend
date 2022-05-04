@@ -25,7 +25,7 @@ import { FileUploader } from 'react-drag-drop-files';
 import { useTranslation } from 'react-i18next';
 import { showSuccess, showError } from 'redux/slices/snackbarSlice';
 
-import FileDownload from 'js-file-download';
+import config from "config.json";
 
 const fileTypes = ['jpg', 'png', 'mp4', 'avi', 'jpeg', 'mov'];
 
@@ -67,7 +67,6 @@ const ExerciseFiles = ({ exercise }: { exercise: Exercise }) => {
         handleClose();
       })
       .catch((err) => {
-        debugger;
         const message = err.response.data.message;
         dispatch(showError(message));
       });
@@ -90,11 +89,11 @@ const ExerciseFiles = ({ exercise }: { exercise: Exercise }) => {
       });
   };
 
-  const openFile = (id: number, fileName: string) => {
-    exerciseFileService.getExerciseFile(id).then((data) => {
-      FileDownload(data, fileName);
-    });
-  };
+  const openFile = (url: string) => {
+    var a = document.createElement('a');
+    a.href = config.SERVER_URL + url;
+    a.click();
+  }
 
   return (
     <Card
@@ -141,7 +140,7 @@ const ExerciseFiles = ({ exercise }: { exercise: Exercise }) => {
               >
                 <ListItemAvatar
                   onClick={() => {
-                    openFile(oneFile.id, oneFile.fileName);
+                    openFile(oneFile.url);
                   }}
                   className="hover"
                 >
@@ -151,7 +150,7 @@ const ExerciseFiles = ({ exercise }: { exercise: Exercise }) => {
                 </ListItemAvatar>
                 <ListItemText
                   onClick={() => {
-                    openFile(oneFile.id, oneFile.fileName);
+                    openFile(oneFile.url);
                   }}
                   primary={oneFile.fileName}
                   secondary={oneFile.type.toUpperCase()}

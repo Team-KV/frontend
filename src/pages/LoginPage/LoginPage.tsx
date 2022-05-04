@@ -28,7 +28,7 @@ function Login() {
     };
 
     axios
-      .post('http://localhost/api/login', loginCredentials)
+      .post('http://localhost/api/login', loginCredentials, addConfig())
       .then((response: AxiosResponse) => {
         localStorage.setItem('token', response.data.Token);
         dispatch(showSuccess(t('isLoggedIn')));
@@ -39,6 +39,14 @@ function Login() {
         dispatch(showError(message));
       });
   };
+
+  const addConfig = () => {
+    return {
+      headers: {
+        'X-localization': 'cs',
+      }
+    }
+  }
 
   return (
     <Container maxWidth={'xs'}>

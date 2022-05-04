@@ -3,6 +3,7 @@ import recordService from 'api/services/recordService';
 import { Controls } from 'components/Controls';
 import { Form, useForm } from 'components/Form';
 import Section from 'components/Section';
+import TextItem from 'components/TextItem';
 import { useAppDispatch } from 'hooks';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -79,9 +80,10 @@ const RecordForm = () => {
         gap={2}
       >
         <Section first label={recordId ? t('calendar:recordEdit') : t('calendar:recordNew')} />
+        <TextItem label={t('calendar:progress')} value={''}></TextItem>
         <Slider
           value={values.progress}
-          aria-label={t('progress')}
+          aria-label={t('calendar:progress')}
           min={-5}
           max={5}
           step={1}

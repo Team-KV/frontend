@@ -27,7 +27,7 @@ const ExerciseForm = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: Event) => {
     e.stopPropagation();
     if (id) {
       exerciseService
@@ -47,10 +47,6 @@ const ExerciseForm = () => {
           dispatch(showSuccess(t('exercises:isExerciseUpdated')));
           navigate('/exercises/' + exercise.id);
         })
-        .catch((err) => {
-          const message = err.response?.data?.message;
-          dispatch(showError(message));
-        });
     }
   };
 

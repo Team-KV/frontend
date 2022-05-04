@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   IconButton,
+  Link,
   List,
   ListItem,
   ListItemAvatar,
@@ -22,7 +23,7 @@ import FolderIcon from '@mui/icons-material/Folder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Attachment } from 'models/Attachment';
 
-import FileDownload from 'js-file-download';
+import config from "config.json";
 
 const fileTypes = ['jpeg', 'png', 'pdf', 'doc', 'jpg', 'docx'];
 
@@ -70,6 +71,7 @@ const Attachments = ({ client }: { client: Client }) => {
 
   useEffect(() => {
     if (client?.attachments) setAttachments([...client.attachments]);
+    console.log(client?.attachments);
   }, [client]);
 
   const deleteAttachment = (id: number) => {
@@ -87,11 +89,12 @@ const Attachments = ({ client }: { client: Client }) => {
       });
   };
 
-  const openAttachment = (id: number, fileName: string) => {
-    ClientService.getAttachment(id).then((data) => {
-      FileDownload(data, fileName);
-    });
-  };
+  const openAttachment = (url: string) => {
+    console.log(url);
+    var a = document.createElement('a');
+    a.href = config.SERVER_URL + url;
+    a.click();
+  }
 
   return (
     <Card
@@ -135,11 +138,9 @@ const Attachments = ({ client }: { client: Client }) => {
                     <DeleteIcon />
                   </IconButton>
                 }
+                onClick={() => openAttachment(attachment.url)}
               >
                 <ListItemAvatar
-                  onClick={() => {
-                    openAttachment(attachment.id, attachment.fileName);
-                  }}
                   className="hover"
                 >
                   <Avatar>
@@ -147,9 +148,7 @@ const Attachments = ({ client }: { client: Client }) => {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  onClick={() => {
-                    openAttachment(attachment.id, attachment.fileName);
-                  }}
+                  onClick={() => openAttachment(attachment.url)}
                   primary={attachment.fileName}
                   secondary={attachment.type.toUpperCase()}
                   className="hover"

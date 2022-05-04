@@ -17,11 +17,12 @@
   "save": "Uložit",
   "search": "Hledat",
   "unknown": "Neuvedeno",
+  "actions": "Akce",
 
   "attachments": "Přílohy",  
   "files": "Soubory",
   
   "formRequired": "Toto pole je povinné",
 
-  "isLoggedIn": "Successfully logged in"
+  "isLoggedIn": "Přihlášení proběhlo úspěšně"
 }

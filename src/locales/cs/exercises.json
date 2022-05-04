@@ -3,6 +3,8 @@
   "description": "Popis",
   "url": "Odkaz URL",
 
+  "exercise": "Cvik",
+
   "category": "Kategorie",
   "generalInfo": "Obecné informace",
 
@@ -18,5 +20,7 @@
   "isExerciseUpdated": "Cvik byl úspěšně aktualizován",
   "isExerciseDeleted": "Cvik byl úspěšně odstraněn",
   "exerciseNew": "Nový cvik",
-  "exerciseEdit": "Úprava cviku"
+  "exerciseEdit": "Úprava cviku",
+
+  "addExerciseTask": "Přidat cvik k úkolu"
 }
