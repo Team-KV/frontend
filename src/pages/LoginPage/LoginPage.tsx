@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from 'hooks';
 import { showError, showSuccess } from 'redux/slices/snackbarSlice';
+import config from "config.json";
 
 function Login() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ function Login() {
     };
 
     axios
-      .post('http://localhost/api/login', loginCredentials, addConfig())
+      .post(config.SERVER_URL + 'login', loginCredentials, addConfig())
       .then((response: AxiosResponse) => {
         localStorage.setItem('token', response.data.Token);
         dispatch(showSuccess(t('isLoggedIn')));
