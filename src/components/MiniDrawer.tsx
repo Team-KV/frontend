@@ -23,7 +23,7 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link } from 'react-router-dom';
 import { Button, Snackbar, Switch } from '@mui/material';
-import { fetchUser } from 'redux/slices/userSlice';
+// import { fetchUser } from 'redux/slices/userSlice';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { useTranslation } from 'react-i18next';
@@ -104,20 +104,6 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
   const [open, setOpen] = React.useState(false);
   const [t] = useTranslation();
 
-  const user = useAppSelector((state) => state.user.value);
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchUser());
-  }, [dispatch]);
-
-  // const switchLang = (lang: any) => {
-  //   i18n
-  //     .use(initReactI18next) // passes i18n down to react-i18next
-  //     .init({ lng: lang });
-  // };
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -177,7 +163,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
           <Typography variant="h6" noWrap component="div">
             Physiport
           </Typography>
-          <Typography ml="auto">Email: {user.email}</Typography>
+          {/* <Typography ml="auto">Email: {user.email}</Typography> */}
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

@@ -3,7 +3,7 @@ import { publicRoutes, privateRoutes, IRoute } from 'routes';
 import ProtectedRoute from 'components/ProtectedRoute';
 import { useEffect } from 'react';
 import store from 'store';
-import { fetchUser } from 'redux/slices/userSlice';
+// import { fetchUser } from 'redux/slices/userSlice';
 import Snackbar from 'components/Snackbar';
 
 function App() {
@@ -17,9 +17,9 @@ function App() {
     />
   ));
 
-  useEffect(() => {
-    store.dispatch(fetchUser)
-  }, [])
+  // useEffect(() => {
+  //   store.dispatch(fetchUser)
+  // }, [])
 
   return (
     <div className="App">
