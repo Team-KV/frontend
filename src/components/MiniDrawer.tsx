@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -19,14 +19,13 @@ import ListItemText from '@mui/material/ListItemText';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link } from 'react-router-dom';
-import { Button, Snackbar, Switch } from '@mui/material';
-// import { fetchUser } from 'redux/slices/userSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { useTranslation } from 'react-i18next';
+import userService from 'api/services/userService';
+import { fetchUser } from 'redux/slices/userSlice';
 
 const drawerWidth = 240;
 
@@ -101,16 +100,12 @@ const Drawer = styled(MuiDrawer, {
 
 export default function MiniDrawer({ body }: { body: React.ReactNode }) {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const user = useAppSelector<any>((state) => state.user.value);
+  const [menuItems, setMenuItems] = useState<any>([]); 
+  const navigate = useNavigate();
   const [t] = useTranslation();
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const dispatch = useAppDispatch();
 
   const menuItemsClient = [
     {
@@ -119,7 +114,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
       link: '/dashboard',
     },
   ];
-
+  
   const menuItemsStaff = [
     {
       name: t('clients'),
@@ -135,13 +130,29 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
       name: t('exercises'),
       icon: <FitnessCenterIcon />,
       link: '/exercises',
-    },
-    // {
-    //   name: t('encyclopedia'),
-    //   icon: <MenuBookIcon />,
-    //   link: '/encyclopedia',
-    // },
+    }
   ];
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    userService.getUserInfo().then((fetchedUser) => {
+      dispatch(fetchUser());
+      const newItems = user.role === 1 ? menuItemsStaff : menuItemsClient;
+      setMenuItems(newItems);
+    }).catch((err) => {
+      if(err?.response?.status === 401)
+        navigate('/login');
+    })
+  }, [])
+
+ 
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -163,7 +174,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
           <Typography variant="h6" noWrap component="div">
             Physiport
           </Typography>
-          {/* <Typography ml="auto">Email: {user.email}</Typography> */}
+          <Typography ml="auto">Email: {user?.email}</Typography>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -178,7 +189,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {menuItemsStaff.map((item, index) => (
+          {menuItems.map((item, index) => (
             <Link
               style={{ textDecoration: 'none', color: 'inherit' }}
               key={index}

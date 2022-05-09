@@ -7,7 +7,7 @@ import store from 'store';
 import Snackbar from 'components/Snackbar';
 
 function App() {
-  const auth = 'staff';
+  const auth = 'client';
 
   let routes = privateRoutes[auth].map((route: IRoute) => (
     <Route
@@ -16,10 +16,6 @@ function App() {
       element={<ProtectedRoute element={route.element} />}
     />
   ));
-
-  // useEffect(() => {
-  //   store.dispatch(fetchUser)
-  // }, [])
 
   return (
     <div className="App">
