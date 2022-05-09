@@ -1,7 +1,6 @@
 import { Box, Card, Grid, Typography } from '@mui/material';
 import { Client } from 'models/Client';
 import TextItem from 'components/TextItem';
-import SEX from 'constants/sex';
 import { t } from 'i18next';
 import CardTitle from 'components/CardTitle';
 

@@ -7,7 +7,7 @@ import TaskForm from 'pages/calendar/components/TaskForm';
 import Clients from 'pages/clients/Clients';
 import ClientsDetail from 'pages/clients/ClientsDetail';
 import ClientsForm from 'pages/clients/ClientsForm';
-import DashboardPage from 'pages/DashboardPage/DashboardPage';
+import DashboardPage from 'pages/dashboard/dashboard';
 import ExercisesPage from 'pages/exercises/Exercises';
 import ExercisesDetail from 'pages/exercises/ExercisesDetail';
 import ExercisesForm from 'pages/exercises/ExercisesForm';
@@ -133,6 +133,11 @@ export const privateRoutes: { staff: IRoute[]; client: IRoute[] } = {
       name: 'dashboard',
       path: '/dashboard',
       element: <DashboardPage />,
+    },
+    {
+      path: '/tasks/:id',
+      name: 'calendar',
+      element: <TaskDetail />,
     },
   ],
 };
