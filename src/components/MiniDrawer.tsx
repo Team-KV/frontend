@@ -26,6 +26,7 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { useTranslation } from 'react-i18next';
 import userService from 'api/services/userService';
 import { fetchUser } from 'redux/slices/userSlice';
+import User from './User';
 
 const drawerWidth = 240;
 
@@ -101,11 +102,10 @@ const Drawer = styled(MuiDrawer, {
 export default function MiniDrawer({ body }: { body: React.ReactNode }) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const user = useAppSelector<any>((state) => state.user.value);
-  const [menuItems, setMenuItems] = useState<any>([]); 
-  const navigate = useNavigate();
+  const [menuItems, setMenuItems] = useState<any>([]);
   const [t] = useTranslation();
-  const dispatch = useAppDispatch();
+  const user = useAppSelector<any>((state) => state.user.value);
+
 
   const menuItemsClient = [
     {
@@ -114,7 +114,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
       link: '/dashboard',
     },
   ];
-  
+
   const menuItemsStaff = [
     {
       name: t('clients'),
@@ -130,8 +130,12 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
       name: t('exercises'),
       icon: <FitnessCenterIcon />,
       link: '/exercises',
-    }
+    },
   ];
+
+  useEffect(()=> {
+    setMenuItems(user?.role === 1 ? menuItemsStaff : menuItemsClient)
+  }, [])
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -140,19 +144,6 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  useEffect(() => {
-    userService.getUserInfo().then((fetchedUser) => {
-      dispatch(fetchUser());
-      const newItems = user.role === 1 ? menuItemsStaff : menuItemsClient;
-      setMenuItems(newItems);
-    }).catch((err) => {
-      if(err?.response?.status === 401)
-        navigate('/login');
-    })
-  }, [])
-
- 
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -174,7 +165,11 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
           <Typography variant="h6" noWrap component="div">
             Physiport
           </Typography>
-          <Typography ml="auto">Email: {user?.email}</Typography>
+
+          <Box ml={'auto'}>
+            <User />
+          </Box>
+          {/* <Typography ml="auto">Email: {user?.email}</Typography> */}
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

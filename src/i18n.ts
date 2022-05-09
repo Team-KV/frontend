@@ -7,8 +7,11 @@ import calendarCS from 'locales/cs/calendar.json'
 import exercisesCS from 'locales/cs/exercises.json'
 import dashboardCS from 'locales/cs/dashboard.json'
 
-// import commonEN from 'locales/en/common.json'
-// import clientsEN from 'locales/en/clients.json'
+import commonEN from 'locales/en/common.json'
+import clientsEN from 'locales/en/clients.json'
+import calendarEN from 'locales/en/calendar.json'
+import exercisesEN from 'locales/en/exercises.json'
+import dashboardEN from 'locales/en/dashboard.json'
 
 const resources = {
   cs: {
@@ -18,10 +21,13 @@ const resources = {
     exercises: exercisesCS,
     dashboard: dashboardCS,
   },
-  // en: {
-  //   common: commonCS,
-  //   clients: clientsCS
-  // },
+  en: {
+    common: commonEN,
+    clients: clientsEN,
+    calendar: calendarEN,
+    exercises: exercisesEN,
+    dashboard: dashboardEN,
+  },
 }
 
 i18n.use(initReactI18next).init({

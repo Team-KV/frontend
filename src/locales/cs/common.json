@@ -1,4 +1,7 @@
 {
+  "czech": "Čeština",
+  "english": "Angličtina",
+
   "calendar": "Kalendář",
   "cancel": "Zrušit",
   "clients": "Klienti",
@@ -24,5 +27,9 @@
   
   "formRequired": "Toto pole je povinné",
 
-  "isLoggedIn": "Přihlášení proběhlo úspěšně"
+  "changePassword": "Změnit heslo",
+  "logout": "Odhlásit se",
+
+  "isLoggedIn": "Přihlášení proběhlo úspěšně",
+  "isLoggedOut": "Byl jste úspěšně odhlášen"
 }
