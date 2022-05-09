@@ -1,6 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import userService from "api/services/userService";
-import { User } from "models/User";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface SnackbarState {
   snackbarOpen: boolean,

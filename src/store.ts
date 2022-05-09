@@ -1,12 +1,12 @@
-import { applyMiddleware, configureStore, createStore } from "@reduxjs/toolkit";
-// import userReducer from "redux/slices/userSlice";
+import { configureStore } from "@reduxjs/toolkit";
 import snackbarReducer from "redux/slices/snackbarSlice";
+import userReducer from "redux/slices/userSlice";
+
 
 const store = configureStore({
   reducer: {
-    // user: userReducer,
+    user: userReducer,
     snackbar: snackbarReducer,
-    // clients: clientsReducer
   }
 });
 
