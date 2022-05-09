@@ -5,7 +5,7 @@ import commonCS from 'locales/cs/common.json'
 import clientsCS from 'locales/cs/clients.json'
 import calendarCS from 'locales/cs/calendar.json'
 import exercisesCS from 'locales/cs/exercises.json'
-
+import dashboardCS from 'locales/cs/dashboard.json'
 
 // import commonEN from 'locales/en/common.json'
 // import clientsEN from 'locales/en/clients.json'
@@ -15,7 +15,8 @@ const resources = {
     common: commonCS,
     clients: clientsCS,
     calendar: calendarCS,
-    exercises: exercisesCS
+    exercises: exercisesCS,
+    dashboard: dashboardCS,
   },
   // en: {
   //   common: commonCS,

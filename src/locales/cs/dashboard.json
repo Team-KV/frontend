@@ -1,0 +1,13 @@
+{
+  "yourDashboard": "Přehled",
+  "firstName": "Jméno",
+  "lastName": "Příjmení",
+  "phone": "Telefon",
+  "staffInfo": "Váš fyzioterapeut",
+  "progress": "Vývoj zdravotního stavu",
+  "nextEvent": "Následující schůzka",
+  "tasks": "Zadané úkoly",
+
+  "noNextEvent": "Momentálně nemáte naplánovány žádné schůzky",
+  "noTasks": "Nemáte zadané žádné úkoly"
+}
