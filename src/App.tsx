@@ -1,8 +1,7 @@
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
-import { publicRoutes, privateRoutes, IRoute } from 'routes';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { IRoute, privateRoutes, publicRoutes } from 'routes';
 import ProtectedRoute from 'components/ProtectedRoute';
-import { useEffect, useState } from 'react';
-import store from 'store';
+import { useEffect } from 'react';
 // import { fetchUser } from 'redux/slices/userSlice';
 import Snackbar from 'components/Snackbar';
 import { useAppDispatch, useAppSelector } from 'hooks';

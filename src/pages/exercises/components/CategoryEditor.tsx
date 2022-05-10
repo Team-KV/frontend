@@ -1,20 +1,20 @@
 import {
+  Avatar,
+  Box,
+  Button,
+  IconButton,
   List,
   ListItem,
-  IconButton,
   ListItemAvatar,
-  Avatar,
   ListItemText,
-  Button,
-  Box,
-  Paper,
   Modal,
+  Paper,
 } from '@mui/material';
 import categoryService from 'api/services/categoryService';
 import { useAppDispatch } from 'hooks';
 import { Category } from 'models/Category';
 import { useTranslation } from 'react-i18next';
-import { showError, showSuccess } from 'redux/slices/snackbarSlice';
+import { showError } from 'redux/slices/snackbarSlice';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Form, useForm } from 'components/Form';
@@ -23,7 +23,7 @@ import { Controls } from 'components/Controls';
 import { useState } from 'react';
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute' as const,
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',

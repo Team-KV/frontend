@@ -1,4 +1,4 @@
-import { Box, Card, Grid, Typography } from '@mui/material';
+import { Card } from '@mui/material';
 import { Client } from 'models/Client';
 import TextItem from 'components/TextItem';
 import { t } from 'i18next';

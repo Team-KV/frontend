@@ -1,9 +1,7 @@
-import { Box, Typography, Button, Grid, Card } from '@mui/material';
+import { Box, Button, Card, Grid, Typography } from '@mui/material';
 import exerciseService from 'api/services/exerciseService';
-import Events from 'events';
 import getYoutubeEmbedId from 'helpers/getYoutubeEmbedId';
 import { useAppDispatch } from 'hooks';
-import { t } from 'i18next';
 import { Exercise } from 'models/Exercise';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';

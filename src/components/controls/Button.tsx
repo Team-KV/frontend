@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Button as MuiButton } from '@mui/material';
-import { t } from 'i18next';
 
 const Button = (props: any) => {
   const { label, size, color, variant, onClick, ...rest } = props;

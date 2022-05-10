@@ -1,13 +1,11 @@
 import clientService from 'api/services/clientService';
 import React, { useEffect, useState } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Client } from 'models/Client';
 import ContactInfo from './components/ContactInfo';
-import NotFound from 'components/NotFound';
-import { Button, Card, Grid, Typography } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import HealthInfo from './components/HealthInfo';
 import SEX from 'constants/sex';
-import { t } from 'i18next';
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
 import { Box } from '@mui/system';
@@ -18,13 +16,13 @@ import Events from './components/Events';
 import Attachments from './components/Attachments';
 
 const ClientsDetail = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [client, setClient] = useState<Client | null>(null);
 
   const [t] = useTranslation();
 
   const dispatch = useAppDispatch();
-  let { id } = useParams();
+  const { id } = useParams();
   const sex = SEX.find((item) => item.value === client?.sex)?.id!;
   const sexIcon =
     sex === 'male' ? (

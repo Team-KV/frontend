@@ -1,4 +1,4 @@
-import { Box, Card, Grid, Typography } from '@mui/material';
+import { Card } from '@mui/material';
 import TextItem from 'components/TextItem';
 import { t } from 'i18next';
 import CardTitle from 'components/CardTitle';

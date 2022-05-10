@@ -1,15 +1,15 @@
 import {
-  Card,
-  Modal,
+  Avatar,
   Box,
+  Button,
+  Card,
+  Divider,
+  IconButton,
   List,
   ListItem,
-  IconButton,
   ListItemAvatar,
-  Avatar,
   ListItemText,
-  Button,
-  Divider,
+  Modal,
 } from '@mui/material';
 import exerciseFileService from 'api/services/exerciseFileService';
 import exerciseService from 'api/services/exerciseService';
@@ -22,7 +22,7 @@ import { ExerciseFile } from 'models/ExerciseFile';
 import React, { useEffect, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 import { useTranslation } from 'react-i18next';
-import { showSuccess, showError } from 'redux/slices/snackbarSlice';
+import { showError, showSuccess } from 'redux/slices/snackbarSlice';
 
 import config from 'config.json';
 

@@ -1,6 +1,5 @@
 import { TaskDTO } from "./dto/TaskDTO";
 import { Exercise } from "./Exercise";
-import { ExerciseTask } from "./ExerciseTask";
 
 export interface Task {
   id: number,

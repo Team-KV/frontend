@@ -1,5 +1,4 @@
 import API from 'api/api';
-import { EventDTO } from 'models/dto/EventDTO';
 import { EventTypeDTO } from 'models/dto/EventTypeDTO';
 import { EventType } from 'models/EventType';
 

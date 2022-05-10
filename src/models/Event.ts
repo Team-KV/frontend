@@ -1,6 +1,5 @@
 import { Client } from './Client';
 import { EventDTO } from './dto/EventDTO';
-import { RecordDTO } from './dto/RecordDTO';
 import { EventType } from './EventType';
 import { Record } from './Record';
 import { Staff } from './Staff';

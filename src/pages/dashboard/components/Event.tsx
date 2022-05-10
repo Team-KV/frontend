@@ -1,18 +1,13 @@
 import {
   Avatar,
-  Box,
   Card,
-  Grid,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Typography,
 } from '@mui/material';
 import TextItem from 'components/TextItem';
-import { t } from 'i18next';
 import CardTitle from 'components/CardTitle';
-import { Staff } from 'models/Staff';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Event } from 'models/Event';

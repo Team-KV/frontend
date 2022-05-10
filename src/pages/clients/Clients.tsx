@@ -20,7 +20,6 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { Search } from '@mui/icons-material';
 import { Client } from 'models/Client';
 import { useAppDispatch } from 'hooks';
 import { showError } from 'redux/slices/snackbarSlice';
@@ -33,10 +32,10 @@ interface Column {
 }
 
 const Clients = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
-  let [clients, setClients]: [Client[], any] = useState([]);
-  let [allClients, setAllClients]: [Client[], any] = useState([]);
+  const [clients, setClients]: [Client[], any] = useState([]);
+  const [allClients, setAllClients]: [Client[], any] = useState([]);
 
   const dispatch = useAppDispatch();
 

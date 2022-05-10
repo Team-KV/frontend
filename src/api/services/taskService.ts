@@ -1,4 +1,3 @@
-import { Category } from '@mui/icons-material';
 import API from 'api/api';
 import { ExerciseTaskDTO } from 'models/dto/ExerciseTaskDTO';
 import { TaskDTO } from 'models/dto/TaskDTO';

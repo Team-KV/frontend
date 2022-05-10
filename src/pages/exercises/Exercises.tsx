@@ -3,8 +3,6 @@ import {
   Button,
   Grid,
   IconButton,
-  Paper,
-  TablePagination,
   TextField,
   Typography,
 } from '@mui/material';
@@ -17,7 +15,6 @@ import ExerciseCard from './components/ExerciseCard';
 import exerciseService from 'api/services/exerciseService';
 import { useAppDispatch } from 'hooks';
 import { showError } from 'redux/slices/snackbarSlice';
-import { constants } from 'zlib';
 
 const Exercises = () => {
   const dispatch = useAppDispatch();

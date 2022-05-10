@@ -1,6 +1,4 @@
-import { TextValidator } from 'react-material-ui-form-validator';
-import { t } from 'i18next';
-import { FormGroup, FormControlLabel, Checkbox as MuiCheckBox } from '@mui/material';
+import { FormControlLabel, FormGroup, Checkbox as MuiCheckBox } from '@mui/material';
 
 const Checkbox = (props: any) => {
   const { name, value, label, onChange, ...rest } = props;

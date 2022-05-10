@@ -1,6 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import MiniDrawer from './MiniDrawer';
 
 const PrivateRoute = ({ element }: { element: JSX.Element }) => {

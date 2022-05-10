@@ -1,4 +1,3 @@
-import { Graph } from "models/Graph";
 import { GraphData } from "models/GraphData";
 
 export interface GraphDataDTO {

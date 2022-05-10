@@ -2,7 +2,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { csCZ, enUS } from '@mui/material/locale';
+import { csCZ } from '@mui/material/locale';
 
 import store from './store';
 
@@ -39,7 +39,6 @@ const theme = createTheme(
 
 import App from './App';
 import { Provider } from 'react-redux';
-import i18n from 'i18n';
 
 ReactDOM.render(
   <React.StrictMode>

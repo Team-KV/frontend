@@ -1,11 +1,11 @@
-import axios, { Axios, AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import {
   Box,
   Button,
   Container,
-  TextField,
   CssBaseline,
+  TextField,
   Typography,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +14,6 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { showError, showSuccess } from 'redux/slices/snackbarSlice';
 import config from 'config.json';
 import { fetchUser } from 'redux/slices/userSlice';
-import { userInfo } from 'os';
 import { useEffect } from 'react';
 
 function Login() {

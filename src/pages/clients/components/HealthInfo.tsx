@@ -1,9 +1,8 @@
-import { Card, Divider, Grid } from '@mui/material';
+import { Card, Grid } from '@mui/material';
 import { Client } from 'models/Client';
 import TextItem from 'components/TextItem';
 import CardTitle from 'components/CardTitle';
 import { useTranslation } from 'react-i18next';
-import { zhCN } from 'date-fns/locale';
 
 const HealthInfo = ({ client }: { client: Client }) => {
   const [t] = useTranslation();

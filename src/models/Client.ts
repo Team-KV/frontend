@@ -1,4 +1,3 @@
-import SEX from 'constants/sex';
 import { User } from 'models/User'
 import { Attachment } from './Attachment';
 import { ClientDTO } from './dto/ClientDTO';

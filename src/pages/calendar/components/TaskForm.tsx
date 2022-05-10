@@ -1,14 +1,13 @@
 import { Box } from '@mui/material';
-import { taskCompleted } from '@reduxjs/toolkit/dist/listenerMiddleware/exceptions';
 import eventService from 'api/services/eventService';
 import taskService from 'api/services/taskService';
 import { Controls } from 'components/Controls';
-import { useForm, Form } from 'components/Form';
+import { Form, useForm } from 'components/Form';
 import Section from 'components/Section';
 import { useAppDispatch } from 'hooks';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { showError, showSuccess } from 'redux/slices/snackbarSlice';
 
 const TaskForm = () => {
@@ -19,7 +18,7 @@ const TaskForm = () => {
     clientId: null,
   });
 
-  let { eventId, id } = useParams();
+  const { eventId, id } = useParams();
   const [t] = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

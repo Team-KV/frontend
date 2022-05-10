@@ -1,4 +1,3 @@
-import { Event } from 'models/Event'
 
 const mapToProcessedEvent = (event: any) => ({
   ...event,

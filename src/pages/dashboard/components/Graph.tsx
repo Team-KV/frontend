@@ -1,12 +1,9 @@
-import { Box, Card, Grid, Typography } from '@mui/material';
-import TextItem from 'components/TextItem';
+import { Box, Card, Typography } from '@mui/material';
 import { t } from 'i18next';
-import CardTitle from 'components/CardTitle';
 import { GraphData } from 'models/GraphData';
 
 import Chart from 'chart.js/auto';
 import { useEffect, useState } from 'react';
-import { borderColor } from '@mui/system';
 
 const Graph = ({ graph }: { graph: GraphData[] | undefined }) => {
   const [renderedGraph, setRenderedGraph] = useState(false);

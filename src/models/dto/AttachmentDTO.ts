@@ -1,9 +1,3 @@
-import { Event } from "models/Event";
-import { EventTypeDTO } from "./EventTypeDTO";
-import { ClientDTO } from "./ClientDTO";
-import { StaffDTO } from "./StaffDTO";
-import { RecordDTO } from "./RecordDTO";
-import { Record } from "models/Record";
 import { Attachment } from "models/Attachment";
 
 export interface AttachmentDTO {

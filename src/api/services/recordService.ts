@@ -1,8 +1,5 @@
 import API from 'api/api';
-import { debug } from 'console';
-import { EventDTO } from 'models/dto/EventDTO';
 import { RecordDTO } from 'models/dto/RecordDTO';
-import { Event } from 'models/Event';
 import { Record } from 'models/Record';
 
 const recordService = {

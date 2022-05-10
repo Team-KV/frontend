@@ -1,6 +1,5 @@
 
 import { TextValidator} from 'react-material-ui-form-validator';
-import { t } from 'i18next';
 
 const Input = (props: any) => {
   const { name, value, label, onChange, ...rest } = props;

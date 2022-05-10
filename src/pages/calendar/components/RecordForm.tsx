@@ -5,7 +5,7 @@ import { Form, useForm } from 'components/Form';
 import Section from 'components/Section';
 import TextItem from 'components/TextItem';
 import { useAppDispatch } from 'hooks';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import { showError, showSuccess } from 'redux/slices/snackbarSlice';
@@ -17,7 +17,7 @@ const RecordForm = () => {
     exerciseNote: '',
     text: '',
   });
-  let { recordId, eventId } = useParams();
+  const { recordId, eventId } = useParams();
   const [t] = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

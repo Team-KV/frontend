@@ -1,7 +1,4 @@
-import { t } from "i18next";
 import { Exercise } from "models/Exercise";
-import { ExerciseFile } from "models/ExerciseFile";
-import { ExerciseTask } from "models/ExerciseTask";
 import { ExerciseFileDTO } from "./ExerciseFileDTO";
 import { ExerciseTaskDTO } from "./ExerciseTaskDTO";
 

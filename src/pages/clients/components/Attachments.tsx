@@ -4,7 +4,6 @@ import {
   Button,
   Card,
   IconButton,
-  Link,
   List,
   ListItem,
   ListItemAvatar,
@@ -28,7 +27,7 @@ import config from "config.json";
 const fileTypes = ['jpeg', 'png', 'pdf', 'doc', 'jpg', 'docx'];
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute' as const,
   top: '50%',
   left: '50%',
   height: '50%',
@@ -91,7 +90,7 @@ const Attachments = ({ client }: { client: Client }) => {
 
   const openAttachment = (url: string) => {
     console.log(url);
-    var a = document.createElement('a');
+    const a = document.createElement('a');
     a.href = config.SERVER_URL + url;
     a.click();
   }

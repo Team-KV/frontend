@@ -10,11 +10,11 @@ import { useEffect } from 'react';
 import SEX from 'constants/sex';
 import clientService from 'api/services/clientService';
 import { useAppDispatch } from 'hooks';
-import { showSuccess, showError } from 'redux/slices/snackbarSlice';
+import { showError, showSuccess } from 'redux/slices/snackbarSlice';
 
 const ClientsForm = () => {
-  let { id } = useParams();
-  let navigate = useNavigate();
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const [t] = useTranslation();
   const { values, setValues, handleInput } = useForm({});

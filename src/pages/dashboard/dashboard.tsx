@@ -1,7 +1,4 @@
-import ClientService from 'api/services/clientService';
 import dashboardService from 'api/services/dashboardService';
-import { useAppSelector } from 'hooks';
-import { Client } from 'models/Client';
 import { Dashboard } from 'models/Dashboard';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';

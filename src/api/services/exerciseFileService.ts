@@ -1,8 +1,4 @@
 import API from 'api/api';
-import { ExerciseDTO } from 'models/dto/ExerciseDTO';
-import { ExerciseFileDTO } from 'models/dto/ExerciseFileDTO';
-import { Exercise } from 'models/Exercise';
-import { ExerciseFile } from 'models/ExerciseFile';
 
 const exerciseFileService = {
   getExerciseFile: async (id: number) => {

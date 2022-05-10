@@ -1,8 +1,7 @@
 import { Scheduler } from '@aldabil/react-scheduler';
-import { Box } from '@mui/material';
 import eventService from 'api/services/eventService';
 import { cs } from 'date-fns/locale';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import EventForm from './components/EventForm';
 import { Event } from 'models/Event';
 import { useAppDispatch } from 'hooks';

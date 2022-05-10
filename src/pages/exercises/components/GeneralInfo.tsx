@@ -1,4 +1,4 @@
-import { Box, Card, Grid, Typography } from '@mui/material';
+import { Box, Card, Typography } from '@mui/material';
 import categoryService from 'api/services/categoryService';
 import CardTitle from 'components/CardTitle';
 import TextItem from 'components/TextItem';

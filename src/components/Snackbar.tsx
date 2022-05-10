@@ -2,9 +2,8 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import { Snackbar as MuiSnackbar } from '@mui/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { hideSnackbar, setSnackbar } from 'redux/slices/snackbarSlice';
+import { hideSnackbar } from 'redux/slices/snackbarSlice';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,

@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 
 import { useState } from 'react';
-import { TextField, Button, DialogActions, Typography } from '@mui/material';
+import { Button, DialogActions, Typography } from '@mui/material';
 import {
-  EventActions,
   ProcessedEvent,
   SchedulerHelpers,
 } from '@aldabil/react-scheduler/dist/types';
@@ -18,11 +17,9 @@ import { useAppDispatch } from 'hooks';
 import { showError, showSuccess } from 'redux/slices/snackbarSlice';
 
 import mapToProcessedEvent from 'helpers/mapToProcessedEvent';
-import mapToEvent from 'helpers/mapToEvent';
-import { EventType } from 'models/EventType';
 
 const setDateWithAddedHours = (hours: number) => {
-  var dt = new Date();
+  const dt = new Date();
   dt.setHours(dt.getHours() + hours);
   return dt;
 };
@@ -49,7 +46,7 @@ const EventForm = ({ scheduler }: { scheduler: SchedulerHelpers }) => {
 
   useEffect(() => {
     clientService.getClients().then((fetchedClients) => {
-      let options: any = fetchedClients.map((client) => ({
+      const options: any = fetchedClients.map((client) => ({
         label: `${client.firstName} ${client.lastName} (${
           client?.dateOfBirth?.getFullYear() ?? '----'
         })`,
@@ -59,7 +56,7 @@ const EventForm = ({ scheduler }: { scheduler: SchedulerHelpers }) => {
     });
 
     eventTypeService.getEventTypes().then((fetchedEventTypes) => {
-      let options: any = fetchedEventTypes.map((eventType) => ({
+      const options: any = fetchedEventTypes.map((eventType) => ({
         label: `${eventType.name}`,
         id: eventType.id,
       }));

@@ -1,4 +1,3 @@
-import { Dashboard } from "models/Dashboard";
 import { ClientDTO } from "./ClientDTO";
 import { EventDTO } from "./EventDTO";
 import { GraphDataDTO } from "./GraphDataDTO";

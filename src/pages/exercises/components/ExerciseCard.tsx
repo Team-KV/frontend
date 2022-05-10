@@ -1,18 +1,16 @@
 import {
   Card,
   CardActionArea,
-  CardMedia,
   CardContent,
+  CardMedia,
   Typography,
 } from '@mui/material';
 import { Exercise } from 'models/Exercise';
 import React, { useEffect, useState } from 'react';
 import noImageSrc from 'assets/img/no-image.png';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import exerciseService from 'api/services/exerciseService';
-import { showError } from 'redux/slices/snackbarSlice';
 import config from 'config.json';
-import { height, minHeight } from '@mui/system';
 
 const ExerciseCard = ({ exercise }: { exercise: Exercise }) => {
   const navigate = useNavigate();

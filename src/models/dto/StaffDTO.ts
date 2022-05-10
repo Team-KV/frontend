@@ -1,5 +1,4 @@
 import { Staff } from "models/Staff";
-import { User } from "models/User";
 
 export interface StaffDTO {
   id: number,

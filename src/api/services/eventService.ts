@@ -1,5 +1,4 @@
 import API from 'api/api';
-import { debug } from 'console';
 import { EventDTO } from 'models/dto/EventDTO';
 import { Event } from 'models/Event';
 

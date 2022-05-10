@@ -1,36 +1,32 @@
 import {
   Box,
-  Card,
-  Slider,
   Button,
+  Card,
+  Modal,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Modal,
 } from '@mui/material';
 import exerciseService from 'api/services/exerciseService';
 import taskService from 'api/services/taskService';
 import { Controls } from 'components/Controls';
-import { useForm, Form } from 'components/Form';
+import { Form, useForm } from 'components/Form';
 import Section from 'components/Section';
 import TextItem from 'components/TextItem';
-import { id } from 'date-fns/locale';
 import { useAppDispatch } from 'hooks';
-import { t } from 'i18next';
 import { Exercise } from 'models/Exercise';
 import { ExerciseTask } from 'models/ExerciseTask';
 import { Task } from 'models/Task';
 import React, { useEffect, useState } from 'react';
-import { CirclePicker } from 'react-color';
 import { useTranslation } from 'react-i18next';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { showError, showSuccess } from 'redux/slices/snackbarSlice';
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute' as const,
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -48,7 +44,7 @@ interface Column {
 }
 
 const TaskDetail = () => {
-  let { id } = useParams();
+  const { id } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [task, setTask] = useState<Task>();
@@ -115,7 +111,7 @@ const TaskDetail = () => {
       });
     }
     exerciseService.getExercises().then((fetchedExercises) => {
-      let options: any = fetchedExercises.map((exercise) => ({
+      const options: any = fetchedExercises.map((exercise) => ({
         label: `${exercise.name}`,
         id: exercise.id,
       }));

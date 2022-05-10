@@ -4,11 +4,8 @@ import { Box } from '@mui/system';
 import ClientService from 'api/services/clientService';
 import eventService from 'api/services/eventService';
 import eventTypeService from 'api/services/eventTypeService';
-import CardTitle from 'components/CardTitle';
 import TextItem from 'components/TextItem';
-import { ClientRequest } from 'http';
 import { Client } from 'models/Client';
-import { EventType } from 'models/EventType';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -31,7 +28,7 @@ const EventDetail = ({ event }: { event: ProcessedEvent }) => {
     });
 
     eventTypeService.getEventTypes().then((fetchedEventTypes) => {
-      let options: any = fetchedEventTypes.map((eventType) => ({
+      const options: any = fetchedEventTypes.map((eventType) => ({
         label: `${eventType.name}`,
         id: eventType.id,
       }));

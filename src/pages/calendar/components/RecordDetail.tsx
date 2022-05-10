@@ -1,16 +1,15 @@
-import { Box, Button, Card, LinearProgress, Slider } from '@mui/material';
+import { Box, Button, Card, Slider } from '@mui/material';
 import recordService from 'api/services/recordService';
 import TextItem from 'components/TextItem';
 import { useAppDispatch } from 'hooks';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { showError, showSuccess } from 'redux/slices/snackbarSlice';
-import { Record } from 'models/Record';
 import Section from 'components/Section';
 
 const RecordDetail = () => {
-  let { id } = useParams();
+  const { id } = useParams();
   const dispatch = useAppDispatch();
   const [t] = useTranslation();
   const navigate = useNavigate();

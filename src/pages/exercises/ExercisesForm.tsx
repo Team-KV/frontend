@@ -1,4 +1,4 @@
-import { Autocomplete, Box, Slider } from '@mui/material';
+import { Box } from '@mui/material';
 import categoryService from 'api/services/categoryService';
 import exerciseService from 'api/services/exerciseService';
 import { Controls } from 'components/Controls';
@@ -8,7 +8,7 @@ import { useAppDispatch } from 'hooks';
 import { Category } from 'models/Category';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { showError, showSuccess } from 'redux/slices/snackbarSlice';
 import CategoryEditor from './components/CategoryEditor';
 
@@ -22,7 +22,7 @@ const ExerciseForm = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [categoriesOptions, setCategoriesOptions] = useState<any[]>([]);
 
-  let { id } = useParams();
+  const { id } = useParams();
   const [t] = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -76,7 +76,7 @@ const ExerciseForm = () => {
   }, []);
 
   useEffect(() => {
-    let newCategoriesOptions = categories.map((category) => ({
+    const newCategoriesOptions = categories.map((category) => ({
       label: category.name,
       id: category.id,
     }));

@@ -1,6 +1,4 @@
 import API from 'api/api';
-import { Category } from 'models/Category';
-import { CategoryDTO } from 'models/dto/CategoryDTO';
 import { ExerciseDTO } from 'models/dto/ExerciseDTO';
 import { ExerciseFileDTO } from 'models/dto/ExerciseFileDTO';
 import { Exercise } from 'models/Exercise';
@@ -28,7 +26,7 @@ const exerciseService = {
   deleteExercise: async (id: number) => API.delete('exercise/' + id),
 
   uploadFile: async (id: number, file: any) => {
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append("files[]", file)
     const { data } = await API.postFile(`exercise/${id}/upload`, formData);
     return data.ExerciseFiles.map((dto: ExerciseFileDTO) => new ExerciseFile(dto));
