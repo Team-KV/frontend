@@ -24,6 +24,11 @@ export interface IRoute {
 export const publicRoutes: IRoute[] = [
   {
     name: 'login',
+    path: '/',
+    element: <LoginPage />,
+  },
+  {
+    name: 'login',
     path: '/login',
     element: <LoginPage />,
   },

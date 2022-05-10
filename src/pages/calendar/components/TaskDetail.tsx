@@ -124,11 +124,9 @@ const TaskDetail = () => {
   };
 
   const onSubmit = () => {
-    taskService
-      .addExerciseToTask(+id!, values)
-      .then((fetchedExerciseTask) => {
-        setExerciseTasks([...fetchedExerciseTask]);
-      })
+    taskService.addExerciseToTask(+id!, values).then((fetchedExerciseTask) => {
+      setExerciseTasks([...fetchedExerciseTask]);
+    });
     handleClose();
   };
 
@@ -137,19 +135,19 @@ const TaskDetail = () => {
   };
 
   const handleDeleteExerciseTask = () => {
-    debugger;
-  }
+    // debugger;
+  };
 
   return (
     <>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <Form onSubmit={onSubmit}>
-            <Box display="flex" flexDirection="column" gap={2}>
+            <Box display='flex' flexDirection='column' gap={2}>
               <Controls.Autocomplete
                 validators={['required']}
                 errorMessages={[t('formRequired')]}
-                name="eventTypeId"
+                name='eventTypeId'
                 onChange={handleExerciseInput}
                 options={exercises}
                 value={
@@ -160,13 +158,13 @@ const TaskDetail = () => {
                 label={t('exercises:exercise')}
               />
               <Controls.Input
-                name="repetitions"
+                name='repetitions'
                 label={t('calendar:repetitions')}
                 onChange={handleInput}
                 value={values.repetitions}
               />
               <Controls.Input
-                name="duration"
+                name='duration'
                 label={t('calendar:duration')}
                 onChange={handleInput}
                 value={values.duration}
@@ -174,15 +172,15 @@ const TaskDetail = () => {
             </Box>
 
             <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
+              display='flex'
+              justifyContent='space-between'
+              alignItems='center'
               mt={3}
             >
-              <Button onClick={handleClose} variant="outlined">
+              <Button onClick={handleClose} variant='outlined'>
                 {t('cancel')}
               </Button>
-              <Button variant="contained" type="submit">
+              <Button variant='contained' type='submit'>
                 {t('save')}
               </Button>
             </Box>
@@ -207,7 +205,7 @@ const TaskDetail = () => {
             value={task?.text}
           ></TextItem>
           <TableContainer sx={{ marginTop: 3 }}>
-            <Table aria-label="clients">
+            <Table aria-label='clients'>
               <TableHead>
                 <TableRow>
                   <TableCell align={'left'} style={{ top: 57, minWidth: 10 }}>
@@ -230,8 +228,8 @@ const TaskDetail = () => {
               <TableBody>
                 {exerciseTasks.map((exerciseTask, i) => {
                   return (
-                    <TableRow role="checkbox" tabIndex={-1} key={i}>
-                      <TableCell align="left">{i + 1}</TableCell>
+                    <TableRow role='checkbox' tabIndex={-1} key={i}>
+                      <TableCell align='left'>{i + 1}</TableCell>
                       {columns.map((column) => {
                         const value = exerciseTask[column.id];
                         return (
@@ -240,11 +238,13 @@ const TaskDetail = () => {
                           </TableCell>
                         );
                       })}
-                      <TableCell align="right">
+                      <TableCell align='right'>
                         <Button
-                        onClick={() => handleDeleteExerciseTask(exerciseTask.id)}
-                          variant="contained"
-                          color="error"
+                          onClick={() =>
+                            handleDeleteExerciseTask(exerciseTask.id)
+                          }
+                          variant='contained'
+                          color='error'
                           size='small'
                         >
                           {t('delete')}
@@ -258,23 +258,23 @@ const TaskDetail = () => {
             <Button
               onClick={() => handleOpen()}
               fullWidth
-              variant="outlined"
-              color="success"
+              variant='outlined'
+              color='success'
               sx={{ marginTop: 1 }}
             >
               {t('exercises:addExerciseTask')}
             </Button>
           </TableContainer>
         </Card>
-        <Box mt={3} display={'flex'} justifyContent="space-between">
+        <Box mt={3} display={'flex'} justifyContent='space-between'>
           <Button
             onClick={() => navigate('/tasks/' + id + '/form')}
-            color="info"
-            variant="contained"
+            color='info'
+            variant='contained'
           >
             {t('edit')}
           </Button>
-          <Button onClick={handleDelete} color="error" variant="contained">
+          <Button onClick={handleDelete} color='error' variant='contained'>
             {t('delete')}
           </Button>
         </Box>

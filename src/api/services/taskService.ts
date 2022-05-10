@@ -29,7 +29,7 @@ const taskService = {
     const dto = {
       exerciseTasks: [new ExerciseTaskDTO(exerciseTask)]
     }
-    const { data } = await API.post('task/' + id + '/add-exercises', dto)
+    const { data } = await API.post('task/' + id + '/exercises', dto)
     return data.map((dto: ExerciseTaskDTO) => new ExerciseTask(dto));
   }
 

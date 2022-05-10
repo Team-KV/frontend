@@ -23,12 +23,12 @@ const ClientsDetail = () => {
 
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  const sex = SEX.find((item) => item.value === client?.sex)?.id!;
+  const sex = SEX.find((item) => item.value === client?.sex)?.id; // FIX
   const sexIcon =
     sex === 'male' ? (
-      <MaleIcon fontSize="large" />
+      <MaleIcon fontSize='large' />
     ) : sex === 'female' ? (
-      <FemaleIcon fontSize="large" />
+      <FemaleIcon fontSize='large' />
     ) : (
       ''
     );
@@ -44,13 +44,16 @@ const ClientsDetail = () => {
 
   const createUserFromClient = () => {
     if (id) {
-      clientService.createUserFromClient(+id).then((fetchedClient) => {
-        dispatch(showSuccess(t('clients:isUserCreated')));
-        setClient(fetchedClient);
-      }).catch((err) => {
-        const message = err.response.data.message;
-        dispatch(showError(message));
-      })
+      clientService
+        .createUserFromClient(+id)
+        .then((fetchedClient) => {
+          dispatch(showSuccess(t('clients:isUserCreated')));
+          setClient(fetchedClient);
+        })
+        .catch((err) => {
+          const message = err.response.data.message;
+          dispatch(showError(message));
+        });
     }
   };
 
@@ -76,16 +79,16 @@ const ClientsDetail = () => {
         px={4}
         display={'flex'}
         justifyContent={'space-between'}
-        alignItems="center"
+        alignItems='center'
       >
         <Box
           display={'flex'}
-          justifyContent="start"
-          alignItems="center"
+          justifyContent='start'
+          alignItems='center'
           gap={1}
         >
           {sexIcon}
-          <Typography variant="h4" fontWeight={500} letterSpacing={2}>
+          <Typography variant='h4' fontWeight={500} letterSpacing={2}>
             {client?.firstName} {client?.lastName}{' '}
             {client?.noCzech ? `(${t('clients:noCzech')})` : ''}
           </Typography>
@@ -94,9 +97,9 @@ const ClientsDetail = () => {
           <Button
             sx={{ fontWeight: 'bold' }}
             onClick={() => navigate('/clients/' + client?.id + '/form')}
-            variant="contained"
+            variant='contained'
             size={'large'}
-            color="warning"
+            color='warning'
           >
             {t('edit')}
           </Button>
@@ -116,7 +119,7 @@ const ClientsDetail = () => {
           <Attachments client={client!} />
         </Grid>
       </Grid>
-      <Box mt={4} px={4} display="flex" justifyContent="space-between">
+      <Box mt={4} px={4} display='flex' justifyContent='space-between'>
         {client?.user ? (
           <Typography variant='h6'>
             {t('clients:account') + ': ' + client.user?.email}
@@ -124,8 +127,8 @@ const ClientsDetail = () => {
         ) : (
           <Button
             sx={{ fontWeight: 'bold' }}
-            color="info"
-            variant="contained"
+            color='info'
+            variant='contained'
             size={'large'}
             onClick={createUserFromClient}
           >
@@ -134,9 +137,9 @@ const ClientsDetail = () => {
         )}
         <Button
           sx={{ fontWeight: 'bold' }}
-          color="error"
+          color='error'
           onClick={deleteClient}
-          variant="contained"
+          variant='contained'
           size={'large'}
         >
           {t('delete')}

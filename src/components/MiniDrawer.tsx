@@ -102,6 +102,10 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
   const [t] = useTranslation();
   const user = useAppSelector((state: any) => state.user.value);
 
+  const markIfActive = (pathname: string): boolean => {
+    return window.location.href.includes(pathname);
+  };
+
   const menuItemsClient = [
     {
       name: t('dashboard'),
@@ -180,7 +184,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {menuItems.map((item: any, index: any) => (
+          {menuItems.map((item: any, index: number) => (
             <Link
               style={{ textDecoration: 'none', color: 'inherit' }}
               key={index}
@@ -194,6 +198,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
+                selected={markIfActive(item.link)}
               >
                 <ListItemIcon
                   sx={{
