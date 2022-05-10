@@ -1,17 +1,11 @@
 import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useEffect, useState } from 'react';
-import userService from 'api/services/userService';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
 import { fetchUser } from 'redux/slices/userSlice';
@@ -19,6 +13,7 @@ import { showSuccess } from 'redux/slices/snackbarSlice';
 import { useTranslation } from 'react-i18next';
 import LanguageIcon from '@mui/icons-material/Language';
 import { AccountCircle } from '@mui/icons-material';
+import React from 'react';
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -53,23 +48,23 @@ export default function AccountMenu() {
   }, []);
 
   return (
-    <>
+    <div>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        {user.value.email}
+        {user?.value?.email}
         <IconButton
           onClick={handleClick}
-          size="small"
+          size='small'
           sx={{ ml: 2 }}
           aria-controls={open ? 'account-menu' : undefined}
-          aria-haspopup="true"
+          aria-haspopup='true'
           aria-expanded={open ? 'true' : undefined}
         >
-          <AccountCircle htmlColor="white" fontSize="large" />
+          <AccountCircle htmlColor='white' fontSize='large' />
         </IconButton>
       </Box>
       <Menu
         anchorEl={anchorEl}
-        id="account-menu"
+        id='account-menu'
         open={open}
         onClose={handleClose}
         onClick={handleClose}
@@ -104,23 +99,23 @@ export default function AccountMenu() {
       >
         <MenuItem onClick={changeLanguage}>
           <ListItemIcon>
-            <LanguageIcon fontSize="small" />
+            <LanguageIcon fontSize='small' />
           </ListItemIcon>
           {i18n.language === 'cs' ? t('english') : t('czech')}
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <Settings fontSize='small' />
           </ListItemIcon>
           {t('changePassword')}
         </MenuItem>
         <MenuItem onClick={logout}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <Logout fontSize='small' />
           </ListItemIcon>
           {t('logout')}
         </MenuItem>
       </Menu>
-    </>
+    </div>
   );
 }

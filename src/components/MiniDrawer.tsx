@@ -1,5 +1,3 @@
-import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -22,11 +20,9 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { useTranslation } from 'react-i18next';
-import userService from 'api/services/userService';
-import { fetchUser } from 'redux/slices/userSlice';
+import { useAppSelector } from 'hooks';
 import User from './User';
+import { useTranslation } from 'react-i18next';
 
 const drawerWidth = 240;
 
@@ -102,10 +98,9 @@ const Drawer = styled(MuiDrawer, {
 export default function MiniDrawer({ body }: { body: React.ReactNode }) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [menuItems, setMenuItems] = useState<any>([]);
+  const [menuItems, setMenuItems] = useState<object[]>([]);
   const [t] = useTranslation();
-  const user = useAppSelector<any>((state) => state.user.value);
-
+  const user = useAppSelector((state: any) => state.user.value);
 
   const menuItemsClient = [
     {
@@ -133,9 +128,9 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
     },
   ];
 
-  useEffect(()=> {
-    setMenuItems(user?.role === 1 ? menuItemsStaff : menuItemsClient)
-  }, [])
+  useEffect(() => {
+    setMenuItems(user?.role === 1 ? menuItemsStaff : menuItemsClient);
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -148,13 +143,13 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position='fixed' open={open}>
         <Toolbar>
           <IconButton
-            color="inherit"
-            aria-label="open drawer"
+            color='inherit'
+            aria-label='open drawer'
             onClick={handleDrawerOpen}
-            edge="start"
+            edge='start'
             sx={{
               marginRight: 5,
               ...(open && { display: 'none' }),
@@ -162,7 +157,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant='h6' noWrap component='div'>
             Physiport
           </Typography>
 
@@ -172,7 +167,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
           {/* <Typography ml="auto">Email: {user?.email}</Typography> */}
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant='permanent' open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? (
@@ -217,7 +212,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
 
         {body}
