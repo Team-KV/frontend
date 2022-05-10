@@ -9,11 +9,26 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from 'redux/slices/userSlice';
-import { showSuccess } from 'redux/slices/snackbarSlice';
+import { showError, showSuccess } from 'redux/slices/snackbarSlice';
 import { useTranslation } from 'react-i18next';
 import LanguageIcon from '@mui/icons-material/Language';
 import { AccountCircle } from '@mui/icons-material';
 import React from 'react';
+import { Button, Modal } from '@mui/material';
+import { Controls } from './Controls';
+import { Form, useForm } from './Form';
+import userService from 'api/services/userService';
+
+const style = {
+  position: 'absolute' as const,
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -30,6 +45,32 @@ export default function AccountMenu() {
     setAnchorEl(null);
   };
 
+  const { values, setValues, handleInput } = useForm({
+    email: user.value.email,
+    password: '',
+    password_again: '',
+  });
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleModalOpen = () => {
+    setOpenModal(true);
+  };
+  const handleModalClose = () => setOpenModal(false);
+
+  const onSubmit = (e: Event) => {
+    userService
+      .changePassword(user.value.id, values)
+      .then(() => {
+        dispatch(showSuccess(t('passwordChanged')));
+      })
+      .catch((err) => {
+        const message = err.response.data.message;
+        dispatch(showError(message));
+      });
+    handleModalClose();
+  };
+
   const logout = () => {
     localStorage.removeItem('token');
     dispatch(showSuccess(t('isLoggedOut')));
@@ -44,6 +85,42 @@ export default function AccountMenu() {
 
   return (
     <div>
+      <Modal open={openModal} onClose={handleModalClose}>
+        <Box sx={style}>
+          <Form onSubmit={onSubmit}>
+            <Box display={'flex'} flexDirection={'column'} gap={2}>
+              <Controls.Input
+                name='password'
+                label={t('password')}
+                onChange={handleInput}
+                value={values.password}
+                type='password'
+              />
+              <Controls.Input
+                name='password_again'
+                label={t('passwordAgain')}
+                onChange={handleInput}
+                value={values.passwordAgain}
+                type='password'
+              />
+
+              <Box
+                display='flex'
+                justifyContent='space-between'
+                alignItems='center'
+              >
+                <Button onClick={handleModalClose} variant='outlined'>
+                  {t('cancel')}
+                </Button>
+                <Button variant='contained' type='submit'>
+                  {t('save')}
+                </Button>
+              </Box>
+            </Box>
+          </Form>
+        </Box>
+      </Modal>
+
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         {user?.value?.email}
         <IconButton
@@ -98,7 +175,7 @@ export default function AccountMenu() {
           </ListItemIcon>
           {i18n.language === 'cs' ? t('english') : t('czech')}
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={handleModalOpen}>
           <ListItemIcon>
             <Settings fontSize='small' />
           </ListItemIcon>

@@ -30,6 +30,9 @@
   "changePassword": "Změnit heslo",
   "logout": "Odhlásit se",
 
+  "passwordAgain": "Heslo znovu",
+  "passwordChanged": "Heslo bylo úspěšně změněno",
+
   "isLoggedIn": "Přihlášení proběhlo úspěšně",
   "isLoggedOut": "Byl jste úspěšně odhlášen"
 }

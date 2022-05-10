@@ -17,10 +17,6 @@ const StaffInfo = ({ event }: { event: Event | undefined }) => {
   const navigate = useNavigate();
   const [t] = useTranslation();
 
-  const navigateToEvent = (e: any) => {
-    navigate('/calendar');
-  };
-
   return (
     <Card
       sx={{
@@ -33,20 +29,28 @@ const StaffInfo = ({ event }: { event: Event | undefined }) => {
       {event ? (
         <List>
           <ListItem key={event.id}>
-            <ListItemAvatar onClick={navigateToEvent} className={'hover'}>
-              <Avatar variant="rounded">
+            <ListItemAvatar>
+              <Avatar variant='rounded'>
                 <EventIcon />
               </Avatar>
             </ListItemAvatar>
             <ListItemText
-              primary={`${event.name}`}
-              secondary={`${new Date(
-                event.start
-              ).toLocaleDateString()} - ${new Date(
-                event.end
-              ).toLocaleDateString()}`}
-              onClick={navigateToEvent}
-              className={'hover'}
+              primary={`${new Date(event.start).toLocaleDateString()} - ${
+                event.name
+              }`}
+              secondary={`${new Date(event.start).toLocaleTimeString(
+                navigator.language,
+                {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                }
+              )} - ${new Date(event.end).toLocaleTimeString(
+                navigator.language,
+                {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                }
+              )}`}
             />
           </ListItem>
         </List>
