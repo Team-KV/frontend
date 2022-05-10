@@ -39,11 +39,6 @@ export const publicRoutes: IRoute[] = [
 export const privateRoutes: { staff: IRoute[]; client: IRoute[] } = {
   staff: [
     {
-      name: 'home',
-      path: '/',
-      element: <Clients />,
-    },
-    {
       name: 'clients',
       path: '/clients',
       element: <Clients />,
@@ -124,11 +119,6 @@ export const privateRoutes: { staff: IRoute[]; client: IRoute[] } = {
     },
   ],
   client: [
-    {
-      name: 'home',
-      path: '/',
-      element: <DashboardPage />,
-    },
     {
       name: 'dashboard',
       path: '/dashboard',

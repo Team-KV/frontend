@@ -8,7 +8,7 @@ import Logout from '@mui/icons-material/Logout';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
-import { fetchUser } from 'redux/slices/userSlice';
+import { fetchUser, logoutUser } from 'redux/slices/userSlice';
 import { showSuccess } from 'redux/slices/snackbarSlice';
 import { useTranslation } from 'react-i18next';
 import LanguageIcon from '@mui/icons-material/Language';
@@ -33,6 +33,7 @@ export default function AccountMenu() {
   const logout = () => {
     localStorage.removeItem('token');
     dispatch(showSuccess(t('isLoggedOut')));
+    dispatch(logoutUser());
     navigate('/login');
   };
 
@@ -40,12 +41,6 @@ export default function AccountMenu() {
     const currentLanguage = i18n.language;
     i18n.changeLanguage(currentLanguage === 'cs' ? 'en' : 'cs');
   };
-
-  useEffect(() => {
-    dispatch(fetchUser()).then((res) => {
-      if (res.meta.requestStatus == 'rejected') navigate('/login');
-    });
-  }, []);
 
   return (
     <div>

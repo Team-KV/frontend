@@ -129,8 +129,9 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
   ];
 
   useEffect(() => {
-    setMenuItems(user?.role === 1 ? menuItemsStaff : menuItemsClient);
-  }, []);
+    if (user?.role)
+      setMenuItems(user?.role === 1 ? menuItemsStaff : menuItemsClient);
+  }, [user]);
 
   const handleDrawerOpen = () => {
     setOpen(true);

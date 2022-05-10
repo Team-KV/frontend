@@ -10,14 +10,18 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useAppDispatch } from 'hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { showError, showSuccess } from 'redux/slices/snackbarSlice';
-import config from "config.json";
+import config from 'config.json';
+import { fetchUser } from 'redux/slices/userSlice';
+import { userInfo } from 'os';
+import { useEffect } from 'react';
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [t] = useTranslation();
+  const user = useAppSelector<any>((state) => state.user);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -33,7 +37,7 @@ function Login() {
       .then((response: AxiosResponse) => {
         localStorage.setItem('token', response.data.Token);
         dispatch(showSuccess(t('isLoggedIn')));
-        navigate('/');
+        dispatch(fetchUser());
       })
       .catch((err) => {
         const message = err.response.data.message;
@@ -41,13 +45,22 @@ function Login() {
       });
   };
 
+  useEffect(() => {
+    if (user.value && user.value.role === 1) {
+      navigate('/clients');
+    }
+    if (user.value && user.value.role === 0) {
+      navigate('/dashboard');
+    }
+  }, [user.value]);
+
   const addConfig = () => {
     return {
       headers: {
         'X-localization': 'cs',
-      }
-    }
-  }
+      },
+    };
+  };
 
   return (
     <Container maxWidth={'xs'}>
@@ -65,24 +78,24 @@ function Login() {
         </Typography>
         <Box component={'form'} onSubmit={handleSubmit}>
           <TextField
-            margin="normal"
+            margin='normal'
             required
             fullWidth
-            id="email"
+            id='email'
             label={t('email')}
-            name="email"
-            autoComplete="email"
+            name='email'
+            autoComplete='email'
             autoFocus
           />
           <TextField
-            margin="normal"
+            margin='normal'
             required
             fullWidth
-            name="password"
+            name='password'
             label={t('password')}
-            type="password"
-            id="password"
-            autoComplete="current-password"
+            type='password'
+            id='password'
+            autoComplete='current-password'
           />
           <Button
             fullWidth
