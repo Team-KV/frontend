@@ -14,7 +14,6 @@ import {
 import exerciseFileService from 'api/services/exerciseFileService';
 import exerciseService from 'api/services/exerciseService';
 import CardTitle from 'components/CardTitle';
-import { id } from 'date-fns/locale';
 import { useAppDispatch } from 'hooks';
 import FolderIcon from '@mui/icons-material/Folder';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -25,12 +24,12 @@ import { FileUploader } from 'react-drag-drop-files';
 import { useTranslation } from 'react-i18next';
 import { showSuccess, showError } from 'redux/slices/snackbarSlice';
 
-import config from "config.json";
+import config from 'config.json';
 
 const fileTypes = ['jpg', 'png', 'mp4', 'avi', 'jpeg', 'mov'];
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute',
   top: '50%',
   left: '50%',
   height: '50%',
@@ -90,10 +89,10 @@ const ExerciseFiles = ({ exercise }: { exercise: Exercise }) => {
   };
 
   const openFile = (url: string) => {
-    var a = document.createElement('a');
+    const a = document.createElement('a');
     a.href = config.SERVER_URL + url;
     a.click();
-  }
+  };
 
   return (
     <Card
@@ -110,7 +109,7 @@ const ExerciseFiles = ({ exercise }: { exercise: Exercise }) => {
             hoverTitle={t('clients:dropHere')}
             classes={'drop-area drop-zone'}
             handleChange={handleChange}
-            name="files"
+            name='files'
             types={fileTypes}
           />
         </Box>
@@ -128,8 +127,8 @@ const ExerciseFiles = ({ exercise }: { exercise: Exercise }) => {
                 key={oneFile.id}
                 secondaryAction={
                   <IconButton
-                    edge="end"
-                    aria-label="delete"
+                    edge='end'
+                    aria-label='delete'
                     onClick={() => {
                       deleteExerciseFile(oneFile.id);
                     }}
@@ -142,7 +141,7 @@ const ExerciseFiles = ({ exercise }: { exercise: Exercise }) => {
                   onClick={() => {
                     openFile(oneFile.url);
                   }}
-                  className="hover"
+                  className='hover'
                 >
                   <Avatar>
                     <FolderIcon />
@@ -154,7 +153,7 @@ const ExerciseFiles = ({ exercise }: { exercise: Exercise }) => {
                   }}
                   primary={oneFile.fileName}
                   secondary={oneFile.type.toUpperCase()}
-                  className="hover"
+                  className='hover'
                 />
               </ListItem>
             );
@@ -162,9 +161,9 @@ const ExerciseFiles = ({ exercise }: { exercise: Exercise }) => {
         </List>
         <Divider />
         <Button
-          variant="contained"
+          variant='contained'
           onClick={handleOpen}
-          color="success"
+          color='success'
           sx={{
             margin: 'auto',
             marginTop: 1,

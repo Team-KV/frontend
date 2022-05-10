@@ -17,14 +17,13 @@ import ExerciseCard from './components/ExerciseCard';
 import exerciseService from 'api/services/exerciseService';
 import { useAppDispatch } from 'hooks';
 import { showError } from 'redux/slices/snackbarSlice';
+import { constants } from 'zlib';
 
 const Exercises = () => {
-  const [page, setPage] = React.useState(2);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const dispatch = useAppDispatch();
 
-  let [exercises, setExercises]: [Exercise[], any] = useState([]);
-  let [allExercises, setAllExercises]: [Exercise[], any] = useState([]);
+  const [exercises, setExercises]: [Exercise[], any] = useState([]);
+  const [allExercises, setAllExercises]: [Exercise[], any] = useState([]);
 
   useEffect(() => {
     exerciseService
@@ -39,26 +38,12 @@ const Exercises = () => {
       });
   }, []);
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
   const changeFilter = (e: any) => {
     const value: string = e.target.value.toLowerCase();
     const newExercises = allExercises.filter((exercise: Exercise) => {
       return (
-        exercise.name.toLowerCase().includes(value) ||
-        exercise.description.toLowerCase().includes(value)
+        exercise.name?.toLowerCase()?.includes(value) ||
+        exercise.description?.toLowerCase()?.includes(value)
       );
     });
     setExercises(newExercises);
@@ -73,10 +58,10 @@ const Exercises = () => {
           alignItems: 'center',
         }}
       >
-        <Typography variant="h5">{t('exercises')}</Typography>
+        <Typography variant='h5'>{t('exercises')}</Typography>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <TextField
-            size="small"
+            size='small'
             label={t('search')}
             onChange={changeFilter}
             InputProps={{
@@ -90,28 +75,20 @@ const Exercises = () => {
           <Button
             sx={{ ml: 3 }}
             style={{ height: 40, color: 'white' }}
-            variant="contained"
-            href="exercises/form"
+            variant='contained'
+            href='exercises/form'
           >
             <AddIcon />
           </Button>
         </Box>
       </Box>
-      <Grid container justifyContent="start" m="auto" spacing={2}>
+      <Grid container justifyContent='start' m='auto' spacing={2}>
         {exercises.map((exercise) => (
-          <Grid key={exercise.id} item sm={6} md={4} lg={2}>
+          <Grid key={exercise.id} item sm={6} md={4} lg={3}>
             <ExerciseCard exercise={exercise} />
           </Grid>
         ))}
       </Grid>
-      {/* <TablePagination
-        component="div"
-        count={100}
-        page={page}
-        onPageChange={handleChangePage}
-        rowsPerPage={rowsPerPage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      /> */}
     </>
   );
 };

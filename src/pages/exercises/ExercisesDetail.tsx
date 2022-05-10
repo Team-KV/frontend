@@ -16,7 +16,7 @@ const ExerciseDetail = () => {
   const [exercise, setExercise] = useState<Exercise>();
   const [t] = useTranslation();
   const dispatch = useAppDispatch();
-  let { id } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const deleteExercise = () => {
@@ -29,15 +29,17 @@ const ExerciseDetail = () => {
   };
 
   useEffect(() => {
-    exerciseService
-      .getExercise(+id!)
-      .then((fetchedExercise) => {
-        setExercise({ ...fetchedExercise });
-      })
-      .catch((err) => {
-        const message = err.response.data.message;
-        dispatch(showError(message));
-      });
+    if (id) {
+      exerciseService
+        .getExercise(+id)
+        .then((fetchedExercise) => {
+          setExercise({ ...fetchedExercise });
+        })
+        .catch((err) => {
+          const message = err.response.data.message;
+          dispatch(showError(message));
+        });
+    }
   }, []);
 
   return (
@@ -48,15 +50,15 @@ const ExerciseDetail = () => {
         px={4}
         display={'flex'}
         justifyContent={'space-between'}
-        alignItems="center"
+        alignItems='center'
       >
         <Box
           display={'flex'}
-          justifyContent="start"
-          alignItems="center"
+          justifyContent='start'
+          alignItems='center'
           gap={1}
         >
-          <Typography variant="h4" fontWeight={500} letterSpacing={2}>
+          <Typography variant='h4' fontWeight={500} letterSpacing={2}>
             {exercise?.name}
           </Typography>
         </Box>
@@ -64,9 +66,9 @@ const ExerciseDetail = () => {
           <Button
             sx={{ fontWeight: 'bold' }}
             onClick={() => navigate('/exercises/' + exercise?.id + '/form')}
-            variant="contained"
+            variant='contained'
             size={'large'}
-            color="warning"
+            color='warning'
           >
             {t('edit')}
           </Button>
@@ -81,7 +83,7 @@ const ExerciseDetail = () => {
           xs={12}
           md={7}
           lg={7}
-          display="flex"
+          display='flex'
           justifyContent={'center'}
         >
           <Card
@@ -96,19 +98,19 @@ const ExerciseDetail = () => {
           >
             {exercise?.url ? (
               <iframe
-                width="100%"
-                height="420"
+                width='100%'
+                height='420'
                 src={
                   'https://www.youtube.com/embed/' +
                   getYoutubeEmbedId(exercise?.url)
                 }
-                frameBorder="0"
-                allow="autoplay; encrypted-media"
+                frameBorder='0'
+                allow='autoplay; encrypted-media'
                 allowFullScreen
-                title="video"
+                title='video'
               />
             ) : (
-              <Typography variant="h5">
+              <Typography variant='h5'>
                 {t('exercises:noVideoAvailable')}
               </Typography>
             )}
@@ -118,12 +120,12 @@ const ExerciseDetail = () => {
           <ExerciseFiles exercise={exercise!}></ExerciseFiles>
         </Grid>
       </Grid>
-      <Box mt={4} px={4} display="flex" justifyContent="flex-end">
+      <Box mt={4} px={4} display='flex' justifyContent='flex-end'>
         <Button
           sx={{ fontWeight: 'bold' }}
-          color="error"
+          color='error'
           onClick={deleteExercise}
-          variant="contained"
+          variant='contained'
           size={'large'}
         >
           {t('delete')}
