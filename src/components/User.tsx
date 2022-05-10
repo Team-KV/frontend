@@ -12,7 +12,7 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useEffect, useState } from 'react';
 import userService from 'api/services/userService';
-import { useAppDispatch } from 'hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { useNavigate } from 'react-router-dom';
 import { fetchUser } from 'redux/slices/userSlice';
 import { showSuccess } from 'redux/slices/snackbarSlice';
@@ -26,6 +26,7 @@ export default function AccountMenu() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [t, i18n] = useTranslation();
+  const user = useAppSelector<any>((state) => state.user);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -46,24 +47,25 @@ export default function AccountMenu() {
   };
 
   useEffect(() => {
-    dispatch(fetchUser());
+    dispatch(fetchUser()).then((res) => {
+      if (res.meta.requestStatus == 'rejected') navigate('/login');
+    });
   }, []);
 
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title="Account settings">
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? 'account-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-          >
-            <AccountCircle htmlColor="white" fontSize="large" />
-          </IconButton>
-        </Tooltip>
+        {user.value.email}
+        <IconButton
+          onClick={handleClick}
+          size="small"
+          sx={{ ml: 2 }}
+          aria-controls={open ? 'account-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+        >
+          <AccountCircle htmlColor="white" fontSize="large" />
+        </IconButton>
       </Box>
       <Menu
         anchorEl={anchorEl}

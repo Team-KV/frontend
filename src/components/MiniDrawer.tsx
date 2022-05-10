@@ -184,7 +184,7 @@ export default function MiniDrawer({ body }: { body: React.ReactNode }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {menuItems.map((item, index) => (
+          {menuItems.map((item: any, index: any) => (
             <Link
               style={{ textDecoration: 'none', color: 'inherit' }}
               key={index}
