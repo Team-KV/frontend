@@ -55,7 +55,7 @@ const Graph = ({ graph }: { graph: GraphData[] | undefined }) => {
         {t('dashboard:progress')}
       </Typography>
       <Box pt={1}>
-        <canvas height={180} id="myChart"></canvas>
+        <canvas height={120} id="myChart"></canvas>
       </Box>
     </Card>
   );

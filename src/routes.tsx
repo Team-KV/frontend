@@ -3,6 +3,8 @@ import Calendar from 'pages/calendar/Calendar';
 import RecordDetail from 'pages/calendar/components/RecordDetail';
 import RecordForm from 'pages/calendar/components/RecordForm';
 import TaskDetail from 'pages/calendar/components/TaskDetail';
+import ClientTaskDetail from 'pages/dashboard/components/ClientTaskDetail';
+
 import TaskForm from 'pages/calendar/components/TaskForm';
 import Clients from 'pages/clients/Clients';
 import ClientsDetail from 'pages/clients/ClientsDetail';
@@ -132,7 +134,7 @@ export const privateRoutes: { staff: IRoute[]; client: IRoute[] } = {
     {
       path: '/tasks/:id',
       name: 'calendar',
-      element: <TaskDetail />,
+      element: <ClientTaskDetail />,
     },
   ],
 };

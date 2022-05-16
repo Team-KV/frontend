@@ -26,13 +26,11 @@ const taskService = {
   deleteTask: (id: number) => API.delete('task/' + id),
 
   addExerciseToTask: async (id: number, exerciseTask: ExerciseTask) => {
-    const dto = {
-      exerciseTasks: [new ExerciseTaskDTO(exerciseTask)]
-    }
-    const { data } = await API.post('task/' + id + '/exercises', dto)
-    return data.map((dto: ExerciseTaskDTO) => new ExerciseTask(dto));
-  }
-
+    const dto = new ExerciseTaskDTO(exerciseTask);
+    const { data } = await API.post('task/' + id + '/exercises', { exerciseTasks: [dto] })
+    return data.ExerciseTasks.map((dto: ExerciseTaskDTO) => new ExerciseTask(dto));
+  },
+  deleteExerciseFromTask: async (id: number) => await API.delete('exercise-task/' + id)
 }
 
 export default taskService;

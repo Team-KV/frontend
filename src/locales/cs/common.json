@@ -1,7 +1,8 @@
 {
   "czech": "Čeština",
   "english": "Angličtina",
-
+  
+  "back": "Zpět",
   "calendar": "Kalendář",
   "cancel": "Zrušit",
   "clients": "Klienti",
@@ -29,6 +30,8 @@
 
   "changePassword": "Změnit heslo",
   "logout": "Odhlásit se",
+
+  "notImplementedYet": "Tato část není v aktuální verzi kompletní",
 
   "passwordAgain": "Heslo znovu",
   "passwordChanged": "Heslo bylo úspěšně změněno",

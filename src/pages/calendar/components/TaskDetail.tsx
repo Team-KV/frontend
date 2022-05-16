@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Card,
+  IconButton,
   Modal,
   Table,
   TableBody,
@@ -18,12 +19,12 @@ import Section from 'components/Section';
 import TextItem from 'components/TextItem';
 import { useAppDispatch } from 'hooks';
 import { Exercise } from 'models/Exercise';
-import { ExerciseTask } from 'models/ExerciseTask';
 import { Task } from 'models/Task';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import { showError, showSuccess } from 'redux/slices/snackbarSlice';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const style = {
   position: 'absolute' as const,
@@ -48,17 +49,16 @@ const TaskDetail = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [task, setTask] = useState<Task>();
-  const [exerciseTasks, setExerciseTasks] = useState<ExerciseTask[]>([]);
   const [t] = useTranslation();
   const [exercises, setExercises] = useState<Exercise[]>([]);
 
   const { values, setValues, handleInput } = useForm({
     name: '',
+    repetitions: '',
+    duration: '',
+    exerciseId: 0,
     feedback: '',
-    difficulty: 0,
-    repetitions: 0,
-    duration: 0,
-    exerciseId: null,
+    difficulty: '',
   });
 
   const columns: Column[] = [
@@ -104,10 +104,6 @@ const TaskDetail = () => {
     if (id) {
       taskService.getTask(+id).then((fetchedTask) => {
         setTask({ ...fetchedTask });
-        if (fetchedTask?.exercises)
-          setExerciseTasks(
-            fetchedTask.exercises.map((exercise) => exercise.pivot)
-          );
       });
     }
     exerciseService.getExercises().then((fetchedExercises) => {
@@ -119,14 +115,18 @@ const TaskDetail = () => {
     });
   }, []);
 
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    setValues({ ...values, difficulty: newValue });
-  };
-
   const onSubmit = () => {
-    taskService.addExerciseToTask(+id!, values).then((fetchedExerciseTask) => {
-      setExerciseTasks([...fetchedExerciseTask]);
-    });
+    taskService
+      .addExerciseToTask(+id!, values)
+      .then((fetchedExerciseTask) => {
+        taskService.getTask(+id!).then((fetchedTask) => {
+          setTask({ ...fetchedTask });
+        });
+      })
+      .catch((err) => {
+        const message = err.response?.data?.message;
+        dispatch(showError(message));
+      });
     handleClose();
   };
 
@@ -134,8 +134,19 @@ const TaskDetail = () => {
     setValues({ ...values, exerciseId: exercise?.id });
   };
 
-  const handleDeleteExerciseTask = () => {
-    // debugger;
+  const handleDeleteExerciseTask = (exerciseId: number) => {
+    taskService
+      .deleteExerciseFromTask(exerciseId)
+      .then(() => {
+        const myExercises = task?.exercises.filter(
+          (exer) => exer.id == +exerciseId!
+        );
+        setTask({ ...task, exercises: myExercises });
+      })
+      .catch((err) => {
+        const message = err.response?.data?.message;
+        dispatch(showError(message));
+      });
   };
 
   return (
@@ -208,8 +219,8 @@ const TaskDetail = () => {
             <Table aria-label='clients'>
               <TableHead>
                 <TableRow>
-                  <TableCell align={'left'} style={{ top: 57, minWidth: 10 }}>
-                    {t('calendar:order')}
+                  <TableCell align={'left'} style={{ top: 57, minWidth: 140 }}>
+                    {t('calendar:exercise')}
                   </TableCell>
                   {columns.map((column) => (
                     <TableCell
@@ -226,12 +237,12 @@ const TaskDetail = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {exerciseTasks.map((exerciseTask, i) => {
+                {task?.exercises.map((exerciseTask: any, i: number) => {
                   return (
                     <TableRow role='checkbox' tabIndex={-1} key={i}>
-                      <TableCell align='left'>{i + 1}</TableCell>
+                      <TableCell align='left'>{exerciseTask.name}</TableCell>
                       {columns.map((column) => {
-                        const value = exerciseTask[column.id];
+                        const value = exerciseTask.pivot[column.id];
                         return (
                           <TableCell key={column.id} align={column.align}>
                             {value}
@@ -239,16 +250,14 @@ const TaskDetail = () => {
                         );
                       })}
                       <TableCell align='right'>
-                        <Button
+                        <IconButton
                           onClick={() =>
                             handleDeleteExerciseTask(exerciseTask.id)
                           }
-                          variant='contained'
                           color='error'
-                          size='small'
                         >
-                          {t('delete')}
-                        </Button>
+                          <DeleteIcon />
+                        </IconButton>
                       </TableCell>
                     </TableRow>
                   );

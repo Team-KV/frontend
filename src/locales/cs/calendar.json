@@ -28,6 +28,7 @@
   "isTaskCreated": "Úkol byl úspěšně vytvořen",
   "isTaskDeleted": "Úkol byl smazán",
 
+  "exercise": "Název cviku",
   "order": "Pořadí",
   "feedback": "Zpětná vazba",
   "difficulty": "Náročnost",

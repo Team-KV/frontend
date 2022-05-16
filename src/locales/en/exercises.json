@@ -1,3 +1,26 @@
 {
+  "name": "Name",
+  "description": "Description",
+  "url": "URL",
 
+  "exercise": "Exercise",
+
+  "category": "Category",
+  "generalInfo": "General info",
+
+  "noVideoAvailable": "No video available",
+
+  "uploadFile": "Upload file",
+  "isFilesUploaded": "Files are uploaded",
+  "isFileUploaded": "File is uploaded",
+
+  "addCategory": "Add category",
+
+  "isExerciseCreated": "Exercise is created",
+  "isExerciseUpdated": "Exercise is updated",
+  "isExerciseDeleted": "Exercise is deleted",
+  "exerciseNew": "New exercise",
+  "exerciseEdit": "Edit exercise",
+
+  "addExerciseTask": "Add exercise to the task"
 }

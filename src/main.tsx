@@ -1,12 +1,14 @@
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import { csCZ } from '@mui/material/locale';
-
+import { csCZ, enUS } from '@mui/material/locale';
+import App from './App';
+import { Provider } from 'react-redux';
 import store from './store';
-
 import 'i18n';
+
+const locale = localStorage.getItem('locale');
+const desiredLocale = locale === 'en' ? enUS : csCZ;
 
 const theme = createTheme(
   {
@@ -34,11 +36,8 @@ const theme = createTheme(
     //   },
     // },
   },
-  csCZ
+  desiredLocale
 );
-
-import App from './App';
-import { Provider } from 'react-redux';
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,3 +1,41 @@
 {
+  "czech": "Czech",
+  "english": "English",
+  
+  "back": "Back",
+  "calendar": "Calendar",
+  "cancel": "Cancel",
+  "clients": "Clients",
+  "dashboard": "Dashboard",
+  "delete": "Delete",
+  "edit": "Edit",
+  "email": "Email",
+  "encyclopedia": "Encyclopedia",
+  "end": "End",
+  "events": "Events",
+  "exercises": "Exercises",
+  "loginButton": "Log in",
+  "login": "Login",
 
+  "password": "Password",
+  "save": "Save",
+  "search": "Search",
+  "unknown": "Unknown",
+  "actions": "Actions",
+
+  "attachments": "Attachments",
+  "files": "Files",
+
+  "formRequired": "This field is required",
+
+  "changePassword": "Change password",
+  "logout": "Logout",
+
+  "notImplementedYet": "This part is not implemented in this version",
+
+  "passwordAgain": "Password again",
+  "passwordChanged": "Password is changed",
+
+  "isLoggedIn": "Successfully logged in",
+  "isLoggedOut": "Successfully logged out"
 }

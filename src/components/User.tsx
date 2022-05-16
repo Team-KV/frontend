@@ -80,7 +80,9 @@ export default function AccountMenu() {
 
   const changeLanguage = () => {
     const currentLanguage = i18n.language;
-    i18n.changeLanguage(currentLanguage === 'cs' ? 'en' : 'cs');
+    const desiredLanguage = currentLanguage === 'cs' ? 'en' : 'cs';
+    i18n.changeLanguage(desiredLanguage);
+    localStorage.setItem('locale', desiredLanguage); 
   };
 
   return (

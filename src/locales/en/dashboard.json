@@ -1,3 +1,13 @@
 {
+  "yourDashboard": "Dashboard",
+  "firstName": "Name",
+  "lastName": "Last name",
+  "phone": "Phone",
+  "staffInfo": "Your physiotherapist",
+  "progress": "Progress",
+  "nextEvent": "Next event",
+  "tasks": "Your tasks",
 
+  "noNextEvent": "No events planned",
+  "noTasks": "No tasks planned"
 }

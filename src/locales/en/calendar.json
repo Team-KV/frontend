@@ -1,3 +1,41 @@
 {
+  "eventType": "Event type",
+  "event": "Event",
+  "title": "Title",
+  "name": "Name",
+  "start": "Start",
+  "end": "End",
+  "client": "Client",
+  "note": "Note",
+  "description": "Description",
+  "isActive": "Activate",
 
+  "recordNew": "New record",
+  "recordDetail": "Record detail",
+  "recordEdit": "Edit record",
+
+  "taskNew": "New task",
+  "taskDetail": "Task detail",
+
+  "progress": "Progress",
+  "progressNote": "Progress note",
+  "exerciseNote": "Exercise note",
+  "text": "Note",
+
+  "isRecordCreated": "Record is created",
+  "isRecordDeleted": "Record is deleted",
+
+  "isTaskCreated": "Task is created",
+  "isTaskDeleted": "Task is Deleted",
+
+  "exercise": "Exercise name",
+  "order": "Order",
+  "feedback": "Feedback",
+  "difficulty": "Difficulty",
+  "repetitions": "Repetitions",
+  "duration": "Duration of single repetition",
+
+  "isEventDeleted": "Event is deleted",
+  "isEventCreated": "Event is created",
+  "isEventSaved": "Event is saved"
 }

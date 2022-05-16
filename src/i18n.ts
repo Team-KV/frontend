@@ -30,9 +30,15 @@ const resources = {
   },
 }
 
+let locale = localStorage.getItem('locale')
+if(!locale) {
+  locale = 'cs'
+  localStorage.setItem('locale', 'cs');
+}
+
 i18n.use(initReactI18next).init({
   defaultNS: "common",
-  lng: 'cs',
+  lng: locale,
   resources: resources,
   interpolation: {
     escapeValue: false
